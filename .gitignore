@@ -44,3 +44,5 @@ next-env.d.ts
 figma designs/
 AGENTS.md
 CLAUDE.md
+
+.vercel
