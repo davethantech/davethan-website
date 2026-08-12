@@ -1,5 +1,5 @@
 import { buildConfig } from 'payload';
-import { postgresAdapter } from '@payloadcms/db-postgres';
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -24,10 +24,8 @@ export default buildConfig({
   ],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.POSTGRES_URI || 'postgres://payload:payloadpassword@127.0.0.1:5432/davethan',
-    },
+  db: mongooseAdapter({
+    url: process.env.MONGODB_URI || '',
   }),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
