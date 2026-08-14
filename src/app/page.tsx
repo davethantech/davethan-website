@@ -16,7 +16,7 @@ export default function Home() {
             <h2 className="text-[#06bae1] font-roboto font-bold text-[20px] tracking-wide">
               IT Partner For Founders & Growing Teams
             </h2>
-            <h1 className="text-[48px] lg:text-[48px] font-roboto font-semibold text-[#0a0d53] leading-tight">
+            <h1 className="text-[40px] lg:text-[48px] font-roboto font-semibold text-[#0a0d53] leading-tight">
               Scaling businesses with proven IT strategy
             </h1>
             <p className="text-[rgba(10,13,83,0.66)] font-poppins text-[20px] leading-relaxed max-w-xl">
