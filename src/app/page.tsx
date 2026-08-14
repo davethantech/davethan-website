@@ -10,7 +10,7 @@ export default function Home() {
 
       <main>
         {/* HERO SECTION */}
-        <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-4 lg:px-8 pt-8 lg:pt-16 pb-24 flex flex-col lg:flex-row items-start justify-between gap-12">
+        <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-4 lg:px-8 pt-4 lg:pt-4 pb-24 flex flex-col lg:flex-row items-start justify-between gap-12">
           {/* Left Content */}
           <div className="flex-1 space-y-6 z-10 max-w-2xl mt-4 lg:mt-12">
             <h2 className="text-[#06bae1] font-roboto font-bold text-[20px] tracking-wide">
@@ -37,7 +37,7 @@ export default function Home() {
           </div>
 
           {/* Right Visual */}
-          <div className="flex-1 relative h-[400px] lg:h-[630px] w-full flex items-start justify-end lg:-mr-12 -mt-8 lg:-mt-16">
+          <div className="flex-1 relative h-[400px] lg:h-[630px] w-full flex items-start justify-end lg:-mr-12 -mt-4 lg:-mt-4">
             <div className="relative w-[120%] lg:w-[700px] h-full right-[-10%] lg:right-[-50px]">
               <Image
                 src="/Robot_hand_holding_glowing_globe.png"
@@ -265,7 +265,7 @@ export default function Home() {
         <section className="bg-[#070933] py-24 relative z-10">
           {/* Middle Line (Passes behind the card) */}
           <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[rgba(255,255,255,0.08)] -translate-y-1/2 z-0" />
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="bg-white rounded-[24px] p-12 flex flex-col lg:flex-row items-center justify-between gap-8 max-w-5xl mx-auto">
               <div className="space-y-4 max-w-xl">
