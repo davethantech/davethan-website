@@ -18,9 +18,9 @@ export default function IndustryPage() {
 
       <main>
         {/* HERO SECTION */}
-        <section className="bg-[#070933] relative z-10 pt-24 lg:pt-32 flex flex-col items-center text-center">
+        <section className="bg-[#070933] relative z-10 pt-12 lg:pt-16 flex flex-col items-center text-center">
           {/* Decorative Ellipse */}
-          <div className="absolute left-[10px] sm:left-[20px] lg:left-[40px] top-[40px] lg:top-[120px] w-[80px] lg:w-[150px] h-[80px] lg:h-[150px] z-0 pointer-events-none">
+          <div className="absolute left-[10px] sm:left-[20px] lg:left-[80px] top-[10px] lg:top-[40px] w-[80px] lg:w-[150px] h-[80px] lg:h-[150px] z-0 pointer-events-none">
             <Image src="/industry-hero-ellipse.png" alt="Decorative" fill className="object-contain" />
           </div>
 
