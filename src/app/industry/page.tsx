@@ -27,7 +27,7 @@ export default function IndustryPage() {
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] w-full flex flex-col items-center relative z-10">
             {/* Center Content */}
             <div className="w-full max-w-3xl flex flex-col items-center space-y-6 lg:space-y-8 pb-12 lg:pb-16">
-              <div className="inline-block bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.2)] rounded-full px-6 py-2">
+              <div className="inline-block bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.2)] rounded-full px-4 py-2">
                 <span className="text-[#06bae1] font-inter font-bold text-[10px] lg:text-[11px] tracking-wider uppercase">
                   DAVETHAN TECHNOLOGIES LTD
                 </span>
