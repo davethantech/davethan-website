@@ -12,7 +12,7 @@ export default function AboutPage() {
       <main>
         {/* HERO SECTION */}
         <section className="bg-[#070933] relative overflow-hidden">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] py-24 lg:py-32 flex flex-col lg:flex-row items-center relative min-h-[640px]">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] py-4 lg:py-4 flex flex-col lg:flex-row items-center relative min-h-[600px]">
             <div className="z-10 w-full lg:w-[540px] shrink-0">
               <h1 className="text-[44px] font-roboto font-semibold leading-tight mb-6">
                 <span className="text-[#bff9ea]">Get to know </span>
