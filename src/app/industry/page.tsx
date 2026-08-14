@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FAQAccordion, FAQItem } from "@/components/ui/FAQAccordion";
+import { FolderCheck, Building2, Headset, Activity } from "lucide-react";
 
 const industryFaqs: FAQItem[] = [
   { q: "Do you support regulated industries like healthcare or fintech?", a: "Yes — we build compliance-ready infrastructure and security for regulated, high-stakes environments." },
@@ -155,15 +156,19 @@ export default function IndustryPage() {
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px]">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { label: "Successful Projects", value: "50+" },
-                { label: "Industries Served", value: "12" },
-                { label: "Support Coverage", value: "24/7" },
-                { label: "Uptime SLA", value: "99.9%" }
+                { label: "Successful Projects", value: "50+", icon: FolderCheck },
+                { label: "Industries Served", value: "12", icon: Building2 },
+                { label: "Support Coverage", value: "24/7", icon: Headset },
+                { label: "Uptime SLA", value: "99.9%", icon: Activity }
               ].map((metric, i) => (
-                <div key={i} className="bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.12)] rounded-[12px] h-[120px] flex flex-col justify-center px-6 relative overflow-hidden">
-                  <div className="absolute left-6 top-6 w-[36px] h-[36px] bg-[#06bae1] rounded-full opacity-20" />
-                  <span className="text-white font-space-grotesk font-bold text-[26px] z-10 relative pl-12">{metric.value}</span>
-                  <span className="text-[rgba(255,255,255,0.6)] font-inter text-[12px] mt-2 z-10 relative">{metric.label}</span>
+                <div key={i} className="bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.12)] rounded-[12px] p-6 flex flex-col justify-center">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-[36px] h-[36px] bg-[#06bae1]/20 rounded-full flex items-center justify-center shrink-0">
+                      <metric.icon className="w-5 h-5 text-[#06bae1]" />
+                    </div>
+                    <span className="text-white font-space-grotesk font-bold text-[28px] leading-none">{metric.value}</span>
+                  </div>
+                  <span className="text-[rgba(255,255,255,0.6)] font-inter text-[13px]">{metric.label}</span>
                 </div>
               ))}
             </div>
