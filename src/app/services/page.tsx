@@ -13,13 +13,13 @@ export default function ServicesPage() {
         {/* HERO SECTION */}
         <section className="relative z-10 pt-16 lg:pt-24 pb-20 lg:pb-32 overflow-hidden">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] w-full flex flex-col lg:flex-row items-center gap-16 relative">
-            
+
             {/* Left Text */}
             <div className="w-full lg:w-[45%] flex flex-col items-start text-left z-10">
               <h1 className="text-[#0a0d53] font-roboto font-semibold text-[40px] sm:text-[48px] lg:text-[56px] leading-tight mb-6">
                 IT Solutions for Your Business
               </h1>
-              
+
               <p className="text-[#5b6472] font-poppins text-[16px] lg:text-[18px] leading-relaxed max-w-lg mb-10">
                 Since our establishment, we have been delivering high quality and sustainable IT solutions for growing businesses across the UK and Nigeria.
               </p>
@@ -36,11 +36,11 @@ export default function ServicesPage() {
             {/* Right Image */}
             <div className="w-full lg:w-[55%] relative h-[350px] sm:h-[450px] lg:h-[500px] flex justify-center lg:justify-end">
               <div className="relative w-full lg:w-[90%] h-full rounded-[20px] overflow-hidden shadow-2xl">
-                <Image 
-                  src="/services-hero.png" 
-                  alt="IT Solutions for Your Business" 
-                  fill 
-                  className="object-cover" 
+                <Image
+                  src="/services-hero.png"
+                  alt="IT Solutions for Your Business"
+                  fill
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -50,7 +50,7 @@ export default function ServicesPage() {
         {/* OUR SERVICES SECTION */}
         <section className="py-20 bg-white relative z-10">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] flex flex-col items-center">
-            
+
             <div className="text-center mb-16">
               <h2 className="text-[#06bae1] font-roboto font-bold text-[14px] tracking-wider uppercase mb-2">
                 AREAS WHAT WE SERVE
@@ -62,7 +62,7 @@ export default function ServicesPage() {
 
             {/* Services Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl mb-16">
-              
+
               {/* Service 1 */}
               <div className="bg-white border border-[#e4e9f2] rounded-[12px] p-8 pb-12 shadow-[0px_8px_24px_0px_rgba(10,13,51,0.06)] flex flex-col items-center text-center hover:-translate-y-2 transition-transform duration-300">
                 <div className="w-[64px] h-[64px] bg-[#bff9ea]/40 rounded-full flex items-center justify-center mb-6">
@@ -117,7 +117,7 @@ export default function ServicesPage() {
         {/* WHY CHOOSE US SECTION */}
         <section className="py-24 relative overflow-hidden bg-[#bff9ea]/30">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] relative z-10 flex flex-col items-center">
-            
+
             <div className="text-center mb-16">
               <h2 className="text-[#06bae1] font-roboto font-bold text-[14px] tracking-wider uppercase mb-2">
                 SOME REASONS
@@ -128,7 +128,7 @@ export default function ServicesPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 max-w-5xl mx-auto w-full">
-              
+
               {/* Reason 1 */}
               <div className="flex items-start gap-6">
                 <span className="text-[#06bae1] font-space-grotesk font-bold text-[22px] leading-none mt-1">01</span>
@@ -190,7 +190,7 @@ export default function ServicesPage() {
         {/* OUR PROCESS SECTION */}
         <section className="py-24 bg-white">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] flex flex-col items-center text-center">
-            
+
             <div className="mb-20">
               <h2 className="text-[#06bae1] font-roboto font-bold text-[16px] tracking-wider uppercase mb-3">
                 OUR PROCESS
@@ -202,7 +202,7 @@ export default function ServicesPage() {
 
             {/* Process Steps */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 w-full max-w-6xl relative">
-              
+
               {/* Step 1 */}
               <div className="flex flex-col items-center text-center relative z-10">
                 <div className="w-[72px] h-[72px] bg-[#bff9ea]/50 rounded-full flex items-center justify-center mb-6 relative">
@@ -253,57 +253,57 @@ export default function ServicesPage() {
 
         {/* STATS SECTION */}
         <section className="py-24 bg-white relative">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-32">
-            
-            {/* Circular Graphic — SVG arc for pixel-perfect crescent */}
-            <div className="relative w-[280px] h-[280px] flex items-center justify-center flex-shrink-0">
-              {/* SVG Arc: circumference = 2π×120 ≈ 754. Show ~75% = 565, gap = 189 */}
-              <svg
-                className="absolute inset-0"
-                width="280"
-                height="280"
-                viewBox="0 0 280 280"
-              >
-                {/* Background thin ring (optional, subtle grey) */}
-                <circle cx="140" cy="140" r="110" fill="none" stroke="#f0f4f8" strokeWidth="28" />
-                {/* Cyan arc — 75% visible, rotated so gap is upper-right */}
-                <circle
-                  cx="140"
-                  cy="140"
-                  r="110"
-                  fill="none"
-                  stroke="#06bae1"
-                  strokeWidth="28"
-                  strokeLinecap="round"
-                  strokeDasharray="565 189"
-                  strokeDashoffset="47"
-                  transform="rotate(-90 140 140)"
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-24">
+
+            {/* Circular Graphic — exact SVG from design */}
+            <div className="relative flex-shrink-0" style={{ width: "340px", height: "298px" }}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 440" width="100%" height="100%">
+                <defs>
+                  <style>{`@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');`}</style>
+                </defs>
+
+                {/* Outer crescent shape */}
+                <path
+                  d="M 390 220 A 180 180 0 1 0 390 220.01 M 390 220 A 150 150 0 1 1 390 219.99"
+                  fill="#00B4E6"
+                  fillRule="evenodd"
                 />
+
+                {/* Top right medium cyan dot */}
+                <circle cx="418" cy="70" r="21" fill="#00B4E6" />
+
+                {/* Far right light mint dot */}
+                <circle cx="468" cy="136" r="11" fill="#B7F3E6" />
+
+                {/* Center Text Group */}
+                <g textAnchor="middle">
+                  <text
+                    x="240"
+                    y="218"
+                    fill="#0A0D53"
+                    fontFamily="'Space Grotesk', sans-serif"
+                    fontSize="56px"
+                    fontStyle="normal"
+                    fontWeight="700"
+                  >5</text>
+                  <text x="240" y="260" fontFamily="system-ui, -apple-system, sans-serif" fontSize="22" fontWeight="600" fill="#586474">Years of</text>
+                  <text x="240" y="288" fontFamily="system-ui, -apple-system, sans-serif" fontSize="22" fontWeight="600" fill="#586474">Experience</text>
+                </g>
               </svg>
-
-              {/* Decorative Dots — upper right area */}
-              <div className="absolute top-[28px] right-[44px] w-[18px] h-[18px] bg-[#06bae1] rounded-full" />
-              <div className="absolute top-[72px] right-[16px] w-[10px] h-[10px] bg-[#bff9ea] rounded-full" />
-
-              {/* Text Inside */}
-              <div className="text-center z-10 flex flex-col items-center">
-                <span className="text-[#0a0d53] font-space-grotesk font-bold text-[64px] leading-none mb-1">5</span>
-                <span className="text-[#5b6472] font-inter font-medium text-[15px] leading-tight text-center">Years of<br/>Experience</span>
-              </div>
             </div>
 
-            {/* Stats */}
+            {/* Stats — min-width on number keeps all rows evenly spaced */}
             <div className="flex flex-col space-y-8 text-center lg:text-left">
-              <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8">
-                <h4 className="text-[#06bae1] font-space-grotesk font-bold text-[36px] leading-none">50+</h4>
+              <div className="flex flex-row items-center gap-6">
+                <h4 className="text-[#06bae1] font-space-grotesk font-bold text-[36px] leading-none min-w-[80px]">50+</h4>
                 <p className="text-[#5b6472] font-inter text-[14px]">Businesses Supported</p>
               </div>
-              <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8">
-                <h4 className="text-[#06bae1] font-space-grotesk font-bold text-[36px] leading-none">5</h4>
+              <div className="flex flex-row items-center gap-6">
+                <h4 className="text-[#06bae1] font-space-grotesk font-bold text-[36px] leading-none min-w-[80px]">5</h4>
                 <p className="text-[#5b6472] font-inter text-[14px]">Engineers &amp; Consultants</p>
               </div>
-              <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-8">
-                <h4 className="text-[#06bae1] font-space-grotesk font-bold text-[36px] leading-none">24/7</h4>
+              <div className="flex flex-row items-center gap-6">
+                <h4 className="text-[#06bae1] font-space-grotesk font-bold text-[36px] leading-none min-w-[80px]">24/7</h4>
                 <p className="text-[#5b6472] font-inter text-[14px]">Support Availability</p>
               </div>
             </div>
@@ -314,7 +314,7 @@ export default function ServicesPage() {
         {/* CTA BANNER */}
         <section className="py-16 px-4 bg-white">
           <div className="max-w-[1280px] mx-auto bg-white border border-[#e4e9f2] rounded-[24px] shadow-[0px_8px_32px_12px_rgba(191,249,234,0.35)] px-8 py-16 md:px-16 lg:px-24 flex flex-col lg:flex-row items-center justify-between gap-12">
-            
+
             <div className="text-center lg:text-left flex-1 max-w-2xl">
               <h3 className="text-[#0a0d53] font-roboto font-bold text-[28px] lg:text-[36px] leading-tight mb-4">
                 Start the conversation with a free 30-minute consultation
