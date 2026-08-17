@@ -155,14 +155,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <span className="text-[#0a0d53] font-inter font-bold text-[10px] uppercase tracking-widest shrink-0">
                 SHARE:
               </span>
-              {['INSTAGRAM', 'TWITTER', 'FACEBOOK'].map((platform) => (
-                <Link
-                  key={platform}
-                  href="#"
+              {[
+                { name: 'TWITTER', url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://davethan.tech/blog/${slug}` },
+                { name: 'FACEBOOK', url: `https://www.facebook.com/sharer/sharer.php?u=https://davethan.tech/blog/${slug}` },
+                { name: 'LINKEDIN', url: `https://www.linkedin.com/sharing/share-offsite/?url=https://davethan.tech/blog/${slug}` }
+              ].map((platform) => (
+                <a
+                  key={platform.name}
+                  href={platform.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-[#5b6472] font-inter font-bold text-[10px] uppercase tracking-widest hover:text-[#06bae1] transition-colors"
                 >
-                  {platform}
-                </Link>
+                  {platform.name}
+                </a>
               ))}
             </div>
 
@@ -176,14 +182,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <span className="text-[#0a0d53] font-inter font-bold text-[10px] uppercase tracking-widest">
                     SHARE
                   </span>
-                  {['INSTAGRAM', 'TWITTER', 'FACEBOOK'].map((platform) => (
-                    <Link
-                      key={platform}
-                      href="#"
+                  {[
+                    { name: 'TWITTER', url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://davethan.tech/blog/${slug}` },
+                    { name: 'FACEBOOK', url: `https://www.facebook.com/sharer/sharer.php?u=https://davethan.tech/blog/${slug}` },
+                    { name: 'LINKEDIN', url: `https://www.linkedin.com/sharing/share-offsite/?url=https://davethan.tech/blog/${slug}` }
+                  ].map((platform) => (
+                    <a
+                      key={platform.name}
+                      href={platform.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-[#5b6472] font-inter font-bold text-[11px] uppercase tracking-widest hover:text-[#06bae1] transition-colors"
                     >
-                      {platform}
-                    </Link>
+                      {platform.name}
+                    </a>
                   ))}
                 </div>
 
