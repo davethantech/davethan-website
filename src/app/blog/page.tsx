@@ -68,16 +68,16 @@ export default function BlogPage() {
 
         {/* BROWSE CATEGORIES */}
         <section className="border-b border-[#e4e9f2] bg-white">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] py-6 flex flex-col md:flex-row items-center gap-6">
-            <span className="text-[#0a0d53] font-poppins font-medium italic text-[16px]">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] py-6 flex flex-row items-center gap-4 overflow-x-auto scrollbar-hide">
+            <span className="text-[#0a0d53] font-poppins font-medium italic text-[16px] shrink-0">
               Browse the blog :
             </span>
-            <div className="flex flex-wrap items-center gap-6 md:gap-10">
+            <div className="flex items-center gap-6 md:gap-10 shrink-0">
               {categories.map((cat, idx) => (
                 <Link
                   key={idx}
                   href="#"
-                  className="text-[#0a0d53] font-inter font-bold text-[11px] uppercase tracking-widest hover:text-[#06bae1] transition-colors"
+                  className="text-[#0a0d53] font-inter font-bold text-[11px] uppercase tracking-widest hover:text-[#06bae1] transition-colors whitespace-nowrap"
                 >
                   {cat}
                 </Link>
@@ -91,16 +91,20 @@ export default function BlogPage() {
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px]">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
 
-              {/* Left: Image */}
-              <div className="relative w-full lg:w-1/2 h-[400px] lg:h-[500px] rounded-[24px] overflow-hidden shrink-0">
-                <Image
-                  src="/Blog-Hero.png"
-                  alt="Featured Post"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-                <div className="absolute top-[0%] lg:top-[0%] left-6 bg-[#0a0d53] w-[90px] h-[90px] rounded-full flex flex-col items-center justify-center text-white text-[11px] font-bold tracking-widest leading-tight">
+              {/* Left: Image — use a wrapper that keeps the badge anchored to the image itself */}
+              <div className="relative w-full lg:w-1/2 shrink-0">
+                {/* Image container with a natural aspect ratio so the badge always aligns */}
+                <div className="relative w-full rounded-[24px] overflow-hidden" style={{ aspectRatio: '4/3' }}>
+                  <Image
+                    src="/Blog-Hero.png"
+                    alt="Featured Post"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                {/* Badge anchored to the top-left of the image at all zoom levels */}
+                <div className="absolute top-4 left-6 -translate-y-1/2 bg-[#0a0d53] w-[90px] h-[90px] rounded-full flex flex-col items-center justify-center text-white text-[11px] font-bold tracking-widest leading-tight z-10">
                   <span>READ</span>
                   <span>THE</span>
                   <span>LATEST</span>
