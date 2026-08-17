@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Users, Handshake, TrendingUp, CircleDollarSign, Award, HeartHandshake } from 'lucide-react';
 
 export const metadata = {
   title: 'IT Consultancy | Davethan Technologies Limited',
@@ -121,15 +121,17 @@ export default function ITConsultancyPage() {
             </div>
             <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-12">
               {[
-                { title: 'Human Centric', desc: 'Your people are core to what we do, and every solution is tailored to the individual.' },
-                { title: 'Partnerships', desc: 'We build real relationships with you, so you know you can trust the advice we give.' },
-                { title: 'Performance', desc: "We're enablers of genuine performance growth across teams and individuals." },
-                { title: 'Affordable', desc: "We're on a mission to make specialist IT strategy accessible for all businesses." },
-                { title: 'Experienced', desc: "We've got the expertise to guide your business to success." },
-                { title: 'Client-Centric', desc: 'Customer satisfaction is our top priority in every engagement.' },
+                { title: 'Human Centric', desc: 'Your people are core to what we do, and every solution is tailored to the individual.', Icon: Users },
+                { title: 'Partnerships', desc: 'We build real relationships with you, so you know you can trust the advice we give.', Icon: Handshake },
+                { title: 'Performance', desc: "We're enablers of genuine performance growth across teams and individuals.", Icon: TrendingUp },
+                { title: 'Affordable', desc: "We're on a mission to make specialist IT strategy accessible for all businesses.", Icon: CircleDollarSign },
+                { title: 'Experienced', desc: "We've got the expertise to guide your business to success.", Icon: Award },
+                { title: 'Client-Centric', desc: 'Customer satisfaction is our top priority in every engagement.', Icon: HeartHandshake },
               ].map((val, idx) => (
                 <div key={idx} className="flex items-start gap-4">
-                  <div className="w-[40px] h-[40px] shrink-0 rounded-full bg-[#06bae1] flex items-center justify-center mt-1" />
+                  <div className="w-[40px] h-[40px] shrink-0 rounded-full bg-[#06bae1] flex items-center justify-center mt-1">
+                    <val.Icon className="w-5 h-5 text-white" />
+                  </div>
                   <div>
                     <h4 className="font-poppins font-bold text-[#0a0d53] text-[18px] mb-2">{val.title}</h4>
                     <p className="font-inter text-[#5b6472] text-[14px] leading-relaxed">{val.desc}</p>
