@@ -35,7 +35,7 @@ export default function ITConsultancyPage() {
           </div>
 
           {/* Right Image */}
-          <div className="w-full lg:w-[50%] h-[300px] sm:h-[400px] lg:h-auto relative shrink-0">
+          <div className="w-full lg:w-[50%] h-[400px] sm:h-[400px] lg:h-auto relative shrink-0">
             <Image
               src="/IT-Consultancy-Hero.png"
               alt="IT Consultancy Team"
