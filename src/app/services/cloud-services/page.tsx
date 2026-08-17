@@ -126,10 +126,10 @@ export default function CloudServicesPage() {
                 </div>
 
                 {/* Floating square icon (top right) */}
-                <div className="absolute lg:block absolute lg:top-8 top-8 lg:right-[10%] right-[2%] w-[70px] h-[70px] bg-[#06bae1] rounded-2xl" />
+                <div className="hidden lg:block absolute lg:top-8 top-8 lg:right-[10%] right-[2%] w-[70px] h-[70px] bg-[#06bae1] rounded-2xl" />
 
                 {/* Floating badge: 50+ Successful Migrations */}
-                <div className="absolute bottom-2 left-2 lg:-left-2 bg-[#0a0d53] rounded-[16px] px-5 py-4 flex items-center gap-4 shadow-xl border border-[rgba(255,255,255,0.08)]">
+                <div className="absolute lg:bottom-2 bottom-2 left-[4%] lg:left-[10%] bg-[#0a0d53] rounded-[16px] px-5 py-4 flex items-center gap-4 shadow-xl border border-[rgba(255,255,255,0.08)]">
                   <div className="w-[44px] h-[44px] rounded-full bg-[#06bae1] shrink-0" />
                   <div>
                     <h4 className="text-white font-roboto font-bold text-[24px] leading-none">50+</h4>
