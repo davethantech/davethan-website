@@ -18,7 +18,7 @@ export default function ITConsultancyPage() {
         {/* HERO SECTION */}
         <section className="relative w-full bg-white overflow-hidden flex flex-col lg:flex-row items-stretch pt-[60px] lg:pt-[80px]">
           {/* Left Content */}
-          <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:pl-[80px] lg:pr-12 flex flex-col justify-center py-8 lg:py-16 z-10">
+          <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:pl-[80px] lg:pr-12 flex flex-col justify-center py-2 lg:py-16 z-10">
             <div className="inline-block bg-[rgba(191,249,234,0.58)] rounded-full px-6 py-2 mb-6 self-start">
               <span className="text-[#0a0d53] font-inter font-bold text-[11px] uppercase">
                 IT CONSULTANCY
@@ -35,7 +35,7 @@ export default function ITConsultancyPage() {
           </div>
 
           {/* Right Image */}
-          <div className="w-full lg:w-[50%] h-[400px] sm:h-[400px] lg:h-auto relative shrink-0">
+          <div className="w-full lg:w-[50%] h-[300px] sm:h-[400px] lg:h-auto relative shrink-0">
             <Image
               src="/IT-Consultancy-Hero.png"
               alt="IT Consultancy Team"
