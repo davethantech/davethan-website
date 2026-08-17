@@ -1,122 +1,188 @@
+import Image from 'next/image';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CtaBlock } from '@/components/shared/CtaBlock';
 
 export const metadata = {
   title: 'Contact Us | Davethan Technologies Limited',
-  description: 'Get in touch with the Davethan team — whether you have a question, need a quote, or want to book a free consultation.',
+  description: "Get in touch with the Davethan team — whether you have a question, need a quote, or want to book a free consultation.",
 };
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white font-inter">
       <Navbar />
       <main>
-        {/* HERO */}
-        <section className="py-24 bg-[#070933]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 space-y-5">
-              <span className="text-cyan-400 font-bold tracking-widest text-xs uppercase">GET IN TOUCH</span>
-              <h1 className="text-5xl lg:text-6xl font-space font-bold text-white leading-[1.1]">
-                Let's start a <span className="text-cyan-400">conversation</span>
-              </h1>
-              <p className="text-gray-300 text-lg max-w-lg leading-relaxed">
-                Whether you're ready to get started or just exploring your options, we're here to help. Reach out and one of our experts will be in touch within 24 hours.
-              </p>
-              <div className="space-y-4 pt-4">
-                <div className="flex items-center gap-3 text-sm text-gray-300">
-                  <span className="text-cyan-400">📞</span>
-                  <div>
-                    <div>+44 0208 058 0860 (UK)</div>
-                    <div>+234 812 279 8051 (Nigeria)</div>
+
+        {/* ─── HERO SECTION ─── */}
+        <section className="relative w-full h-[280px] sm:h-[360px] lg:h-[440px] flex items-center mt-16 sm:mt-0">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/Contact-Us-Hero.png"
+              alt="Contact Us"
+              fill
+              className="object-cover"
+              priority
+              quality={100}
+              unoptimized
+            />
+            <div className="absolute inset-0 bg-[#070933]/70"></div> {/* Dark overlay */}
+          </div>
+          <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
+            <h1 className="text-white font-roboto font-bold text-[36px] sm:text-[44px] lg:text-[56px] leading-[1.1] mb-3">
+              Contact Us
+            </h1>
+            <p className="text-gray-300 font-inter text-[14px] sm:text-[16px]">
+              Home &nbsp;&gt;&nbsp; Contact
+            </p>
+          </div>
+        </section>
+
+        {/* ─── CONTACT INFO & MAP SECTION ─── */}
+        <section className="py-16 sm:py-24 bg-white">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+
+              {/* Left Side: Text and Contact Info */}
+              <div className="flex-1 w-full space-y-10">
+                <div>
+                  <span className="text-[#06bae1] font-inter font-bold text-[11px] sm:text-[12px] uppercase tracking-widest flex items-center gap-2 mb-4">
+                    <span className="text-[#06bae1]">:::</span> NEED ANY HELP?
+                  </span>
+                  <h2 className="text-[#0a0d53] font-roboto font-bold text-[32px] sm:text-[40px] lg:text-[46px] leading-[1.1] mb-6">
+                    Get in touch with us
+                  </h2>
+                  <p className="text-[#5b6472] font-inter text-[15px] sm:text-[16px] leading-[1.8] max-w-[500px]">
+                    Have a question about managed IT, cybersecurity, or cloud strategy? We're a phone call, email, or message away.
+                  </p>
+                </div>
+
+                <div className="space-y-8">
+                  {/* Phone */}
+                  <div className="flex items-start gap-6">
+                    <div className="w-[48px] h-[48px] bg-[#0a0d53] rounded-full flex items-center justify-center shrink-0">
+                      <div className="w-[16px] h-[16px] bg-[#06bae1] rounded-full"></div>
+                    </div>
+                    <div>
+                      <h3 className="text-[#0a0d53] font-roboto font-bold text-[18px] mb-2">Have any question?</h3>
+                      <p className="text-[#5b6472] font-inter text-[15px] leading-relaxed">
+                        +44 0208 058 0860 (UK)<br />
+                        +234 812 279 8051 (Nigeria)
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div className="flex items-start gap-6">
+                    <div className="w-[48px] h-[48px] bg-[#0a0d53] rounded-full flex items-center justify-center shrink-0">
+                      <div className="w-[16px] h-[16px] bg-[#06bae1] rounded-full"></div>
+                    </div>
+                    <div>
+                      <h3 className="text-[#0a0d53] font-roboto font-bold text-[18px] mb-2">Write email</h3>
+                      <p className="text-[#5b6472] font-inter text-[15px] leading-relaxed">
+                        info@davethan.tech
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Address */}
+                  <div className="flex items-start gap-6">
+                    <div className="w-[48px] h-[48px] bg-[#0a0d53] rounded-full flex items-center justify-center shrink-0">
+                      <div className="w-[16px] h-[16px] bg-[#06bae1] rounded-full"></div>
+                    </div>
+                    <div>
+                      <h3 className="text-[#0a0d53] font-roboto font-bold text-[18px] mb-2">Visit anytime</h3>
+                      <p className="text-[#5b6472] font-inter text-[15px] leading-relaxed">
+                        UK: 4th floor Victoria House, Chelmsford, Essex CM1 1JR<br />
+                        Nigeria: Plot 104 Emmanuel Adiele Street, off Mike Akhigbe Way, Jabi, Abuja 240102, FCT
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-300">
-                  <span className="text-cyan-400">✉</span>
-                  <span>info@davethan.tech</span>
-                </div>
               </div>
+
+              {/* Right Side: Map */}
+              <div className="w-full lg:w-[600px] h-[400px] sm:h-[480px] bg-gray-100 rounded-[16px] overflow-hidden shadow-sm shrink-0">
+                <iframe
+                  title="Davethan UK Office Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2466.8621490214643!2d0.4727187157813589!3d51.73516087967397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8e8b0222f6d2b%3A0xc4f5c22501ab1a1a!2sVictoria%20House%2C%20Victoria%20Rd%2C%20Chelmsford%20CM1%201JR%2C%20UK!5e0!3m2!1sen!2sng!4v1698243123456!5m2!1sen!2sng"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full object-cover"
+                ></iframe>
+              </div>
+
             </div>
-            <div className="flex-1 w-full bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-space font-bold text-[#070933] mb-6">Send us a message</h2>
-              <form className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          </div>
+        </section>
+
+        {/* ─── CONTACT FORM SECTION ─── */}
+        <section className="py-16 sm:py-24 bg-[#f8f9fc]">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
+            <div className="text-center mb-12 sm:mb-16">
+              <span className="text-[#06bae1] font-inter font-bold text-[11px] sm:text-[12px] uppercase tracking-widest flex items-center justify-center gap-2 mb-4">
+                <span className="text-[#06bae1]">:::</span> GET IN TOUCH WITH US NOW
+              </span>
+              <h2 className="text-[#0a0d53] font-roboto font-bold text-[32px] sm:text-[40px] lg:text-[46px] leading-[1.1] max-w-[600px] mx-auto">
+                Feel Free to Write Our Technology Experts
+              </h2>
+            </div>
+
+            <div className="max-w-[800px] mx-auto bg-white rounded-[16px] p-6 sm:p-10 shadow-sm border border-gray-100">
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Name */}
                   <input
                     type="text"
-                    id="contact-name"
-                    placeholder="Full Name"
+                    placeholder="Enter Name"
                     required
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                    className="w-full h-[56px] px-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all"
                   />
+                  {/* Email */}
                   <input
                     type="email"
-                    id="contact-email"
-                    placeholder="Email Address"
+                    placeholder="Enter Email"
                     required
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                    className="w-full h-[56px] px-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all"
+                  />
+                  {/* Subject */}
+                  <input
+                    type="text"
+                    placeholder="Enter Subject"
+                    required
+                    className="w-full h-[56px] px-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all"
+                  />
+                  {/* Phone */}
+                  <input
+                    type="tel"
+                    placeholder="Enter Phone"
+                    className="w-full h-[56px] px-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all"
                   />
                 </div>
-                <input
-                  type="text"
-                  id="contact-company"
-                  placeholder="Company Name"
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-cyan-400 transition-colors"
-                />
-                <input
-                  type="text"
-                  id="contact-subject"
-                  placeholder="Subject"
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-cyan-400 transition-colors"
-                />
+                {/* Message */}
                 <textarea
-                  id="contact-message"
-                  rows={5}
-                  placeholder="Your message..."
+                  placeholder="Enter Message"
+                  rows={6}
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-cyan-400 resize-none transition-colors"
-                />
+                  className="w-full p-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all resize-none"
+                ></textarea>
+
+                {/* Submit Button */}
                 <button
-                  id="contact-submit"
                   type="submit"
-                  className="w-full bg-gradient-to-r from-cyan-400 to-[#bff9ea] text-[#0a0d53] font-bold py-3 px-8 rounded-lg hover:opacity-90 transition-opacity"
+                  className="inline-flex items-center justify-center bg-[#06bae1] hover:bg-[#05a6c9] text-white font-inter font-bold text-[14px] px-8 py-4 rounded-[4px] transition-colors"
                 >
-                  Send Message &rarr;
+                  Send Message
                 </button>
               </form>
             </div>
           </div>
         </section>
 
-        {/* OFFICE LOCATIONS */}
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-space font-bold text-[#070933]">Our Offices</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  country: '🇬🇧 United Kingdom',
-                  address: '4th Floor Victoria House\nChelmsford, Essex CM1 1JR',
-                  phone: '+44 0208 058 0860',
-                },
-                {
-                  country: '🇳🇬 Nigeria',
-                  address: 'Plot 104 Emmanuel Adiele Street\noff Mike Akhigbe Way, Jabi\nAbuja 240102, FCT',
-                  phone: '+234 812 279 8051',
-                },
-              ].map((office) => (
-                <div key={office.country} className="bg-gray-50 rounded-xl p-8 border border-gray-100">
-                  <h3 className="text-xl font-space font-bold text-[#070933] mb-4">{office.country}</h3>
-                  <p className="text-gray-600 text-sm whitespace-pre-line mb-3">{office.address}</p>
-                  <p className="text-cyan-600 font-semibold text-sm">{office.phone}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <CtaBlock />
       </main>
       <Footer />
     </div>
