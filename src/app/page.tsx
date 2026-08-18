@@ -23,7 +23,7 @@ export default function Home() {
               Managed infrastructure, cybersecurity, and cloud strategy built for teams who don't have time to babysit their tech.
             </p>
             <div className="pt-6">
-              <Link href="/contact" className="inline-block mt-4">
+              <Link href="/about" className="inline-block mt-4">
                 <div
                   className="rounded-[10px] px-[36px] py-[16px] flex items-center justify-center transition-transform hover:scale-105 shadow-[0px_4px_4px_0px_rgba(6,186,225,0.4)]"
                   style={{ backgroundImage: "linear-gradient(270deg, rgb(191, 249, 234) 0%, rgb(6, 186, 225) 100%)" }}
@@ -37,16 +37,14 @@ export default function Home() {
           </div>
 
           {/* Right Visual */}
-          <div className="flex-1 relative h-[400px] lg:h-[630px] w-full flex items-start justify-end lg:-mr-12 -mt-4 lg:-mt-4">
-            <div className="relative w-[120%] lg:w-[700px] h-full right-[-10%] lg:right-[-50px]">
-              <Image
-                src="/Robot_hand_holding_glowing_globe.png"
-                alt="Robot hand holding glowing globe"
-                fill
-                className="object-contain object-right-top lg:object-right-top"
-                priority
-              />
-            </div>
+          <div className="w-full lg:flex-1 relative h-[350px] sm:h-[450px] lg:h-[630px] mt-10 lg:mt-[-16px] lg:-mr-12 shrink-0">
+            <Image
+              src="/Robot_hand_holding_glowing_globe.png"
+              alt="Robot hand holding glowing globe"
+              fill
+              className="object-contain object-center lg:object-right-top"
+              priority
+            />
           </div>
         </section>
 
@@ -130,12 +128,12 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="flex-1 relative w-full h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shrink-0">
+            <div className="w-full relative min-h-[350px] sm:min-h-[450px] lg:h-[600px] lg:flex-1 rounded-2xl shrink-0">
               <Image
                 src="/Woman_with_VR_headset.png"
                 alt="Woman with VR headset"
                 fill
-                className="object-cover object-center"
+                className="object-contain object-center lg:object-right"
               />
             </div>
 

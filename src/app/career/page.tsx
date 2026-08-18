@@ -15,7 +15,7 @@ export default function CareerPage() {
     <div className="min-h-screen bg-white font-inter">
       <Navbar />
       <main>
-        
+
         {/* ─── HERO SECTION ─── */}
         <section className="relative w-full h-[280px] sm:h-[360px] lg:h-[440px] flex items-center justify-center mt-16 sm:mt-0">
           <div className="absolute inset-0 z-0">
@@ -35,7 +35,7 @@ export default function CareerPage() {
               Career
             </h1>
             <p className="text-gray-300 font-inter text-[14px] sm:text-[16px]">
-              Home &nbsp;&gt;&nbsp; Career
+              <a href="/">Home</a> &nbsp;&gt;&nbsp; Career
             </p>
           </div>
         </section>
@@ -56,7 +56,7 @@ export default function CareerPage() {
         <section className="pb-16 sm:pb-24 bg-white">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-              
+
               {/* Left Side: Image */}
               <div className="flex-1 w-full relative">
                 <div className="relative w-full aspect-[4/3] rounded-[16px] overflow-hidden">
@@ -79,7 +79,7 @@ export default function CareerPage() {
                 <p className="text-[#5b6472] font-inter text-[15px] sm:text-[16px] leading-[1.8]">
                   Davethan Technologies is a dynamic and innovative company at the forefront of digital enterprise solutions. We are dedicated to creating a high-performing digital enterprise by leveraging cutting-edge technology and top-tier talent. If you are passionate about digital innovation and are looking to make a meaningful impact, we would love to hear from you.
                 </p>
-                
+
                 <div className="pt-4">
                   <h3 className="text-[#0a0d53] font-roboto font-bold text-[20px] mb-4">
                     Why Davethan Technologies?
@@ -107,7 +107,7 @@ export default function CareerPage() {
         {/* ─── OUR BENEFITS SECTION ─── */}
         <section className="py-16 sm:py-24 bg-[#f8f9fc]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
-            
+
             {/* Top Header Row */}
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
               <div className="max-w-[500px]">
@@ -156,8 +156,8 @@ export default function CareerPage() {
             <p className="text-[#5b6472] font-inter text-[15px] sm:text-[16px] leading-[1.8] mb-10">
               We are always looking for talented individuals to join our team. Explore exciting career opportunities at Davethan Technologies — we offer competitive compensation and benefits packages, and a supportive work environment that values diversity and inclusion.
             </p>
-            <Link 
-              href="#" 
+            <Link
+              href="#"
               className="inline-flex items-center justify-center gap-2 bg-[#06bae1] hover:bg-[#05a6c9] text-[#0a0d53] font-inter font-bold text-[13px] px-8 py-4 rounded-[4px] transition-colors"
             >
               Career Portal <ArrowRight className="w-4 h-4" />
@@ -205,7 +205,7 @@ export default function CareerPage() {
                     rows={4}
                     className="w-full p-6 bg-[#f8f9fc] rounded-[8px] text-[#5b6472] font-inter text-[14px] focus:outline-none focus:ring-1 focus:ring-[#06bae1] transition-all resize-none"
                   ></textarea>
-                  
+
                   <button
                     type="submit"
                     className="w-full inline-flex items-center justify-center bg-[#06bae1] hover:bg-[#05a6c9] text-[#0a0d53] font-inter font-bold text-[13px] tracking-widest uppercase px-8 py-4 rounded-[8px] transition-colors mt-2"

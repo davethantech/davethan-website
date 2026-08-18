@@ -28,12 +28,12 @@ export default function ContactPage() {
             />
             <div className="absolute inset-0 bg-[#070933]/70"></div> {/* Dark overlay */}
           </div>
-          <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
+          <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px] text-center">
             <h1 className="text-white font-roboto font-bold text-[36px] sm:text-[44px] lg:text-[56px] leading-[1.1] mb-3">
-              Contact Us
+              Contact
             </h1>
             <p className="text-gray-300 font-inter text-[14px] sm:text-[16px]">
-              Home &nbsp;&gt;&nbsp; Contact
+              <a href="/">Home</a> &nbsp;&gt;&nbsp; Contact
             </p>
           </div>
         </section>
