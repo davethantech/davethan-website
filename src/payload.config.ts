@@ -20,6 +20,7 @@ export default buildConfig({
     user: Users.slug,
     meta: {
       titleSuffix: '— Davethan CMS',
+      icons: [{ rel: 'icon', url: '/favicon.ico' }],
     },
     components: {
       graphics: {
