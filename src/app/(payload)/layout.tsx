@@ -5,6 +5,16 @@ import { RootLayout, handleServerFunctions } from '@payloadcms/next/layouts';
 import { importMap } from './importMap';
 import React from 'react';
 import type { ServerFunctionClient } from 'payload';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  icons: {
+    icon: '/davethan_logo.webp',
+    shortcut: '/davethan_logo.webp',
+    apple: '/davethan_logo.webp',
+  },
+};
+
 
 type Args = {
   children: React.ReactNode;
