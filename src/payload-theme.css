@@ -114,6 +114,37 @@ html[data-theme] select {
   font-family: var(--font-body) !important;
   width: 100% !important;
 }
+
+/*
+ * FIX 1: The white block in dropdown selectors.
+ * Payload's custom Select field uses an internal <input type="text"> for searching.
+ * When that input is inside a [role="combobox"] container, we must reset our
+ * heavy border/padding styles so it renders as a clean transparent overlay.
+ */
+html[data-theme] [role="combobox"] input,
+html[data-theme] [aria-autocomplete="list"] input,
+html[data-theme] .rs__input-container input,
+html[data-theme] [class*="select"] [class*="input"] input {
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: auto !important;
+  min-width: 2px !important;
+}
+
+/*
+ * FIX 2: The search icon/text overlap.
+ * Payload places an SVG icon to the left of the search input.
+ * Our padding: 12px 16px override was removing the extra left padding
+ * that Payload originally used to push text past the icon.
+ */
+html[data-theme] input[placeholder*="Search"],
+html[data-theme] input[placeholder*="search"] {
+  padding-left: 40px !important;
+}
+
 html[data-theme] input:focus,
 html[data-theme] textarea:focus,
 html[data-theme] select:focus {

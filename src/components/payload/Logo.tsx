@@ -30,7 +30,7 @@ export const Icon = () => (
     src="/davethan_logo.webp"
     alt="Davethan Icon"
     style={{
-      height: '28px',
+      height: '48px',
       width: 'auto',
       objectFit: 'contain',
       display: 'block',

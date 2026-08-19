@@ -8,11 +8,12 @@ import type { ServerFunctionClient } from 'payload';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-  },
+  icons: [
+    { rel: 'icon', url: '/favicon.ico', sizes: '16x16 32x32 48x48' },
+    { rel: 'shortcut icon', url: '/favicon.ico' },
+  ],
 };
+
 
 
 type Args = {
