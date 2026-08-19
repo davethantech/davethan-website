@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
 
 /**
  * Jobs Collection
@@ -60,6 +61,7 @@ export const Jobs: CollectionConfig = {
     {
       name: 'description',
       type: 'richText',
+      editor: lexicalEditor({}),
       label: 'Job Description',
       required: true,
       admin: {

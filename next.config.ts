@@ -1,8 +1,6 @@
 import type { NextConfig } from 'next';
 
-// We import withPayload using the correct named subpath export
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const { withPayload } = require('@payloadcms/next/withPayload');
+import { withPayload } from '@payloadcms/next/withPayload';
 
 const nextConfig: NextConfig = {
   webpack: (webpackConfig: { externals: string[] }) => {
