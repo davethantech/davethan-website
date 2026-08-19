@@ -38,11 +38,12 @@ export default function Home() {
 
           {/* Right Visual */}
           <div className="flex-1 relative h-[400px] lg:h-[630px] w-full flex items-start justify-end lg:-mr-12 -mt-4 lg:-mt-4">
-            <div className="relative w-[120%] lg:w-[700px] h-full right-[-10%] lg:right-[-50px]">
+            <div className="relative w-[120%] lg:w-[700px] min-h-[400px] lg:min-h-[630px] h-full right-[-10%] lg:right-[-50px]">
               <Image
                 src="/Robot_hand_holding_glowing_globe.png"
                 alt="Robot hand holding glowing globe"
                 fill
+                sizes="(max-width: 1024px) 120vw, 700px"
                 className="object-contain object-right-top lg:object-right-top"
                 priority
               />
@@ -101,7 +102,7 @@ export default function Home() {
                 style={service.active ? { backgroundImage: "linear-gradient(189.6deg, rgba(191, 249, 234, 0.15) 8.1%, rgba(6, 186, 225, 0.16) 89.6%)", boxShadow: "0px 4px 4px 0px rgba(6,186,225,0.72)" } : { backgroundColor: "white" }}
               >
                 <div className="bg-[#06bae1] rounded-[10px] w-[44px] h-[44px] flex items-center justify-center shrink-0">
-                  <Image src={service.icon} alt={service.title} width={24} height={24} className="object-contain" />
+                  <Image src={service.icon} alt={service.title} width={24} height={24} className="object-contain w-auto h-auto" />
                 </div>
                 <div className="flex flex-col gap-[8px]">
                   <h4 className="text-[#0a0d53] font-poppins font-bold text-[16px] leading-tight">{service.title}</h4>
@@ -135,6 +136,7 @@ export default function Home() {
                 src="/Woman_with_VR_headset.png"
                 alt="Woman with VR headset"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-contain object-center lg:object-right"
               />
             </div>
@@ -215,7 +217,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col items-center gap-1 justify-self-center">
-              <Image src="/star_metric.png" alt="5 Stars" width={75} height={15} className="object-contain h-[15px] w-auto" />
+              <Image src="/star_metric.png" alt="5 Stars" width={75} height={15} className="object-contain w-auto h-auto" />
               <span className="text-[#5b6472] font-inter text-[11px]">Client-rated support quality</span>
             </div>
 
@@ -257,6 +259,7 @@ export default function Home() {
                   src="/Office_meeting_photo.png"
                   alt="Office Meeting"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 586px"
                   className="object-cover"
                 />
               </div>
@@ -327,7 +330,7 @@ export default function Home() {
                   <div
                     className="w-[56px] h-[56px] mb-4 flex items-center justify-center relative"
                   >
-                    <Image src="/Team_avatar_icon.png" alt="Avatar background" fill className="object-contain" />
+                    <Image src="/Team_avatar_icon.png" alt="Avatar background" fill sizes="56px" className="object-contain" />
                     <span className="text-[#05263b] font-inter font-bold text-[14px] relative z-10">{member.initial}</span>
                   </div>
                   <h3 className="text-white font-roboto font-bold text-[14px]">{member.title}</h3>

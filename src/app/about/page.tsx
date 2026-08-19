@@ -60,6 +60,7 @@ export default function AboutPage() {
                 src="/about_hero_image.png"
                 alt="Davethan Hero"
                 fill
+                sizes="(max-width: 1024px) 100vw, 769px"
                 className="object-contain rounded-[180px]"
                 priority
               />
@@ -135,6 +136,7 @@ export default function AboutPage() {
                 src="/who-we-are-image.png"
                 alt="Who We Are"
                 fill
+                sizes="(max-width: 1024px) 100vw, 700px"
                 className="object-cover rounded-tl-[180px] rounded-br-[180px]"
               />
             </div>
@@ -170,7 +172,7 @@ export default function AboutPage() {
         {/* OUR APPROACH */}
         <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="flex-1 relative w-full max-w-[520px] h-[380px]">
+            <div className="flex-1 relative w-full max-w-[520px] min-h-[380px] h-[380px]">
               <Image
                 src="/bulb-with-trend-image.png"
                 alt="Innovation"

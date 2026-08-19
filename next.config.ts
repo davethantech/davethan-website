@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
     ];
     return webpackConfig;
   },
+  images: {
+    qualities: [25, 50, 75, 85, 100],
+  },
 };
 
 export default withPayload(nextConfig);

@@ -111,7 +111,7 @@ export default function RetailPage() {
               </div>
 
               <div className="w-full lg:w-[520px] relative min-h-[360px] sm:min-h-[440px] rounded-[20px] overflow-hidden shrink-0">
-                <Image src="/industry-section-main.png" alt="Retail IT Solutions" fill className="object-cover" />
+                <Image src="/industry-section-main.png" alt="Retail IT Solutions" fill sizes="(max-width: 1024px) 100vw, 520px" className="object-cover" />
               </div>
             </div>
           </div>

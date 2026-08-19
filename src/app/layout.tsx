@@ -8,6 +8,7 @@ const roboto = Roboto({ subsets: ['latin'], weight: ['400', '500', '700'], varia
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-poppins' });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://davethan.tech'),
   title: 'Davethan Technologies Limited | Managed IT, Cybersecurity & Cloud Services',
   description: 'Davethan Technologies Limited provides expert Managed IT, Cybersecurity, IT Consultancy and Cloud Services to businesses across the UK and Nigeria.',
   keywords: ['Managed IT', 'Cybersecurity', 'Cloud Services', 'IT Consultancy', 'UK', 'Nigeria', 'IT Support'],

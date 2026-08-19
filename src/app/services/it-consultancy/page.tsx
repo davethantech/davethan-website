@@ -106,7 +106,7 @@ export default function ITConsultancyPage() {
               </p>
             </div>
             <div className="flex-1 relative w-full h-[300px] lg:h-[450px] flex justify-end">
-              <div className="relative w-full h-full max-w-[800px] right-0">
+              <div className="relative w-full min-h-[300px] lg:min-h-[450px] h-full max-w-[800px] right-0">
                 <Image
                   src="/here-to-help.png"
                   alt="Woman with VR headset"

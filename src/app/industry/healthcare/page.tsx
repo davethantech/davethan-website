@@ -79,7 +79,7 @@ export default function HealthcarePage() {
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px]">
             <div className="flex flex-col lg:flex-row items-center gap-16">
               <div className="w-full lg:w-[520px] relative min-h-[360px] sm:min-h-[440px] rounded-[20px] overflow-hidden shrink-0">
-                <Image src="/industry-section-overlay.png" alt="Healthcare IT" fill className="object-cover" />
+                <Image src="/industry-section-overlay.png" alt="Healthcare IT" fill sizes="(max-width: 1024px) 100vw, 520px" className="object-cover" />
               </div>
 
               <div className="flex-1 space-y-6">

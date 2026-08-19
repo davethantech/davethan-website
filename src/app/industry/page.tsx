@@ -33,7 +33,7 @@ export default function IndustryPage() {
         <section className="bg-[#070933] relative z-10 pt-12 lg:pt-16 flex flex-col items-center text-center">
           {/* Decorative Ellipse */}
           <div className="absolute left-[10px] sm:left-[20px] lg:left-[80px] top-[10px] lg:top-[40px] w-[60px] lg:w-[150px] h-[60px] lg:h-[150px] z-0 pointer-events-none">
-            <Image src="/industry-hero-ellipse.png" alt="Decorative" fill className="object-contain" />
+            <Image src="/industry-hero-ellipse.png" alt="Decorative" fill sizes="150px" className="object-contain" />
           </div>
 
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] w-full flex flex-col items-center relative z-10">
@@ -70,6 +70,7 @@ export default function IndustryPage() {
                 src="/industry-hero-collage.png"
                 alt="Industry Hero Collage"
                 fill
+                sizes="(max-width: 1024px) 90vw, 800px"
                 className="object-cover rounded-[16px] lg:rounded-[24px] shadow-2xl"
                 priority
               />
@@ -144,12 +145,12 @@ export default function IndustryPage() {
 
                 {/* Main image */}
                 <div className="absolute inset-0 rounded-[24px] overflow-hidden shadow-lg">
-                  <Image src="/industry-section-main.png" alt="Industry operations" fill className="object-cover" />
+                  <Image src="/industry-section-main.png" alt="Industry operations" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                 </div>
 
                 {/* Overlapping small image */}
                 <div className="absolute -left-[10%] lg:-left-[60px] -bottom-[20%] lg: -bottom-[20px] w-[65%] lg:w-[260px] h-[55%] lg:h-[210px] rounded-[16px] overflow-hidden z-10">
-                  <Image src="/industry-section-overlay.png" alt="Professional" fill className="object-contain" />
+                  <Image src="/industry-section-overlay.png" alt="Professional" fill sizes="(max-width: 1024px) 100vw, 25vw" className="object-contain" />
                 </div>
 
                 {/* Floating Stat Badge */}
@@ -207,7 +208,7 @@ export default function IndustryPage() {
               {/* Card 1 */}
               <div className="flex flex-col rounded-[20px] shadow-[0px_4px_15px_rgba(191,249,234,0.4)] group overflow-hidden bg-white">
                 <div className="h-[220px] relative w-full overflow-hidden">
-                  <Image src="/industry-fintech.png" alt="Fintech" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src="/industry-fintech.png" alt="Fintech" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 shadow-[inset_0px_4px_4px_0px_rgba(191,249,234,0.8)] pointer-events-none" />
                 </div>
                 <div className="p-8 flex flex-col items-start border-b border-l border-r border-[#e4e9f2] rounded-b-[20px] flex-grow">
@@ -227,7 +228,7 @@ export default function IndustryPage() {
               {/* Card 2 */}
               <div className="flex flex-col rounded-[20px] shadow-[0px_4px_15px_rgba(191,249,234,0.4)] group overflow-hidden bg-white">
                 <div className="h-[220px] relative w-full overflow-hidden">
-                  <Image src="/industry-healthcare.png" alt="Healthcare" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src="/industry-healthcare.png" alt="Healthcare" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 shadow-[inset_0px_4px_4px_0px_rgba(191,249,234,0.8)] pointer-events-none" />
                 </div>
                 <div className="p-8 flex flex-col items-start border-b border-l border-r border-[#e4e9f2] rounded-b-[20px] flex-grow">
@@ -247,7 +248,7 @@ export default function IndustryPage() {
               {/* Card 3 */}
               <div className="flex flex-col rounded-[20px] shadow-[0px_4px_15px_rgba(191,249,234,0.4)] group overflow-hidden bg-white">
                 <div className="h-[220px] relative w-full overflow-hidden">
-                  <Image src="/industry-retail.png" alt="Retail" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src="/industry-retail.png" alt="Retail" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 shadow-[inset_0px_4px_4px_0px_rgba(191,249,234,0.8)] pointer-events-none" />
                 </div>
                 <div className="p-8 flex flex-col items-start border-b border-l border-r border-[#e4e9f2] rounded-b-[20px] flex-grow">
