@@ -21,6 +21,12 @@ export default buildConfig({
     meta: {
       titleSuffix: '— Davethan CMS',
     },
+    components: {
+      graphics: {
+        Logo: '@/components/payload/Logo#Logo',
+        Icon: '@/components/payload/Logo#Icon',
+      },
+    },
   },
   collections: [
     Users,
