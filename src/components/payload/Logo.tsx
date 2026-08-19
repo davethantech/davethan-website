@@ -6,56 +6,23 @@ import React from 'react';
  * Matches the Davethan homepage design system exactly.
  */
 export const Logo = () => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      padding: '4px 0',
-    }}
-  >
+  <div style={{ display: 'flex', alignItems: 'center', padding: '8px 0' }}>
     {/* eslint-disable-next-line @next/next/no-img-element */}
     <img
       src="/davethan_logo.webp"
-      alt="Davethan Technologies Logo"
+      alt="Davethan Technologies CMS"
       style={{
-        height: '36px',
+        height: '48px',
         width: 'auto',
         objectFit: 'contain',
         display: 'block',
-        borderRadius: '6px',
       }}
     />
-    <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
-      <span
-        style={{
-          color: '#0a0d53',
-          fontSize: '16px',
-          fontWeight: '700',
-          fontFamily: "'Roboto', 'Inter', sans-serif",
-          letterSpacing: '-0.3px',
-        }}
-      >
-        Davethan
-      </span>
-      <span
-        style={{
-          color: '#06bae1',
-          fontSize: '10px',
-          fontWeight: '600',
-          fontFamily: "'Inter', sans-serif",
-          letterSpacing: '0.8px',
-          textTransform: 'uppercase' as const,
-        }}
-      >
-        CMS
-      </span>
-    </div>
   </div>
 );
 
 /**
- * Icon — shown collapsed in the sidebar nav.
+ * Icon — shown in the top left of the dashboard.
  */
 export const Icon = () => (
   /* eslint-disable-next-line @next/next/no-img-element */
@@ -64,10 +31,10 @@ export const Icon = () => (
     alt="Davethan Icon"
     style={{
       height: '28px',
-      width: '28px',
-      objectFit: 'cover',
-      borderRadius: '6px',
+      width: 'auto',
+      objectFit: 'contain',
       display: 'block',
     }}
   />
 );
+
