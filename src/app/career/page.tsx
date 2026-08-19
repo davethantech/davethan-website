@@ -40,6 +40,7 @@ const typeLabels: Record<string, string> = {
 // Helper to extract raw text from Payload's Lexical JSON tree for preview snippets
 function extractLexicalText(node: any): string {
   if (!node) return '';
+  if (node.root) return extractLexicalText(node.root);
   if (node.type === 'text' && node.text) return node.text;
   if (Array.isArray(node.children)) {
     return node.children.map(extractLexicalText).join(' ');
@@ -291,14 +292,14 @@ export default async function CareerPage() {
                         </div>
                       </div>
 
-                      {/* Right: Apply CTA */}
+                      {/* Right: View Details CTA */}
                       <div className="shrink-0 pt-4 sm:pt-0">
-                        <a
-                          href={`mailto:${job.applicationEmail}?subject=Application for ${encodeURIComponent(job.title)}`}
+                        <Link
+                          href={`/career/${job.id}`}
                           className="inline-flex items-center justify-center gap-2 bg-[#0a0d53] hover:bg-[#06bae1] text-white hover:text-[#0a0d53] font-inter font-bold text-[13px] px-7 py-4 rounded-[10px] transition-all duration-300 w-full sm:w-auto"
                         >
-                          Apply Now <ArrowRight className="w-4 h-4" />
-                        </a>
+                          View Details <ArrowRight className="w-4 h-4" />
+                        </Link>
                       </div>
                     </div>
                   );
