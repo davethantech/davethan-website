@@ -4,81 +4,49 @@ import { notFound } from 'next/navigation';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CtaBlock } from '@/components/shared/CtaBlock';
-import { blogPosts } from '../data';
+import { getPayloadClient } from '@/lib/payload';
+import type { Post, Category, Media } from '@/payload-types';
 
-// ─── Static post content ─────────────────────────────────────────────────────
-// Replace with a Payload CMS fetch when CMS is connected.
+// ─── ISR: Revalidate at most every 60 seconds ────────────────────────────────
+export const revalidate = 60;
 
-type Post = {
-  title: string;
-  category: string;
-  date: string;
-  author: string;
-  authorRole: string;
-  readTime: string;
-  excerpt: string;
-  heroImage: string;
-  sections: { heading: string; body: string }[];
-  conclusion: { label: string; heading: string; body: string };
-};
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const posts: Record<string, Post> = {
-  'is-your-business-ready-for-a-cyberattack': {
-    title: "Is Your Business Ready for a Cyberattack? Here's How to Prepare Early",
-    category: 'CYBERSECURITY',
-    date: '23RD NOVEMBER 2024',
-    author: 'Davethan Security Team',
-    authorRole: 'CYBERSECURITY',
-    readTime: '6 Min',
-    excerpt:
-      'Dive into the world of proactive security and learn how to protect your business before an incident happens.',
-    heroImage: '/Blog-Hero.png',
-    sections: [
-      {
-        heading: 'Understanding Your Current Risk',
-        body: "In today's threat landscape, understanding your current risk exposure is paramount. Before defending against an attack, it's crucial to conduct a comprehensive audit of existing systems, identifying vulnerabilities, outdated software, and areas where security can be strengthened. By diving into the intricacies of day-to-day operations, businesses can pinpoint the exact gaps that hinder resilience.\n\nTaking a holistic view, consider not only internal systems but also external factors influencing exposure. Analyze recent industry incidents, threat trends, and compliance benchmarks. This comprehensive understanding lays the foundation for a strategic response plan, ensuring your efforts are targeted at the areas that will yield the most protection.",
-      },
-      {
-        heading: 'Building a Response Plan',
-        body: "Armed with insight from your risk audit, the next step is crafting a tailored incident response plan. This involves more than just installing tools — it's about defining clear roles, escalation paths, and communication procedures for the moment something goes wrong.\n\nIntroduce automation and monitoring as an ally in the response process. Automated alerting and integrated security tooling can dramatically shorten detection time. As well — training your team and equipping them with the skills to recognize and report threats ensures both systems and people are ready.",
-      },
-      {
-        heading: 'Continuous Monitoring for Long-Term Security',
-        body: "Security isn't a one-time fix; it's an ongoing commitment. After implementing initial changes, regularly review and reassess their effectiveness. Monitor key indicators, gather feedback from your team, and stay agile in response to evolving threats.\n\nEncourage a culture of vigilance within the organization. Employees at every level should feel empowered to flag anything unusual and contribute to the security effort. By fostering a culture that embraces change and values efficiency, businesses can ensure that resilience becomes ingrained in the DNA of the organization.",
-      },
-    ],
-    conclusion: {
-      label: 'CONCLUSION',
-      heading: "Preparedness isn't merely about buying tools",
-      body: "In conclusion, protecting your business isn't a one-time initiative but a dynamic process that requires ongoing commitment and adaptability. By understanding your current risk, building a targeted response plan, and embracing a culture of continuous monitoring, you can face whatever comes next with confidence.",
-    },
-  },
-};
+function getImageUrl(heroImage: Post['heroImage']): string {
+  if (!heroImage) return '/Blog-Hero.png';
+  if (typeof heroImage === 'string') return heroImage;
+  return (heroImage as Media).url ?? '/Blog-Hero.png';
+}
 
-// Populate remaining slugs with placeholder content until CMS is connected
-for (const bp of blogPosts) {
-  if (!posts[bp.slug]) {
-    posts[bp.slug] = {
-      title: bp.title,
-      category: bp.category,
-      date: 'AUGUST 2026',
-      author: 'Davethan Team',
-      authorRole: bp.category,
-      readTime: '5 Min',
-      excerpt: bp.snippet,
-      heroImage: bp.image,
-      sections: [
-        {
-          heading: 'Coming Soon',
-          body: 'Full article content will be available via the CMS shortly. Check back soon for the complete post.',
-        },
-      ],
-      conclusion: {
-        label: 'STAY TUNED',
-        heading: 'More insights coming your way',
-        body: 'We regularly publish articles on IT, cybersecurity, and cloud strategy tailored to SMEs. Subscribe to our newsletter to be the first to know.',
-      },
-    };
+function getCategoryTitle(category: Post['category']): string {
+  if (!category) return '';
+  if (typeof category === 'string') return category.toUpperCase();
+  return ((category as Category).title ?? '').toUpperCase();
+}
+
+function formatDate(iso?: string | null): string {
+  if (!iso) return '';
+  const date = new Date(iso);
+  const day = date.getDate();
+  const suffix = ['TH', 'ST', 'ND', 'RD'][
+    day % 10 < 4 && (day < 11 || day > 13) ? day % 10 : 0
+  ];
+  return `${day}${suffix} ${date.toLocaleString('en-GB', { month: 'long' }).toUpperCase()} ${date.getFullYear()}`;
+}
+
+// ─── Static params for pre-rendering ─────────────────────────────────────────
+
+export async function generateStaticParams() {
+  try {
+    const payload = await getPayloadClient();
+    const { docs } = await payload.find({
+      collection: 'posts',
+      limit: 200,
+      select: { slug: true },
+    });
+    return docs.map((post) => ({ slug: post.slug }));
+  } catch {
+    return [];
   }
 }
 
@@ -86,30 +54,152 @@ for (const bp of blogPosts) {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = posts[slug];
-  if (!post) return { title: 'Post Not Found | Davethan Blog' };
-  return {
-    title: `${post.title} | Davethan Blog`,
-    description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [{ url: post.heroImage }],
-    },
-  };
+  try {
+    const payload = await getPayloadClient();
+    const { docs } = await payload.find({
+      collection: 'posts',
+      where: { slug: { equals: slug } },
+      limit: 1,
+      depth: 2,
+    });
+    const post = docs[0] as Post | undefined;
+    if (!post) return { title: 'Post Not Found | Davethan Blog' };
+    return {
+      title: `${post.title} | Davethan Blog`,
+      description: post.excerpt ?? '',
+      openGraph: {
+        title: post.title,
+        description: post.excerpt ?? '',
+        images: [{ url: getImageUrl(post.heroImage) }],
+        url: `https://davethan.tech/blog/${slug}`,
+      },
+    };
+  } catch {
+    return { title: 'Davethan Blog' };
+  }
+}
+
+// ─── Rich Text renderer ───────────────────────────────────────────────────────
+
+/**
+ * Minimal lexical rich-text → HTML renderer.
+ * Handles paragraph, heading, unordered-list, and list-item nodes.
+ * Extend as needed for more node types.
+ */
+function renderLexicalNode(node: Record<string, unknown>, key: string | number): React.ReactNode {
+  const type = node.type as string;
+  const children = (node.children as Record<string, unknown>[] | undefined) ?? [];
+
+  switch (type) {
+    case 'root':
+      return <>{children.map((c, i) => renderLexicalNode(c, i))}</>;
+
+    case 'paragraph': {
+      const text = children.map((c, i) => renderLexicalNode(c, i));
+      return (
+        <p key={key} className="text-[#5b6472] font-inter text-[14px] sm:text-[15px] leading-[1.8] mb-4">
+          {text}
+        </p>
+      );
+    }
+
+    case 'heading': {
+      const tag = (node.tag as string) || 'h2';
+      const text = children.map((c, i) => renderLexicalNode(c, i));
+      return tag === 'h2' ? (
+        <h2 key={key} className="text-[#0a0d53] font-roboto font-bold text-[22px] sm:text-[26px] lg:text-[30px] mt-10 mb-5">
+          {text}
+        </h2>
+      ) : (
+        <h3 key={key} className="text-[#0a0d53] font-roboto font-bold text-[18px] sm:text-[20px] mt-8 mb-4">
+          {text}
+        </h3>
+      );
+    }
+
+    case 'list': {
+      const items = children.map((c, i) => renderLexicalNode(c, i));
+      return node.listType === 'number' ? (
+        <ol key={key} className="list-decimal list-inside space-y-2 mb-6 text-[#5b6472] font-inter text-[14px] sm:text-[15px] leading-[1.8]">
+          {items}
+        </ol>
+      ) : (
+        <ul key={key} className="list-disc list-inside space-y-2 mb-6 text-[#5b6472] font-inter text-[14px] sm:text-[15px] leading-[1.8]">
+          {items}
+        </ul>
+      );
+    }
+
+    case 'listitem':
+      return <li key={key}>{children.map((c, i) => renderLexicalNode(c, i))}</li>;
+
+    case 'text': {
+      let el: React.ReactNode = node.text as string;
+      const format = (node.format as number) || 0;
+      if (format & 1) el = <strong>{el}</strong>;
+      if (format & 2) el = <em>{el}</em>;
+      if (format & 8) el = <u>{el}</u>;
+      return <span key={key}>{el}</span>;
+    }
+
+    case 'linebreak':
+      return <br key={key} />;
+
+    case 'quote':
+      return (
+        <blockquote key={key} className="border-l-4 border-[#06bae1] pl-6 my-6 text-[#5b6472] italic font-inter text-[15px] leading-relaxed">
+          {children.map((c, i) => renderLexicalNode(c, i))}
+        </blockquote>
+      );
+
+    default:
+      return null;
+  }
+}
+
+function RichTextContent({ content }: { content: Record<string, unknown> }) {
+  const root = (content?.root as Record<string, unknown>) ?? content;
+  return <>{renderLexicalNode(root, 'root')}</>;
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = posts[slug];
+
+  const payload = await getPayloadClient();
+
+  // Fetch the specific post by slug
+  const { docs } = await payload.find({
+    collection: 'posts',
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 2,
+  });
+
+  const post = docs[0] as Post | undefined;
   if (!post) notFound();
 
-  // Related posts: same category, exclude current slug, max 3
-  const related = blogPosts
-    .filter((p) => p.category === post.category && p.slug !== slug)
-    .slice(0, 3);
+  // Fetch related posts: same category, excluding current, max 3
+  const categoryId =
+    typeof post.category === 'string' ? post.category : (post.category as Category)?.id;
+
+  const { docs: relatedDocs } = await payload.find({
+    collection: 'posts',
+    where: {
+      and: [
+        { 'category.id': { equals: categoryId } },
+        { slug: { not_equals: slug } },
+      ],
+    },
+    limit: 3,
+    depth: 2,
+  });
+  const related = relatedDocs as Post[];
+
+  const heroUrl = getImageUrl(post.heroImage);
+  const categoryLabel = getCategoryTitle(post.category);
+  const dateLabel = formatDate(post.publishedDate);
 
   return (
     <div className="min-h-screen bg-white font-inter">
@@ -119,10 +209,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* ─── HERO ─── */}
         <section className="bg-white pt-12 lg:pt-24 pb-0 text-center px-4 sm:px-6">
           <div className="max-w-[800px] mx-auto">
-            {/* Date · Category */}
             <p className="text-[#5b6472] font-inter font-bold text-[10px] sm:text-[11px] uppercase tracking-widest mb-5">
-              {post.date}&nbsp;·&nbsp;
-              <span className="text-[#06bae1]">{post.category}</span>
+              {dateLabel}&nbsp;·&nbsp;
+              <span className="text-[#06bae1]">{categoryLabel}</span>
             </p>
             <h1 className="text-[#0a0d53] font-roboto font-bold text-[28px] sm:text-[36px] lg:text-[52px] leading-[1.15] mb-5">
               {post.title}
@@ -136,7 +225,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* ─── HERO IMAGE ─── */}
         <div className="relative w-full h-[220px] sm:h-[320px] lg:h-[480px] mt-10">
           <Image
-            src={post.heroImage}
+            src={heroUrl}
             alt={post.title}
             fill
             className="object-cover"
@@ -158,7 +247,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               {[
                 { name: 'TWITTER', url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://davethan.tech/blog/${slug}` },
                 { name: 'FACEBOOK', url: `https://www.facebook.com/sharer/sharer.php?u=https://davethan.tech/blog/${slug}` },
-                { name: 'LINKEDIN', url: `https://www.linkedin.com/sharing/share-offsite/?url=https://davethan.tech/blog/${slug}` }
+                { name: 'LINKEDIN', url: `https://www.linkedin.com/sharing/share-offsite/?url=https://davethan.tech/blog/${slug}` },
               ].map((platform) => (
                 <a
                   key={platform.name}
@@ -174,7 +263,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
 
-              {/* ── Left: Desktop social share sidebar + article text ── */}
+              {/* ── Left: sidebar + article ── */}
               <div className="flex gap-8 flex-1 min-w-0">
 
                 {/* Desktop social share sidebar */}
@@ -185,7 +274,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {[
                     { name: 'TWITTER', url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://davethan.tech/blog/${slug}` },
                     { name: 'FACEBOOK', url: `https://www.facebook.com/sharer/sharer.php?u=https://davethan.tech/blog/${slug}` },
-                    { name: 'LINKEDIN', url: `https://www.linkedin.com/sharing/share-offsite/?url=https://davethan.tech/blog/${slug}` }
+                    { name: 'LINKEDIN', url: `https://www.linkedin.com/sharing/share-offsite/?url=https://davethan.tech/blog/${slug}` },
                   ].map((platform) => (
                     <a
                       key={platform.name}
@@ -199,40 +288,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   ))}
                 </div>
 
-                {/* Article content */}
-                <article className="flex-1 min-w-0 space-y-10 lg:space-y-12">
-
-                  {/* Sections */}
-                  {post.sections.map((section, idx) => (
-                    <div key={idx}>
-                      <h2 className="text-[#0a0d53] font-roboto font-bold text-[22px] sm:text-[26px] lg:text-[30px] mb-5">
-                        {section.heading}
-                      </h2>
-                      <div className="space-y-4">
-                        {section.body.split('\n\n').map((para, pIdx) => (
-                          <p key={pIdx} className="text-[#5b6472] font-inter text-[14px] sm:text-[15px] leading-[1.8]">
-                            {para}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Conclusion */}
-                  <div className="pt-2">
-                    <span className="text-[#06bae1] font-inter font-bold text-[10px] sm:text-[11px] uppercase tracking-widest block mb-3">
-                      {post.conclusion.label}
-                    </span>
-                    <h2 className="text-[#0a0d53] font-roboto font-bold text-[22px] sm:text-[26px] lg:text-[30px] mb-5">
-                      {post.conclusion.heading}
-                    </h2>
-                    <p className="text-[#5b6472] font-inter text-[14px] sm:text-[15px] leading-[1.8]">
-                      {post.conclusion.body}
-                    </p>
-                  </div>
+                {/* Article body — rendered from Payload's lexical rich text */}
+                <article className="flex-1 min-w-0">
+                  <RichTextContent content={post.content as Record<string, unknown>} />
 
                   {/* Back link */}
-                  <div className="pt-2">
+                  <div className="pt-8 mt-4 border-t border-[#e4e9f2]">
                     <Link
                       href="/blog"
                       className="text-[#0a0d53] font-poppins font-bold text-[13px] hover:text-[#06bae1] transition-colors inline-flex items-center gap-2"
@@ -240,11 +301,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       ← Back to Blog
                     </Link>
                   </div>
-
                 </article>
               </div>
 
-              {/* ── Right: Sidebar (stacks below on mobile) ── */}
+              {/* ── Right: Sidebar ── */}
               <aside className="w-full lg:w-[280px] shrink-0 flex flex-col gap-6 lg:gap-8">
 
                 {/* Details Card */}
@@ -254,9 +314,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
                   <div className="space-y-4">
                     {[
-                      { label: 'DATE', value: post.date },
-                      { label: 'CATEGORY', value: post.category },
-                      { label: 'READ TIME', value: post.readTime },
+                      { label: 'DATE', value: dateLabel },
+                      { label: 'CATEGORY', value: categoryLabel },
+                      { label: 'READ TIME', value: post.readTime ?? '5 Min' },
                     ].map((row) => (
                       <div
                         key={row.label}
@@ -279,20 +339,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     AUTHOR
                   </p>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-[44px] h-[44px] rounded-full bg-[#06bae1] flex items-center justify-center shrink-0">
-                      <span className="text-white font-bold text-[16px]">D</span>
+                    <div className="w-[44px] h-[44px] rounded-full bg-gradient-to-br from-[#06bae1] to-[#0a0d53] flex items-center justify-center shrink-0">
+                      <span className="text-white font-bold text-[16px]">
+                        {post.author?.charAt(0)?.toUpperCase() ?? 'D'}
+                      </span>
                     </div>
                     <div>
                       <p className="text-[#0a0d53] font-poppins font-bold text-[14px] leading-tight">
-                        {post.author}
+                        {post.author ?? 'Davethan Team'}
                       </p>
                       <p className="text-[#06bae1] font-inter font-bold text-[10px] uppercase tracking-widest mt-1">
-                        {post.authorRole}
+                        {post.authorRole ?? categoryLabel}
                       </p>
                     </div>
                   </div>
                   <p className="text-[#5b6472] font-inter text-[12px] leading-relaxed">
-                    Our security engineers write about the threats and defenses shaping how growing businesses stay protected.
+                    Our engineers write about the threats and solutions shaping how growing businesses stay protected.
                   </p>
                 </div>
 
@@ -309,18 +371,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 Related Articles
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {related.map((rp, idx) => (
-                  <Link key={idx} href={`/blog/${rp.slug}`} className="group flex flex-col">
+                {related.map((rp) => (
+                  <Link key={rp.id} href={`/blog/${rp.slug}`} className="group flex flex-col">
                     <div className="relative w-full h-[200px] rounded-[12px] overflow-hidden mb-4">
                       <Image
-                        src={rp.image}
+                        src={getImageUrl(rp.heroImage)}
                         alt={rp.title}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                     <span className="text-[#06bae1] font-inter font-bold text-[10px] uppercase tracking-widest mb-2">
-                      {rp.category}
+                      {getCategoryTitle(rp.category)}
                     </span>
                     <h4 className="text-[#0a0d53] font-roboto font-bold text-[16px] sm:text-[17px] leading-snug group-hover:text-[#06bae1] transition-colors">
                       {rp.title}

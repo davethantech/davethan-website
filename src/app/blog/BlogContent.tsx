@@ -6,34 +6,69 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { blogPosts, categories, featuredPost } from './data';
+import type { Post, Category, Media } from '@/payload-types';
 
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
+/** Safely extract a Cloudinary / public-folder image URL from a Payload Media relationship */
+function getImageUrl(heroImage: Post['heroImage']): string {
+  if (!heroImage) return '/Blog-Hero.png';
+  if (typeof heroImage === 'string') return heroImage;
+  // Payload populates `url` on the Media doc when cloud storage is active
+  return (heroImage as Media).url ?? '/Blog-Hero.png';
+}
 
-export default function BlogContent() {
+/** Format a Payload ISO date string to a display string, e.g. "23RD NOVEMBER 2024" */
+function formatDate(iso?: string | null): string {
+  if (!iso) return '';
+  const date = new Date(iso);
+  const day = date.getDate();
+  const suffix = ['TH', 'ST', 'ND', 'RD'][
+    day % 10 < 4 && (day < 11 || day > 13) ? day % 10 : 0
+  ];
+  return `${day}${suffix} ${date.toLocaleString('en-GB', { month: 'long' }).toUpperCase()} ${date.getFullYear()}`;
+}
+
+/** Extract the category display title from a Payload relationship (string id or populated object) */
+function getCategoryTitle(category: Post['category']): string {
+  if (!category) return '';
+  if (typeof category === 'string') return category.toUpperCase();
+  return ((category as Category).title ?? '').toUpperCase();
+}
+
+// ─── Props ───────────────────────────────────────────────────────────────────
+
+interface BlogContentProps {
+  allPosts: Post[];
+  featuredPost: Post | null;
+  categories: Category[];
+}
+
+// ─── Component ───────────────────────────────────────────────────────────────
+
+export default function BlogContent({ allPosts, featuredPost, categories }: BlogContentProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  const filteredPosts =
-    activeCategory
-      ? blogPosts.filter((p) => p.category === activeCategory)
-      : blogPosts;
+  const filteredPosts = activeCategory
+    ? allPosts.filter((p) => getCategoryTitle(p.category) === activeCategory)
+    : allPosts;
 
   return (
     <div className="min-h-screen bg-white font-inter">
       <Navbar />
       <main>
 
-        {/* HERO SECTION */}
+        {/* ─── HERO SECTION ─── */}
         <section className="bg-[#070933] py-20 lg:py-28 text-center px-4">
           <h1 className="text-white font-roboto font-bold text-[40px] sm:text-[48px] lg:text-[60px] tracking-wide mb-6">
             THE BLOG
           </h1>
           <p className="text-[#BFF9EA] font-inter font-bold text-[11px] sm:text-[13px] lg:text-[20px] tracking-[1px] uppercase max-w-[900px] mx-auto leading-relaxed">
-            STAY UP TO DATE ON TIPS, TRICKS & TRENDS FOR IT, CYBERSECURITY & CLOUD STRATEGY
+            STAY UP TO DATE ON TIPS, TRICKS &amp; TRENDS FOR IT, CYBERSECURITY &amp; CLOUD STRATEGY
           </p>
         </section>
 
-        {/* BROWSE CATEGORIES */}
+        {/* ─── BROWSE CATEGORIES ─── */}
         <section className="border-b border-[#e4e9f2] bg-white">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] py-6 flex flex-row items-center gap-4 overflow-x-auto scrollbar-hide">
             <span className="text-[#0a0d53] font-poppins font-medium italic text-[16px] shrink-0">
@@ -51,27 +86,28 @@ export default function BlogContent() {
               >
                 ALL
               </button>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() =>
-                    setActiveCategory(activeCategory === cat ? null : cat)
-                  }
-                  className={`font-inter font-bold text-[11px] uppercase tracking-widest transition-colors whitespace-nowrap ${
-                    activeCategory === cat
-                      ? 'text-[#06bae1] underline underline-offset-4'
-                      : 'text-[#0a0d53] hover:text-[#06bae1]'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+              {categories.map((cat) => {
+                const label = cat.title.toUpperCase();
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(activeCategory === label ? null : label)}
+                    className={`font-inter font-bold text-[11px] uppercase tracking-widest transition-colors whitespace-nowrap ${
+                      activeCategory === label
+                        ? 'text-[#06bae1] underline underline-offset-4'
+                        : 'text-[#0a0d53] hover:text-[#06bae1]'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* FEATURED POST — hide when a category filter is active */}
-        {activeCategory === null && (
+        {/* ─── FEATURED POST — hide when category filter is active ─── */}
+        {activeCategory === null && featuredPost && (
           <section className="py-16 lg:py-24 bg-white">
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px]">
               <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
@@ -83,9 +119,10 @@ export default function BlogContent() {
                     style={{ aspectRatio: '4/3' }}
                   >
                     <Image
-                      src="/Blog-Hero.png"
-                      alt="Featured Post"
+                      src={getImageUrl(featuredPost.heroImage)}
+                      alt={featuredPost.title}
                       fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover"
                       priority
                     />
@@ -101,13 +138,13 @@ export default function BlogContent() {
                 {/* Right: Content */}
                 <div className="w-full lg:w-1/2 max-w-[600px]">
                   <span className="text-[#06bae1] font-inter font-bold text-[11px] uppercase tracking-widest block mb-4">
-                    {featuredPost.category}
+                    {getCategoryTitle(featuredPost.category)}
                   </span>
                   <h2 className="text-[#0a0d53] font-roboto font-bold text-[32px] sm:text-[40px] lg:text-[48px] leading-[1.1] mb-6">
                     {featuredPost.title}
                   </h2>
                   <p className="text-[#5b6472] font-inter text-[15px] leading-relaxed mb-8">
-                    {featuredPost.snippet}
+                    {featuredPost.excerpt}
                   </p>
                   <Link
                     href={`/blog/${featuredPost.slug}`}
@@ -122,7 +159,7 @@ export default function BlogContent() {
           </section>
         )}
 
-        {/* POSTS GRID */}
+        {/* ─── POSTS GRID ─── */}
         <section className={`pb-24 lg:pb-32 bg-white ${activeCategory !== null ? 'pt-16 lg:pt-24' : ''}`}>
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px]">
 
@@ -142,26 +179,35 @@ export default function BlogContent() {
             )}
 
             {filteredPosts.length === 0 ? (
-              <p className="text-[#5b6472] font-inter text-[15px] text-center py-16">
-                No posts in this category yet.
-              </p>
+              <div className="flex flex-col items-center justify-center py-24 gap-4">
+                <p className="text-[#5b6472] font-inter text-[15px] text-center">
+                  No posts in this category yet.
+                </p>
+                <button
+                  onClick={() => setActiveCategory(null)}
+                  className="text-[#06bae1] font-inter font-bold text-[13px] hover:underline"
+                >
+                  View all posts →
+                </button>
+              </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-                {filteredPosts.map((post, idx) => (
-                  <div key={idx} className="group cursor-pointer flex flex-col h-full">
+                {filteredPosts.map((post) => (
+                  <div key={post.id} className="group cursor-pointer flex flex-col h-full">
 
                     {/* Image */}
                     <div className="relative w-full h-[240px] rounded-[16px] overflow-hidden mb-6">
                       <Image
-                        src={post.image}
+                        src={getImageUrl(post.heroImage)}
                         alt={post.title}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       {/* Vertical Category Ribbon */}
                       <div className="absolute top-0 left-8 bg-[#0a0d53] h-[140px] w-[36px] flex items-center justify-center rounded-b-[8px]">
                         <span className="text-white text-[10px] font-bold uppercase tracking-widest -rotate-90 whitespace-nowrap">
-                          {post.category}
+                          {getCategoryTitle(post.category)}
                         </span>
                       </div>
                     </div>
@@ -172,7 +218,7 @@ export default function BlogContent() {
                         {post.title}
                       </h3>
                       <p className="text-[#5b6472] font-inter text-[14px] leading-relaxed mb-6 flex-1">
-                        {post.snippet}
+                        {post.excerpt}
                       </p>
                       <Link
                         href={`/blog/${post.slug}`}

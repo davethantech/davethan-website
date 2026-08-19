@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MapPin, Clock, Briefcase } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CtaBlock } from '@/components/shared/CtaBlock';
+import { getPayloadClient } from '@/lib/payload';
+import type { Job } from '@/payload-types';
 
 export const metadata = {
   title: 'Career | Davethan Technologies Limited',
@@ -16,7 +18,36 @@ export const metadata = {
   },
 };
 
-export default function CareerPage() {
+// Re-validate every 60 seconds — new job listings appear within a minute
+export const revalidate = 60;
+
+// ─── Type Badge ───────────────────────────────────────────────────────────────
+
+const typeBadgeStyles: Record<string, string> = {
+  'full-time': 'bg-[rgba(6,186,225,0.12)] text-[#06bae1] border border-[rgba(6,186,225,0.3)]',
+  'part-time': 'bg-[rgba(10,13,83,0.08)] text-[#0a0d53] border border-[rgba(10,13,83,0.2)]',
+  'contract': 'bg-[rgba(191,249,234,0.5)] text-[#0a0d53] border border-[rgba(6,186,225,0.2)]',
+  'internship': 'bg-[rgba(255,255,255,0.9)] text-[#5b6472] border border-[#e4e9f2]',
+};
+
+const typeLabels: Record<string, string> = {
+  'full-time': 'Full-time',
+  'part-time': 'Part-time',
+  'contract': 'Contract',
+  'internship': 'Internship',
+};
+
+export default async function CareerPage() {
+  // Fetch all active jobs from Payload
+  const payload = await getPayloadClient();
+  const { docs: jobs } = await payload.find({
+    collection: 'jobs',
+    where: { active: { equals: true } },
+    sort: '-updatedAt',
+    limit: 50,
+  });
+  const activeJobs = jobs as Job[];
+
   return (
     <div className="min-h-screen bg-white font-inter">
       <Navbar />
@@ -34,14 +65,14 @@ export default function CareerPage() {
               quality={85}
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-[#070933]/70"></div>
+            <div className="absolute inset-0 bg-[#070933]/70" />
           </div>
           <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px] text-center">
             <h1 className="text-white font-roboto font-bold text-[36px] sm:text-[44px] lg:text-[56px] leading-[1.1] mb-3">
               Career
             </h1>
             <p className="text-gray-300 font-inter text-[14px] sm:text-[16px]">
-              <a href="/">Home</a> &nbsp;&gt;&nbsp; Career
+              <a href="/">Home</a>&nbsp;&gt;&nbsp; Career
             </p>
           </div>
         </section>
@@ -63,7 +94,7 @@ export default function CareerPage() {
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
-              {/* Left Side: Image */}
+              {/* Left: Image */}
               <div className="flex-1 w-full relative">
                 <div className="relative w-full aspect-[4/3] rounded-[16px] overflow-hidden">
                   <Image
@@ -77,7 +108,7 @@ export default function CareerPage() {
                 </div>
               </div>
 
-              {/* Right Side: Text & Bullets */}
+              {/* Right: Text & Bullets */}
               <div className="flex-1 w-full space-y-6">
                 <h2 className="text-[#0a0d53] font-roboto font-bold text-[32px] sm:text-[36px] lg:text-[40px] leading-[1.1]">
                   Join Our Team
@@ -95,10 +126,10 @@ export default function CareerPage() {
                       'Career Growth and Development',
                       'Team Collaboration',
                       'Work-Life Balance',
-                      'Innovation at the Core'
+                      'Innovation at the Core',
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-center gap-3 text-[#0a0d53] font-inter font-bold text-[14px]">
-                        <div className="w-[6px] h-[6px] bg-[#06bae1] rounded-full shrink-0"></div>
+                        <div className="w-[6px] h-[6px] bg-[#06bae1] rounded-full shrink-0" />
                         {item}
                       </li>
                     ))}
@@ -114,7 +145,6 @@ export default function CareerPage() {
         <section className="py-16 sm:py-24 bg-[#f8f9fc]">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
 
-            {/* Top Header Row */}
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
               <div className="max-w-[500px]">
                 <span className="text-[#06bae1] font-inter font-bold text-[11px] sm:text-[12px] uppercase tracking-widest block mb-4">
@@ -126,22 +156,21 @@ export default function CareerPage() {
               </div>
               <div className="max-w-[600px]">
                 <p className="text-[#5b6472] font-inter text-[15px] sm:text-[16px] leading-[1.8]">
-                  Working at Davethan Technologies means being part of a dynamic and forward-thinking company. Our people are our most valuable asset, and we're committed to helping our team members thrive — from ongoing training to a vibrant company culture.
+                  Working at Davethan Technologies means being part of a dynamic and forward-thinking company. Our people are our most valuable asset, and we&apos;re committed to helping our team members thrive — from ongoing training to a vibrant company culture.
                 </p>
               </div>
             </div>
 
-            {/* Benefits Grid */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 text-center">
               {[
                 'Career Growth and Development',
                 'Team Collaboration',
                 'Work-Life Balance',
-                'Innovation at the Core'
+                'Innovation at the Core',
               ].map((benefit, idx) => (
                 <div key={idx} className="flex flex-col items-center gap-5">
                   <div className="w-[56px] h-[56px] bg-[#0a0d53] rounded-full flex items-center justify-center shrink-0 shadow-sm">
-                    <div className="w-[20px] h-[20px] bg-[#06bae1] rounded-full"></div>
+                    <div className="w-[20px] h-[20px] bg-[#06bae1] rounded-full" />
                   </div>
                   <h3 className="text-[#0a0d53] font-roboto font-bold text-[16px] sm:text-[18px] max-w-[180px] leading-snug">
                     {benefit}
@@ -153,25 +182,100 @@ export default function CareerPage() {
           </div>
         </section>
 
-        {/* ─── CURRENT OPENINGS SECTION ─── */}
-        <section className="py-16 sm:py-24 bg-white text-center">
-          <div className="max-w-[700px] mx-auto px-4 sm:px-6">
-            <h2 className="text-[#0a0d53] font-roboto font-bold text-[32px] sm:text-[40px] leading-[1.1] mb-6">
-              Current Openings
-            </h2>
-            <p className="text-[#5b6472] font-inter text-[15px] sm:text-[16px] leading-[1.8] mb-10">
-              We are always looking for talented individuals to join our team. Explore exciting career opportunities at Davethan Technologies — we offer competitive compensation and benefits packages, and a supportive work environment that values diversity and inclusion.
-            </p>
-            <Link
-              href="#"
-              className="inline-flex items-center justify-center gap-2 bg-[#06bae1] hover:bg-[#05a6c9] text-[#0a0d53] font-inter font-bold text-[13px] px-8 py-4 rounded-[4px] transition-colors"
-            >
-              Career Portal <ArrowRight className="w-4 h-4" />
-            </Link>
+        {/* ─── CURRENT OPENINGS ─── */}
+        <section className="py-16 sm:py-24 bg-white">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
+
+            {/* Section Header */}
+            <div className="text-center mb-16">
+              <span className="text-[#06bae1] font-inter font-bold text-[11px] sm:text-[12px] uppercase tracking-widest block mb-4">
+                JOIN THE TEAM
+              </span>
+              <h2 className="text-[#0a0d53] font-roboto font-bold text-[32px] sm:text-[40px] leading-[1.1] mb-6">
+                Current Openings
+              </h2>
+              <p className="text-[#5b6472] font-inter text-[15px] sm:text-[16px] leading-[1.8] max-w-[700px] mx-auto">
+                We are always looking for talented individuals to join our team. Explore exciting career opportunities at Davethan Technologies — we offer competitive compensation and a supportive, inclusive work environment.
+              </p>
+            </div>
+
+            {/* Job Listings */}
+            {activeJobs.length === 0 ? (
+              /* ── Empty State ── */
+              <div className="max-w-[560px] mx-auto text-center py-16 px-8 rounded-[20px] border border-dashed border-[#e4e9f2] bg-[#f8f9fc]">
+                <div className="w-[64px] h-[64px] bg-[#f0f9ff] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Briefcase className="w-7 h-7 text-[#06bae1]" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-[#0a0d53] font-roboto font-bold text-[20px] mb-3">
+                  No openings right now
+                </h3>
+                <p className="text-[#5b6472] font-inter text-[14px] leading-relaxed mb-8">
+                  We don&apos;t have any active vacancies at the moment, but we&apos;re always interested in hearing from talented people. Send us your CV and we&apos;ll be in touch.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-[#06bae1] hover:bg-[#05a6c9] text-[#0a0d53] font-inter font-bold text-[13px] px-8 py-4 rounded-[8px] transition-colors"
+                >
+                  Send Us Your CV <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            ) : (
+              /* ── Job Cards ── */
+              <div className="space-y-4">
+                {activeJobs.map((job) => (
+                  <div
+                    key={job.id}
+                    className="group bg-white border border-[#e4e9f2] rounded-[16px] p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 hover:border-[#06bae1] hover:shadow-[0_4px_24px_rgba(6,186,225,0.12)] transition-all duration-300"
+                  >
+                    {/* Left: Job Info */}
+                    <div className="flex flex-col gap-3 flex-1 min-w-0">
+                      {/* Type Badge */}
+                      <span className={`self-start text-[10px] font-inter font-bold uppercase tracking-widest px-3 py-1 rounded-full ${typeBadgeStyles[job.type] ?? typeBadgeStyles['full-time']}`}>
+                        {typeLabels[job.type] ?? job.type}
+                      </span>
+
+                      <h3 className="text-[#0a0d53] font-roboto font-bold text-[20px] sm:text-[22px] leading-tight group-hover:text-[#06bae1] transition-colors">
+                        {job.title}
+                      </h3>
+
+                      <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                        {job.department && (
+                          <span className="text-[#5b6472] font-inter text-[13px] flex items-center gap-1.5">
+                            <Briefcase className="w-3.5 h-3.5 text-[#06bae1] shrink-0" strokeWidth={2} />
+                            {job.department}
+                          </span>
+                        )}
+                        {job.location && (
+                          <span className="text-[#5b6472] font-inter text-[13px] flex items-center gap-1.5">
+                            <MapPin className="w-3.5 h-3.5 text-[#06bae1] shrink-0" strokeWidth={2} />
+                            {job.location}
+                          </span>
+                        )}
+                        <span className="text-[#5b6472] font-inter text-[13px] flex items-center gap-1.5">
+                          <Clock className="w-3.5 h-3.5 text-[#06bae1] shrink-0" strokeWidth={2} />
+                          {typeLabels[job.type] ?? job.type}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Right: Apply CTA */}
+                    <div className="shrink-0">
+                      <a
+                        href={`mailto:${job.applicationEmail}?subject=Application for ${encodeURIComponent(job.title)}`}
+                        className="inline-flex items-center justify-center gap-2 bg-[#0a0d53] hover:bg-[#06bae1] text-white hover:text-[#0a0d53] font-inter font-bold text-[13px] px-7 py-4 rounded-[10px] transition-all duration-300"
+                      >
+                        Apply Now <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
           </div>
         </section>
 
-        {/* ─── SEND US A MESSAGE SECTION ─── */}
+        {/* ─── SEND US A MESSAGE ─── */}
         <section className="py-16 sm:py-24 bg-white border-t border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-[80px]">
             <div className="text-center mb-12">
@@ -210,8 +314,7 @@ export default function CareerPage() {
                     placeholder="Your message"
                     rows={4}
                     className="w-full p-6 bg-[#f8f9fc] rounded-[8px] text-[#5b6472] font-inter text-[14px] focus:outline-none focus:ring-1 focus:ring-[#06bae1] transition-all resize-none"
-                  ></textarea>
-
+                  />
                   <button
                     type="submit"
                     className="w-full inline-flex items-center justify-center bg-[#06bae1] hover:bg-[#05a6c9] text-[#0a0d53] font-inter font-bold text-[13px] tracking-widest uppercase px-8 py-4 rounded-[8px] transition-colors mt-2"

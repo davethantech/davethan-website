@@ -1,12 +1,15 @@
 import { buildConfig } from 'payload';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { cloudinaryStorage } from 'payload-storage-cloudinary';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { Users } from './collections/Users';
 import { Posts } from './collections/Posts';
 import { Categories } from './collections/Categories';
+import { Media } from './collections/Media';
+import { Jobs } from './collections/Jobs';
 import { FormSubmissions } from './collections/FormSubmissions';
 
 const filename = fileURLToPath(import.meta.url);
@@ -15,11 +18,16 @@ const dirname = path.dirname(filename);
 export default buildConfig({
   admin: {
     user: Users.slug,
+    meta: {
+      titleSuffix: '— Davethan CMS',
+    },
   },
   collections: [
     Users,
     Posts,
     Categories,
+    Media,
+    Jobs,
     FormSubmissions,
   ],
   editor: lexicalEditor({}),
@@ -30,4 +38,18 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  plugins: [
+    // cloudinaryStorage is a self-contained plugin — it wraps cloudStoragePlugin internally.
+    // API: { cloudConfig: { cloud_name, api_key, api_secret }, collections: { [slug]: true | config } }
+    cloudinaryStorage({
+      cloudConfig: {
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
+        api_key: process.env.CLOUDINARY_API_KEY || '',
+        api_secret: process.env.CLOUDINARY_API_SECRET || '',
+      },
+      collections: {
+        media: true,
+      },
+    }),
+  ],
 });
