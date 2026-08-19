@@ -26,15 +26,19 @@ export const CustomDashboard: React.FC = () => {
       }} />
 
       <div style={{ position: 'relative', zIndex: 1 }}>
-        <h1 style={{ 
-          fontSize: '32px', 
-          fontWeight: 700, 
-          marginBottom: '12px',
-          color: '#ffffff',
-          fontFamily: "'Roboto', sans-serif"
-        }}>
+        <div 
+          role="heading" 
+          aria-level={1}
+          style={{ 
+            fontSize: '32px', 
+            fontWeight: 700, 
+            marginBottom: '12px',
+            color: '#ffffff',
+            fontFamily: "'Roboto', sans-serif"
+          }}
+        >
           Welcome to Davethan CMS
-        </h1>
+        </div>
         <p style={{ 
           fontSize: '16px', 
           color: '#bff9ea', 
