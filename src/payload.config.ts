@@ -21,6 +21,7 @@ export default buildConfig({
     meta: {
       titleSuffix: '— Davethan CMS',
     },
+    css: path.resolve(dirname, 'payload-theme.css'),
   },
   collections: [
     Users,

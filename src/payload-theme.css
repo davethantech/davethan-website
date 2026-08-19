@@ -1,0 +1,96 @@
+/* Davethan Payload CMS Theme Overrides */
+
+/* Force Light Theme Base Colors */
+:root, html[data-theme='light'], html[data-theme='dark'] {
+  --theme-bg: #f8f9fc;
+  --theme-text: #0a0d53;
+  --theme-elevation-0: #ffffff;
+  --theme-elevation-50: #f8f9fc;
+  --theme-elevation-100: #f0f2f5;
+  --theme-elevation-150: #e4e9f2;
+  --theme-elevation-200: #c2c9d6;
+  --theme-elevation-300: #a1abc0;
+  --theme-elevation-400: #8190ab;
+  --theme-elevation-500: #5b6472;
+  --theme-elevation-600: #4a525f;
+  --theme-elevation-700: #3a414b;
+  --theme-elevation-800: #292f38;
+  --theme-elevation-900: #181d24;
+  --theme-elevation-1000: #0a0d53;
+
+  --theme-success-100: #e6fcf7;
+  --theme-success-500: #06bae1;
+  --theme-error-100: #ffeeee;
+  --theme-error-500: #e10606;
+
+  /* Form & Button Overrides to defeat Tailwind base resets */
+  --theme-input-bg: #ffffff;
+  --theme-input-border: #e4e9f2;
+  --theme-input-text: #0a0d53;
+}
+
+/* Force Form Styles */
+.payload-admin .field-type {
+  margin-bottom: 24px !important;
+}
+
+.payload-admin input[type="text"],
+.payload-admin input[type="email"],
+.payload-admin input[type="password"],
+.payload-admin textarea,
+.payload-admin select {
+  background-color: var(--theme-input-bg) !important;
+  color: var(--theme-input-text) !important;
+  border: 1px solid var(--theme-input-border) !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-family: inherit !important;
+  width: 100% !important;
+}
+
+.payload-admin input:focus,
+.payload-admin textarea:focus,
+.payload-admin select:focus {
+  outline: none !important;
+  border-color: #06bae1 !important;
+  box-shadow: 0 0 0 2px rgba(6, 186, 225, 0.2) !important;
+}
+
+/* Force Buttons */
+.payload-admin button,
+.payload-admin .btn {
+  background-color: #0a0d53 !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  transition: background-color 0.2s !important;
+}
+
+.payload-admin button:hover,
+.payload-admin .btn:hover {
+  background-color: #06bae1 !important;
+}
+
+/* Button variants if needed */
+.payload-admin .btn--style-secondary {
+  background-color: #f8f9fc !important;
+  color: #0a0d53 !important;
+  border: 1px solid #e4e9f2 !important;
+}
+
+.payload-admin .btn--style-secondary:hover {
+  background-color: #e4e9f2 !important;
+}
+
+/* Navbar / Header */
+.payload-admin .step-nav {
+  background-color: #0a0d53 !important;
+  color: #ffffff !important;
+  padding: 16px 32px !important;
+}
+
+.payload-admin .step-nav a {
+  color: #06bae1 !important;
+}
