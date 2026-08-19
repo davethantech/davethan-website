@@ -7,6 +7,12 @@ import { ArrowRight, Users, Handshake, TrendingUp, CircleDollarSign, Award, Hear
 export const metadata = {
   title: 'IT Consultancy | Davethan Technologies Limited',
   description: 'Your Outsourced IT Strategy Partner. Wherever your business is headed, whenever you need us.',
+  openGraph: {
+    title: 'IT Consultancy | Davethan Technologies Limited',
+    description: 'Your outsourced IT strategy partner — infrastructure planning, vendor management, and technology roadmaps for growing businesses.',
+    url: 'https://davethan.tech/services/it-consultancy',
+    images: [{ url: '/IT-Consultancy-Hero.png', width: 1200, height: 630, alt: 'IT Consultancy Services' }],
+  },
 };
 
 export default function ITConsultancyPage() {
@@ -40,7 +46,8 @@ export default function ITConsultancyPage() {
               src="/IT-Consultancy-Hero.png"
               alt="IT Consultancy Team"
               fill
-              className="object-contain lg:rounded-tl-[80px] lg:rounded-bl-[80px] rounded-tl-[40px] rounded-tr-[40px] lg:rounded-tr-none"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover lg:rounded-tl-[80px] lg:rounded-bl-[80px] rounded-tl-[40px] rounded-tr-[40px] lg:rounded-tr-none"
               priority
             />
           </div>

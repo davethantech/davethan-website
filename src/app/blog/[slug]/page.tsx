@@ -141,8 +141,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             fill
             className="object-cover"
             priority
-            quality={100}
-            unoptimized
+            quality={85}
+            sizes="100vw"
           />
         </div>
 

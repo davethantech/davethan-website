@@ -6,6 +6,12 @@ import { CtaBlock } from '@/components/shared/CtaBlock';
 export const metadata = {
   title: 'Contact Us | Davethan Technologies Limited',
   description: "Get in touch with the Davethan team — whether you have a question, need a quote, or want to book a free consultation.",
+  openGraph: {
+    title: 'Contact Us | Davethan Technologies Limited',
+    description: 'Have a question about managed IT, cybersecurity, or cloud strategy? We are a phone call, email, or message away.',
+    url: 'https://davethan.tech/contact',
+    images: [{ url: '/Contact-Us-Hero.png', width: 1200, height: 630, alt: 'Contact Davethan Technologies' }],
+  },
 };
 
 export default function ContactPage() {
@@ -23,8 +29,8 @@ export default function ContactPage() {
               fill
               className="object-cover"
               priority
-              quality={100}
-              unoptimized
+            quality={85}
+            sizes="100vw"
             />
             <div className="absolute inset-0 bg-[#070933]/70"></div> {/* Dark overlay */}
           </div>

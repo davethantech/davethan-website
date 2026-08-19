@@ -7,6 +7,12 @@ import { Server, DollarSign, RefreshCw, Clock, CloudUpload, Map, ArrowRight } fr
 export const metadata = {
   title: 'Cloud Services | Davethan Technologies Limited',
   description: 'Scalable Cloud for Your Business. Strategic cloud adoption, migration, and optimization tailored to small and medium businesses.',
+  openGraph: {
+    title: 'Cloud Services | Davethan Technologies Limited',
+    description: 'Strategic cloud adoption, migration, and optimization tailored to small and medium businesses in the UK and Nigeria.',
+    url: 'https://davethan.tech/services/cloud-services',
+    images: [{ url: '/Cloud-Services-Hero.png', width: 1200, height: 630, alt: 'Cloud Services' }],
+  },
 };
 
 export default function CloudServicesPage() {
@@ -23,6 +29,7 @@ export default function CloudServicesPage() {
               src="/Cloud-Services-Hero.png"
               alt="Cloud Services Hero"
               fill
+              sizes="100vw"
               className="object-cover"
               priority
             />

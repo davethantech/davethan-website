@@ -7,6 +7,12 @@ import { Shield, Search, Zap, FileCheck, ArrowRight } from 'lucide-react';
 export const metadata = {
   title: 'Cybersecurity | Davethan Technologies Limited',
   description: 'Proactive Defense For Your Business. Comprehensive protection against malware, ransomware, and phishing.',
+  openGraph: {
+    title: 'Cybersecurity Services | Davethan Technologies Limited',
+    description: 'Proactive cybersecurity defence for growing businesses — threat detection, compliance, and 24/7 monitoring.',
+    url: 'https://davethan.tech/services/cybersecurity',
+    images: [{ url: '/Cybersecurity-Hero.png', width: 1200, height: 630, alt: 'Cybersecurity Services' }],
+  },
 };
 
 export default function CybersecurityPage() {
@@ -62,6 +68,7 @@ export default function CybersecurityPage() {
                   src="/Cybersecurity-Hero.png" 
                   alt="Cybersecurity Team" 
                   fill 
+                  sizes="(max-width: 768px) 100vw, 600px"
                   className="object-cover"
                   priority 
                 />

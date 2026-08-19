@@ -37,14 +37,16 @@ export default function Home() {
           </div>
 
           {/* Right Visual */}
-          <div className="w-full lg:flex-1 relative h-[350px] sm:h-[450px] lg:h-[630px] mt-10 lg:mt-[-16px] lg:-mr-12 shrink-0">
-            <Image
-              src="/Robot_hand_holding_glowing_globe.png"
-              alt="Robot hand holding glowing globe"
-              fill
-              className="object-contain object-center lg:object-right-top"
-              priority
-            />
+          <div className="flex-1 relative h-[400px] lg:h-[630px] w-full flex items-start justify-end lg:-mr-12 -mt-4 lg:-mt-4">
+            <div className="relative w-[120%] lg:w-[700px] h-full right-[-10%] lg:right-[-50px]">
+              <Image
+                src="/Robot_hand_holding_glowing_globe.png"
+                alt="Robot hand holding glowing globe"
+                fill
+                className="object-contain object-right-top lg:object-right-top"
+                priority
+              />
+            </div>
           </div>
         </section>
 
@@ -122,7 +124,7 @@ export default function Home() {
                 Proving Infrastructure solutions that transform businesses for tomorrow
               </h3>
             </div>
-            <p className="text-[#5b6472] font-inter text-[15px] max-w-sm pb-2 lg:text-right">
+            <p className="sm:hidden text-[#5b6472] font-inter text-[15px] max-w-lg lg:max-w-sm pb-2 text-left lg:text-center">
               Four ways we take IT off your plate  pick one or run them together as your full IT department.
             </p>
           </div>
@@ -138,6 +140,9 @@ export default function Home() {
             </div>
 
             <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+              <p className="lg:hidden text-[#5b6472] font-inter text-[15px] max-w-lg lg:max-w-sm pb-2 text-left lg:text-center">
+                Four ways we take IT off your plate  pick one or run them together as your full IT department.
+              </p>
               {[
                 { title: '24/7 Support', desc: "Infrastructure doesn't keep business hours, and neither do we. Help is available whenever you actually need it.", font: 'font-roboto' },
                 { title: 'Competence', desc: "Every engineer on our team is skilled, tested, and accountable for solutions that actually work  not just tickets that get closed.", font: 'font-roboto' },

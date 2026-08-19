@@ -5,6 +5,17 @@ import { Footer } from "@/components/layout/Footer";
 import { FAQAccordion, FAQItem } from "@/components/ui/FAQAccordion";
 import { FolderCheck, Building2, Headset, Activity } from "lucide-react";
 
+export const metadata = {
+  title: 'Industries We Serve | Davethan Technologies Limited',
+  description: 'Davethan delivers the knowledge and opportunity to optimize every layer of your stack, tailored to how your sector actually works.',
+  openGraph: {
+    title: 'Industries We Serve | Davethan Technologies Limited',
+    description: 'Davethan delivers the knowledge and opportunity to optimize every layer of your stack, tailored to how your sector actually works.',
+    url: 'https://davethan.tech/industry',
+    images: [{ url: '/industry-hero-collage.png', width: 1200, height: 630, alt: 'Industries We Serve' }],
+  },
+};
+
 const industryFaqs: FAQItem[] = [
   { q: "Do you support regulated industries like healthcare or fintech?", a: "Yes — we build compliance-ready infrastructure and security for regulated, high-stakes environments." },
   { q: "Can you manage our existing cloud infrastructure?", a: "Absolutely. We work with AWS, Azure, and Google Cloud to optimize and secure your existing setup." },
@@ -207,7 +218,7 @@ export default function IndustryPage() {
                   <p className="text-[#5b6472] font-inter text-[13px] mb-6 flex-grow">
                     Compliance-ready infrastructure and security built for regulated, high-stakes environments.
                   </p>
-                  <Link href="/services/cybersecurity" className="text-[#06bae1] font-inter font-bold text-[12px] hover:underline">
+                  <Link href="/industry/fintech" className="text-[#06bae1] font-inter font-bold text-[12px] hover:underline">
                     Read More →
                   </Link>
                 </div>
@@ -227,7 +238,7 @@ export default function IndustryPage() {
                   <p className="text-[#5b6472] font-inter text-[13px] mb-6 flex-grow">
                     Secure systems and data handling for patient records, research, and clinical operations.
                   </p>
-                  <Link href="/services/cloud-services" className="text-[#06bae1] font-inter font-bold text-[12px] hover:underline">
+                  <Link href="/industry/healthcare" className="text-[#06bae1] font-inter font-bold text-[12px] hover:underline">
                     Read More →
                   </Link>
                 </div>
@@ -247,7 +258,7 @@ export default function IndustryPage() {
                   <p className="text-[#5b6472] font-inter text-[13px] mb-6 flex-grow">
                     Scalable cloud infrastructure that keeps storefronts fast and reliable during peak demand.
                   </p>
-                  <Link href="/services/managed-it" className="text-[#06bae1] font-inter font-bold text-[12px] hover:underline">
+                  <Link href="/industry/retail" className="text-[#06bae1] font-inter font-bold text-[12px] hover:underline">
                     Read More →
                   </Link>
                 </div>

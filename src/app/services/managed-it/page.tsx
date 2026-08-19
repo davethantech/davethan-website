@@ -2,11 +2,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { Check } from 'lucide-react';
+import { Check, ClipboardList, Eye, Zap, TrendingUp } from 'lucide-react';
 
 export const metadata = {
   title: 'Managed IT Support | Davethan Technologies Limited',
   description: 'Powerful Managed IT Support for growing businesses - 24/7 monitoring, helpdesk, infrastructure management and more.',
+  openGraph: {
+    title: 'Managed IT Support | Davethan Technologies Limited',
+    description: 'Powerful Managed IT Support for growing businesses — 24/7 monitoring, helpdesk, and infrastructure management.',
+    url: 'https://davethan.tech/services/managed-it',
+    images: [{ url: '/Managed-IT-Hero.png', width: 1200, height: 630, alt: 'Managed IT Support' }],
+  },
 };
 
 export default function ManagedITPage() {
@@ -18,7 +24,7 @@ export default function ManagedITPage() {
         {/* HERO - full bleed background image with dark overlay */}
         <section className="relative w-full overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <Image src="/Managed-IT-Hero.png" alt="Managed IT Support" fill className="object-cover" priority />
+            <Image src="/Managed-IT-Hero.png" alt="Managed IT Support" fill sizes="100vw" className="object-cover" priority />
             <div className="absolute inset-0 bg-[rgba(7,9,51,0.72)]" />
           </div>
 
@@ -127,14 +133,16 @@ export default function ManagedITPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
               {[
-                { num: '01', title: 'Onboarding & Audit', desc: "We map your current stack and flag what's fragile before it breaks." },
-                { num: '02', title: 'Proactive Monitoring', desc: '24/7 oversight so issues get caught before they become downtime.' },
-                { num: '03', title: 'Rapid Response', desc: 'A real human on call, resolving issues fast when they do come up.' },
-                { num: '04', title: 'Ongoing Optimization', desc: 'Regular reviews to keep performance, cost, and security aligned.' },
+                { num: '01', title: 'Onboarding & Audit',    desc: "We map your current stack and flag what's fragile before it breaks.",     Icon: ClipboardList },
+                { num: '02', title: 'Proactive Monitoring',  desc: '24/7 oversight so issues get caught before they become downtime.',        Icon: Eye },
+                { num: '03', title: 'Rapid Response',        desc: 'A real human on call, resolving issues fast when they do come up.',        Icon: Zap },
+                { num: '04', title: 'Ongoing Optimization',  desc: 'Regular reviews to keep performance, cost, and security aligned.',         Icon: TrendingUp },
               ].map((step) => (
                 <div key={step.num} className="flex flex-col items-start">
                   <div className="relative mb-8">
-                    <div className="w-[56px] h-[56px] rounded-full bg-[rgba(6,186,225,0.12)]" />
+                    <div className="w-[56px] h-[56px] rounded-full bg-[rgba(6,186,225,0.12)] flex items-center justify-center">
+                      <step.Icon className="w-[24px] h-[24px] text-[#06bae1]" strokeWidth={1.5} />
+                    </div>
                     <div className="absolute -top-[6px] -right-[6px] w-[28px] h-[28px] rounded-full bg-[#0a0d53] flex items-center justify-center">
                       <span className="font-space-grotesk font-bold text-white text-[11px]">{step.num}</span>
                     </div>

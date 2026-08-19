@@ -8,6 +8,12 @@ import { CtaBlock } from '@/components/shared/CtaBlock';
 export const metadata = {
   title: 'Career | Davethan Technologies Limited',
   description: 'Join the Davethan Technologies team. Explore exciting career opportunities and help us build cutting-edge digital solutions.',
+  openGraph: {
+    title: 'Career | Davethan Technologies Limited',
+    description: 'Join the Davethan Technologies team. Explore exciting career opportunities and help us build cutting-edge digital solutions.',
+    url: 'https://davethan.tech/career',
+    images: [{ url: '/Career-hero.png', width: 1200, height: 630, alt: 'Career at Davethan Technologies' }],
+  },
 };
 
 export default function CareerPage() {
@@ -25,8 +31,8 @@ export default function CareerPage() {
               fill
               className="object-cover"
               priority
-              quality={100}
-              unoptimized
+              quality={85}
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-[#070933]/70"></div>
           </div>
@@ -65,8 +71,8 @@ export default function CareerPage() {
                     alt="Davethan Team Collaboration"
                     fill
                     className="object-cover"
-                    quality={100}
-                    unoptimized
+                    quality={85}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
               </div>

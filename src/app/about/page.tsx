@@ -1,8 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Server, ShieldCheck, Cloud, Lightbulb, User } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
+
+export const metadata = {
+  title: 'About Us | Davethan Technologies Limited',
+  description: 'Learn about Davethan Technologies Limited. We provide scalable software, cloud infrastructure, AI-driven intelligence, and cybersecurity.',
+  openGraph: {
+    title: 'About Us | Davethan Technologies Limited',
+    description: 'Learn about Davethan Technologies Limited. We provide scalable software, cloud infrastructure, AI-driven intelligence, and cybersecurity.',
+    url: 'https://davethan.tech/about',
+    images: [{ url: '/about_hero_image.png', width: 1200, height: 630, alt: 'About Davethan Technologies' }],
+  },
+};
 
 export default function AboutPage() {
   return (
@@ -48,7 +60,7 @@ export default function AboutPage() {
                 src="/about_hero_image.png"
                 alt="Davethan Hero"
                 fill
-                className="object-cover rounded-[180px]"
+                className="object-contain rounded-[180px]"
                 priority
               />
             </div>
@@ -66,14 +78,14 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { id: 1, title: "Managed IT", icon: "/Ellipse_1.png" },
-              { id: 2, title: "Cybersecurity", icon: "/Ellipse_2.png" },
-              { id: 3, title: "Cloud Services", icon: "/Ellipse_3.png" },
-              { id: 4, title: "IT Consultancy", icon: "/Ellipse_4.png" }
+              { id: 1, title: "Managed IT",     Icon: Server,       bg: "bg-[#06bae1]",   iconColor: "text-white" },
+              { id: 2, title: "Cybersecurity",  Icon: ShieldCheck,  bg: "bg-[#0a0d53]",   iconColor: "text-[#06bae1]" },
+              { id: 3, title: "Cloud Services", Icon: Cloud,         bg: "bg-[#06bae1]",   iconColor: "text-white" },
+              { id: 4, title: "IT Consultancy", Icon: Lightbulb,    bg: "bg-[#0a0d53]",   iconColor: "text-[#06bae1]" },
             ].map(service => (
               <div key={service.id} className="flex flex-col items-center gap-6">
-                <div className="w-[88px] h-[88px] flex items-center justify-center relative drop-shadow-sm">
-                  <Image src={service.icon} alt={service.title} fill className="object-contain" />
+                <div className={`w-[88px] h-[88px] rounded-full flex items-center justify-center shrink-0 ${service.bg}`}>
+                  <service.Icon className={`w-[38px] h-[38px] ${service.iconColor}`} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-[#0a0d53] font-roboto font-bold text-[15px]">
                   {service.title}
@@ -144,9 +156,8 @@ export default function AboutPage() {
               “Davethan feels like an extension of our own team — responsive, proactive, and easy to work with.”
             </p>
             <div className="flex items-center gap-[12px] mt-4">
-              <div className="w-[44px] h-[44px] rounded-full bg-gray-300 overflow-hidden relative">
-                {/* Fallback avatar if no image */}
-                <div className="w-full h-full bg-[#06bae1]" />
+              <div className="w-[44px] h-[44px] rounded-full bg-[#06bae1] overflow-hidden relative flex items-center justify-center">
+                <User className="w-[24px] h-[24px] text-white" strokeWidth={1.5} />
               </div>
               <div className="flex flex-col">
                 <span className="text-white font-inter font-bold text-[13px]">Client Feedback</span>
