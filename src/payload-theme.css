@@ -65,6 +65,35 @@ html[data-theme] .nav a.active {
   background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
+/* --- ADMIN LOGO / ICON SIZE FIX ---
+ * Payload restricts the icon in the top nav/breadcrumb area.
+ * These rules force the logo to render at a proper, visible size
+ * by overriding max-height, max-width, and height constraints on
+ * the image AND its wrapper elements.
+ */
+html[data-theme] .step-nav__logo img,
+html[data-theme] [class*="nav-logo"] img,
+html[data-theme] [class*="logo"] img,
+html[data-theme] nav img {
+  height: 44px !important;
+  width: auto !important;
+  max-height: none !important;
+  max-width: none !important;
+  min-height: 44px !important;
+}
+/* Also expand the parent containers so they don't clip the logo */
+html[data-theme] .step-nav__logo,
+html[data-theme] [class*="nav-logo"],
+html[data-theme] nav > a:first-child,
+html[data-theme] .nav__header {
+  height: auto !important;
+  min-height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
+
 /* --- BUTTONS --- */
 /* Target only specific action buttons inside Payload to avoid hitting UI icons/toggles */
 html[data-theme] button[type="submit"],
