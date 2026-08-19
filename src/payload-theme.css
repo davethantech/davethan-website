@@ -86,6 +86,15 @@ html[data-theme] nav img {
   object-fit: contain !important;
 }
 
+/* Ensure the parent link/container doesn't clip the widened image */
+html[data-theme] .step-nav__logo,
+html[data-theme] [class*="nav-logo"],
+html[data-theme] nav > a:first-child {
+  overflow: visible !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
 
 /* --- BUTTONS --- */
 /* Target only specific action buttons inside Payload to avoid hitting UI icons/toggles */
