@@ -23,6 +23,7 @@ export default buildConfig({
       icons: [{ rel: 'icon', url: '/favicon.ico' }],
     },
     components: {
+      beforeDashboard: ['@/components/payload/CustomDashboard#CustomDashboard'],
       graphics: {
         Logo: '@/components/payload/Logo#Logo',
         Icon: '@/components/payload/Logo#Icon',
