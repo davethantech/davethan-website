@@ -18,10 +18,10 @@
 html[data-theme] {
   --font-body: 'Inter', sans-serif !important;
   --font-display: 'Roboto', sans-serif !important;
-  
+
   --theme-bg: #f4f8fc !important;
   --theme-text: var(--davethan-text) !important;
-  
+
   --theme-success-500: var(--davethan-cyan) !important;
   --theme-error-500: #e10606 !important;
 
@@ -34,10 +34,11 @@ html[data-theme] body {
   font-family: var(--font-body) !important;
   color: var(--davethan-text) !important;
 }
-html[data-theme] h1, 
-html[data-theme] h2, 
-html[data-theme] h3, 
-html[data-theme] h4, 
+
+html[data-theme] h1,
+html[data-theme] h2,
+html[data-theme] h3,
+html[data-theme] h4,
 html[data-theme] h5 {
   font-family: var(--font-display) !important;
   color: var(--davethan-text) !important;
@@ -50,6 +51,7 @@ html[data-theme] #nav {
   background-color: var(--davethan-deep) !important;
   border-right: none !important;
 }
+
 html[data-theme] aside a,
 html[data-theme] aside span,
 html[data-theme] .nav a,
@@ -57,6 +59,7 @@ html[data-theme] .nav span {
   color: rgba(255, 255, 255, 0.7) !important;
   transition: all 0.2s ease !important;
 }
+
 html[data-theme] aside a:hover,
 html[data-theme] aside a.active,
 html[data-theme] .nav a:hover,
@@ -77,7 +80,7 @@ html[data-theme] nav img {
   width: auto !important;
   max-height: 48px !important;
   max-width: 200px !important;
-  margin-right: 8px !important;
+  margin-right: 25px !important;
 }
 
 
@@ -87,7 +90,8 @@ html[data-theme] button[type="submit"],
 html[data-theme] .btn,
 html[data-theme] a.btn {
   background-image: linear-gradient(270deg, rgb(191, 249, 234) 0%, rgb(6, 186, 225) 100%) !important;
-  background-color: var(--davethan-cyan) !important; /* Fallback */
+  background-color: var(--davethan-cyan) !important;
+  /* Fallback */
   color: var(--davethan-text) !important;
   border-radius: 10px !important;
   font-family: var(--font-display) !important;
