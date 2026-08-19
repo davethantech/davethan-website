@@ -37,13 +37,23 @@ const typeLabels: Record<string, string> = {
   'internship': 'Internship',
 };
 
+// Helper to extract raw text from Payload's Lexical JSON tree for preview snippets
+function extractLexicalText(node: any): string {
+  if (!node) return '';
+  if (node.type === 'text' && node.text) return node.text;
+  if (Array.isArray(node.children)) {
+    return node.children.map(extractLexicalText).join(' ');
+  }
+  return '';
+}
+
 export default async function CareerPage() {
   // Fetch all active jobs from Payload
   const payload = await getPayloadClient();
   const { docs: jobs } = await payload.find({
     collection: 'jobs',
     where: { active: { equals: true } },
-    sort: '-updatedAt',
+    sort: '-createdAt',
     limit: 50,
   });
   const activeJobs = jobs as Job[];
@@ -222,53 +232,77 @@ export default async function CareerPage() {
             ) : (
               /* ── Job Cards ── */
               <div className="space-y-4">
-                {activeJobs.map((job) => (
-                  <div
-                    key={job.id}
-                    className="group bg-white border border-[#e4e9f2] rounded-[16px] p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 hover:border-[#06bae1] hover:shadow-[0_4px_24px_rgba(6,186,225,0.12)] transition-all duration-300"
-                  >
-                    {/* Left: Job Info */}
-                    <div className="flex flex-col gap-3 flex-1 min-w-0">
-                      {/* Type Badge */}
-                      <span className={`self-start text-[10px] font-inter font-bold uppercase tracking-widest px-3 py-1 rounded-full ${typeBadgeStyles[job.type] ?? typeBadgeStyles['full-time']}`}>
-                        {typeLabels[job.type] ?? job.type}
-                      </span>
+                {activeJobs.map((job) => {
+                  const previewText = extractLexicalText(job.description).replace(/\s+/g, ' ').trim();
+                  const truncatedPreview = previewText.length > 160 ? previewText.substring(0, 160) + '...' : previewText;
+                  
+                  // Format the creation date (e.g. "Aug 19, 2026")
+                  const dateString = new Date(job.createdAt).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                  });
 
-                      <h3 className="text-[#0a0d53] font-roboto font-bold text-[20px] sm:text-[22px] leading-tight group-hover:text-[#06bae1] transition-colors">
-                        {job.title}
-                      </h3>
+                  return (
+                    <div
+                      key={job.id}
+                      className="group bg-white border border-[#e4e9f2] rounded-[16px] p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 hover:border-[#06bae1] hover:shadow-[0_4px_24px_rgba(6,186,225,0.12)] transition-all duration-300"
+                    >
+                      {/* Left: Job Info */}
+                      <div className="flex flex-col gap-3 flex-1 min-w-0">
+                        <div className="flex items-center justify-between sm:justify-start gap-4 mb-1">
+                          {/* Type Badge */}
+                          <span className={`text-[10px] font-inter font-bold uppercase tracking-widest px-3 py-1 rounded-full ${typeBadgeStyles[job.type] ?? typeBadgeStyles['full-time']}`}>
+                            {typeLabels[job.type] ?? job.type}
+                          </span>
+                          
+                          {/* Date Posted */}
+                          <span className="text-[#8e98a8] font-inter text-[12px]">
+                            Posted {dateString}
+                          </span>
+                        </div>
 
-                      <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-                        {job.department && (
+                        <h3 className="text-[#0a0d53] font-roboto font-bold text-[20px] sm:text-[22px] leading-tight group-hover:text-[#06bae1] transition-colors">
+                          {job.title}
+                        </h3>
+
+                        {/* Job Description Preview */}
+                        <p className="text-[#5b6472] font-inter text-[14px] leading-[1.6] line-clamp-2 max-w-[700px] mt-1 mb-2">
+                          {truncatedPreview}
+                        </p>
+
+                        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-2">
+                          {job.department && (
+                            <span className="text-[#5b6472] font-inter text-[13px] flex items-center gap-1.5">
+                              <Briefcase className="w-3.5 h-3.5 text-[#06bae1] shrink-0" strokeWidth={2} />
+                              {job.department}
+                            </span>
+                          )}
+                          {job.location && (
+                            <span className="text-[#5b6472] font-inter text-[13px] flex items-center gap-1.5">
+                              <MapPin className="w-3.5 h-3.5 text-[#06bae1] shrink-0" strokeWidth={2} />
+                              {job.location}
+                            </span>
+                          )}
                           <span className="text-[#5b6472] font-inter text-[13px] flex items-center gap-1.5">
-                            <Briefcase className="w-3.5 h-3.5 text-[#06bae1] shrink-0" strokeWidth={2} />
-                            {job.department}
+                            <Clock className="w-3.5 h-3.5 text-[#06bae1] shrink-0" strokeWidth={2} />
+                            {typeLabels[job.type] ?? job.type}
                           </span>
-                        )}
-                        {job.location && (
-                          <span className="text-[#5b6472] font-inter text-[13px] flex items-center gap-1.5">
-                            <MapPin className="w-3.5 h-3.5 text-[#06bae1] shrink-0" strokeWidth={2} />
-                            {job.location}
-                          </span>
-                        )}
-                        <span className="text-[#5b6472] font-inter text-[13px] flex items-center gap-1.5">
-                          <Clock className="w-3.5 h-3.5 text-[#06bae1] shrink-0" strokeWidth={2} />
-                          {typeLabels[job.type] ?? job.type}
-                        </span>
+                        </div>
+                      </div>
+
+                      {/* Right: Apply CTA */}
+                      <div className="shrink-0 pt-4 sm:pt-0">
+                        <a
+                          href={`mailto:${job.applicationEmail}?subject=Application for ${encodeURIComponent(job.title)}`}
+                          className="inline-flex items-center justify-center gap-2 bg-[#0a0d53] hover:bg-[#06bae1] text-white hover:text-[#0a0d53] font-inter font-bold text-[13px] px-7 py-4 rounded-[10px] transition-all duration-300 w-full sm:w-auto"
+                        >
+                          Apply Now <ArrowRight className="w-4 h-4" />
+                        </a>
                       </div>
                     </div>
-
-                    {/* Right: Apply CTA */}
-                    <div className="shrink-0">
-                      <a
-                        href={`mailto:${job.applicationEmail}?subject=Application for ${encodeURIComponent(job.title)}`}
-                        className="inline-flex items-center justify-center gap-2 bg-[#0a0d53] hover:bg-[#06bae1] text-white hover:text-[#0a0d53] font-inter font-bold text-[13px] px-7 py-4 rounded-[10px] transition-all duration-300"
-                      >
-                        Apply Now <ArrowRight className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 
