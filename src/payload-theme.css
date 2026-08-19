@@ -1,37 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 /* Davethan Payload CMS Theme Overrides */
 
-/* Force Light Theme Base Colors */
 :root, html[data-theme='light'], html[data-theme='dark'] {
-  --theme-bg: #f8f9fc;
-  --theme-text: #0a0d53;
+  /* Fonts */
+  --font-body: 'Inter', sans-serif;
+  --font-display: 'Roboto', sans-serif;
+  
+  /* Core Brand Colors */
+  --davethan-deep: #070933;
+  --davethan-text: #0a0d53;
+  --davethan-cyan: #06bae1;
+  --davethan-cyan-light: #bff9ea;
+  --davethan-gray: #5b6472;
+  
+  /* Payload Theme Map */
+  --theme-bg: #f4f8fc; /* Slightly blue-tinted light gray for the main dashboard */
+  --theme-text: var(--davethan-text);
+  
+  /* Elevations (Cards, Panels) */
   --theme-elevation-0: #ffffff;
   --theme-elevation-50: #f8f9fc;
   --theme-elevation-100: #f0f2f5;
   --theme-elevation-150: #e4e9f2;
   --theme-elevation-200: #c2c9d6;
-  --theme-elevation-300: #a1abc0;
-  --theme-elevation-400: #8190ab;
-  --theme-elevation-500: #5b6472;
-  --theme-elevation-600: #4a525f;
-  --theme-elevation-700: #3a414b;
-  --theme-elevation-800: #292f38;
-  --theme-elevation-900: #181d24;
-  --theme-elevation-1000: #0a0d53;
-
+  
+  /* System States */
   --theme-success-100: #e6fcf7;
-  --theme-success-500: #06bae1;
+  --theme-success-500: var(--davethan-cyan);
   --theme-error-100: #ffeeee;
   --theme-error-500: #e10606;
 
-  /* Form & Button Overrides to defeat Tailwind base resets */
+  /* Form & Button Overrides */
   --theme-input-bg: #ffffff;
   --theme-input-border: #e4e9f2;
-  --theme-input-text: #0a0d53;
+  --theme-input-text: var(--davethan-text);
 }
 
-/* Force Form Styles */
+/* Global Font Application */
+.payload-admin {
+  font-family: var(--font-body) !important;
+}
+.payload-admin h1, .payload-admin h2, .payload-admin h3, .payload-admin h4, .payload-admin h5 {
+  font-family: var(--font-display) !important;
+  color: var(--davethan-text) !important;
+}
+
+/* --- SIDEBAR (Nav) --- */
+.payload-admin nav, 
+.payload-admin .nav, 
+.payload-admin aside {
+  background-color: var(--davethan-deep) !important;
+  border-right: none !important;
+}
+.payload-admin nav a, 
+.payload-admin .nav a,
+.payload-admin nav span,
+.payload-admin .nav span {
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: all 0.3s ease;
+}
+.payload-admin nav a:hover,
+.payload-admin .nav a:hover,
+.payload-admin nav a.active,
+.payload-admin .nav a.active {
+  color: var(--davethan-cyan) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Header / Step Nav */
+.payload-admin .step-nav {
+  background-color: transparent !important;
+  padding: 16px 0 !important;
+  margin-bottom: 24px;
+}
+.payload-admin .step-nav a {
+  color: var(--davethan-cyan) !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 600 !important;
+}
+.payload-admin .step-nav span {
+  color: var(--davethan-gray) !important;
+}
+
+/* --- CARDS & PANELS --- */
+.payload-admin .card,
+.payload-admin .collection-list,
+.payload-admin .document-header {
+  background-color: #ffffff !important;
+  border: 1px solid var(--theme-elevation-150) !important;
+  border-radius: 14px !important;
+  box-shadow: 0px 4px 16px rgba(6, 186, 225, 0.04) !important;
+}
+
+/* --- FORMS --- */
 .payload-admin .field-type {
   margin-bottom: 24px !important;
+}
+.payload-admin .field-type label {
+  font-family: var(--font-body) !important;
+  color: var(--davethan-gray) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  margin-bottom: 8px !important;
 }
 
 .payload-admin input[type="text"],
@@ -43,54 +114,71 @@
   color: var(--theme-input-text) !important;
   border: 1px solid var(--theme-input-border) !important;
   border-radius: 8px !important;
-  padding: 12px 16px !important;
-  font-family: inherit !important;
+  padding: 14px 16px !important;
+  font-family: var(--font-body) !important;
   width: 100% !important;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.02) !important;
+  transition: all 0.3s ease !important;
 }
 
 .payload-admin input:focus,
 .payload-admin textarea:focus,
 .payload-admin select:focus {
   outline: none !important;
-  border-color: #06bae1 !important;
-  box-shadow: 0 0 0 2px rgba(6, 186, 225, 0.2) !important;
+  border-color: var(--davethan-cyan) !important;
+  box-shadow: 0px 0px 0px 3px rgba(6, 186, 225, 0.15) !important;
 }
 
-/* Force Buttons */
+/* --- BUTTONS --- */
 .payload-admin button,
-.payload-admin .btn {
-  background-color: #0a0d53 !important;
-  color: #ffffff !important;
-  border-radius: 8px !important;
-  font-weight: 600 !important;
+.payload-admin .btn,
+.payload-admin button[type="submit"] {
+  background-image: linear-gradient(270deg, rgb(191, 249, 234) 0%, rgb(6, 186, 225) 100%) !important;
+  color: var(--davethan-text) !important;
+  border-radius: 10px !important;
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
   border: none !important;
-  padding: 12px 24px !important;
-  transition: background-color 0.2s !important;
+  padding: 12px 28px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  box-shadow: 0px 4px 4px rgba(6, 186, 225, 0.2) !important;
 }
 
 .payload-admin button:hover,
-.payload-admin .btn:hover {
-  background-color: #06bae1 !important;
+.payload-admin .btn:hover,
+.payload-admin button[type="submit"]:hover {
+  transform: scale(1.02) !important;
+  box-shadow: 0px 6px 12px rgba(6, 186, 225, 0.3) !important;
+  background-image: linear-gradient(270deg, rgb(6, 186, 225) 0%, rgb(191, 249, 234) 100%) !important;
 }
 
-/* Button variants if needed */
+/* Secondary Button variant */
 .payload-admin .btn--style-secondary {
-  background-color: #f8f9fc !important;
-  color: #0a0d53 !important;
-  border: 1px solid #e4e9f2 !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  color: var(--davethan-text) !important;
+  border: 2px solid var(--theme-elevation-150) !important;
+  box-shadow: none !important;
 }
-
 .payload-admin .btn--style-secondary:hover {
-  background-color: #e4e9f2 !important;
+  border-color: var(--davethan-text) !important;
+  background-color: transparent !important;
+  transform: scale(1) !important;
+  box-shadow: none !important;
 }
 
-/* Navbar / Header */
-.payload-admin .step-nav {
-  background-color: #0a0d53 !important;
-  color: #ffffff !important;
-  padding: 16px 32px !important;
+/* Table overrides for Collection lists */
+.payload-admin table {
+  font-family: var(--font-body) !important;
 }
-
-.payload-admin .step-nav a {
-  color: #06bae1 !important;
+.payload-admin th {
+  color: var(--davethan-text) !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+.payload-admin td {
+  color: var(--davethan-gray) !important;
+  font-size: 14px !important;
 }
