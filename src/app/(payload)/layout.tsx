@@ -9,9 +9,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   icons: {
-    icon: '/davethan_logo.webp',
-    shortcut: '/davethan_logo.webp',
-    apple: '/davethan_logo.webp',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
   },
 };
 

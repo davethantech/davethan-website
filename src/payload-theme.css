@@ -66,8 +66,7 @@ html[data-theme] .nav a.active {
 }
 
 /* --- BUTTONS --- */
-/* Target all buttons inside Payload to ensure cyan gradients apply */
-html[data-theme] button,
+/* Target only specific action buttons inside Payload to avoid hitting UI icons/toggles */
 html[data-theme] button[type="submit"],
 html[data-theme] .btn,
 html[data-theme] a.btn {
@@ -83,7 +82,6 @@ html[data-theme] a.btn {
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-html[data-theme] button:hover,
 html[data-theme] button[type="submit"]:hover,
 html[data-theme] .btn:hover,
 html[data-theme] a.btn:hover {
