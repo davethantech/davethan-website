@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
   return (
     <header className="w-full relative z-50">
@@ -19,7 +20,6 @@ export function Navbar() {
         <span className="text-gray-500">·</span>
         <span>✉ info@davethan.tech</span>
         <span className="text-gray-500">·</span>
-        <Link href="/admin" className="hover:text-cyan-400 transition-colors">Client Login</Link>
       </div>
 
       {/* Main Navbar */}
@@ -68,6 +68,34 @@ export function Navbar() {
                   <div className="border-t border-gray-100 mt-1 pt-1">
                     <Link href="/services" className="block px-4 py-2.5 text-sm text-cyan-500 font-bold hover:bg-cyan-50 transition-colors">
                       View All Services →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Products with dropdown hint */}
+            <div className="relative group">
+              <Link href="/products" className="hover:text-cyan-500 transition-colors flex items-center gap-1">
+                PRODUCTS
+                <svg className="w-3 h-3 mt-0.5 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
+              {/* Dropdown */}
+              <div className="absolute top-full left-0 mt-3 w-52 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="py-2">
+                  {[
+                    { label: "Dishstack", href: "https://dishstack.davethan.tech" },
+                    { label: "Medicore", href: "https://medicore.davethan.tech" },
+                    { label: "Springboard ERP", href: "https://springboarderp.davethan.tech" },
+                  ].map((item) => (
+                    <Link key={item.href} href={item.href} className="block px-4 py-2.5 text-sm text-[#070933] hover:bg-cyan-50 hover:text-cyan-600 transition-colors">
+                      {item.label}
+                    </Link>
+                  ))}
+                  <div className="border-t border-gray-100 mt-1 pt-1">
+                    <Link href="/products" className="block px-4 py-2.5 text-sm text-cyan-500 font-bold hover:bg-cyan-50 transition-colors">
+                      View All Products →
                     </Link>
                   </div>
                 </div>
@@ -169,6 +197,51 @@ export function Navbar() {
                       onClick={() => setMobileOpen(false)}
                     >
                       View All Services →
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+
+
+              {/* Products with mobile accordion */}
+              <div>
+                <button
+                  className="w-full flex items-center justify-between px-6 py-4 border-b border-gray-100 hover:bg-cyan-50 hover:text-cyan-500 transition-colors"
+                  onClick={() => setProductsOpen((prev) => !prev)}
+                >
+                  <span>PRODUCTS</span>
+                  <svg
+                    className={`w-4 h-4 transition-transform ${productsOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {productsOpen && (
+                  <div className="bg-gray-50">
+                    {[
+                      { label: "Dishstack", href: "https://dishstack.davethan.tech" },
+                      { label: "Medicore", href: "https://medicore.davethan.tech" },
+                      { label: "Springboard ERP", href: "https://springboarderp.davethan.tech" },
+                    ].map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block px-10 py-3 text-sm text-[#070933] border-b border-gray-100 hover:bg-cyan-50 hover:text-cyan-600 transition-colors"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                    <Link
+                      href="/products"
+                      className="block px-10 py-3 text-sm text-cyan-500 font-bold border-b border-gray-100 hover:bg-cyan-50 transition-colors"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      View All Products →
                     </Link>
                   </div>
                 )}
