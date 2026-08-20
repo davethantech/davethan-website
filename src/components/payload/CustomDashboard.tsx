@@ -6,7 +6,7 @@ export const CustomDashboard: React.FC = () => {
     <div style={{
       background: 'linear-gradient(135deg, #070933 0%, #0a0d53 100%)',
       borderRadius: '16px',
-      padding: '40px',
+      padding: '32px 24px',
       color: '#ffffff',
       marginBottom: '32px',
       boxShadow: '0 10px 30px rgba(6, 186, 225, 0.15)',
@@ -34,7 +34,8 @@ export const CustomDashboard: React.FC = () => {
             fontWeight: 700, 
             marginBottom: '12px',
             color: '#ffffff',
-            fontFamily: "'Roboto', sans-serif"
+            fontFamily: "'Roboto', sans-serif",
+            lineHeight: 1.2
           }}
         >
           Welcome to Davethan CMS
