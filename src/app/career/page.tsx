@@ -4,6 +4,7 @@ import { ArrowRight, MapPin, Clock, Briefcase } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CtaBlock } from '@/components/shared/CtaBlock';
+import { CareersForm } from '@/components/shared/CareersForm';
 import { getPayloadClient } from '@/lib/payload';
 import type { Job } from '@/payload-types';
 
@@ -327,36 +328,7 @@ export default async function CareerPage() {
                 <span className="text-white font-inter font-bold text-[14px]">Get in Touch</span>
               </div>
               <div className="p-8">
-                <form className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Your Name*"
-                    required
-                    className="w-full h-[52px] px-6 bg-[#f8f9fc] rounded-[8px] text-[#5b6472] font-inter text-[14px] focus:outline-none focus:ring-1 focus:ring-[#06bae1] transition-all"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Your Email*"
-                    required
-                    className="w-full h-[52px] px-6 bg-[#f8f9fc] rounded-[8px] text-[#5b6472] font-inter text-[14px] focus:outline-none focus:ring-1 focus:ring-[#06bae1] transition-all"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Position of Interest"
-                    className="w-full h-[52px] px-6 bg-[#f8f9fc] rounded-[8px] text-[#5b6472] font-inter text-[14px] focus:outline-none focus:ring-1 focus:ring-[#06bae1] transition-all"
-                  />
-                  <textarea
-                    placeholder="Your message"
-                    rows={4}
-                    className="w-full p-6 bg-[#f8f9fc] rounded-[8px] text-[#5b6472] font-inter text-[14px] focus:outline-none focus:ring-1 focus:ring-[#06bae1] transition-all resize-none"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full inline-flex items-center justify-center bg-[#06bae1] hover:bg-[#05a6c9] text-[#0a0d53] font-inter font-bold text-[13px] tracking-widest uppercase px-8 py-4 rounded-[8px] transition-colors mt-2"
-                  >
-                    SEND MESSAGE
-                  </button>
-                </form>
+                <CareersForm />
               </div>
             </div>
           </div>

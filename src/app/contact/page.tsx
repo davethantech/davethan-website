@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CtaBlock } from '@/components/shared/CtaBlock';
+import { ContactForm } from '@/components/shared/ContactForm';
 
 export const metadata = {
   title: 'Contact Us | Davethan Technologies Limited',
@@ -139,52 +140,7 @@ export default function ContactPage() {
             </div>
 
             <div className="max-w-[800px] mx-auto bg-white rounded-[16px] p-6 sm:p-10 shadow-sm border border-gray-100">
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Name */}
-                  <input
-                    type="text"
-                    placeholder="Enter Name"
-                    required
-                    className="w-full h-[56px] px-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all"
-                  />
-                  {/* Email */}
-                  <input
-                    type="email"
-                    placeholder="Enter Email"
-                    required
-                    className="w-full h-[56px] px-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all"
-                  />
-                  {/* Subject */}
-                  <input
-                    type="text"
-                    placeholder="Enter Subject"
-                    required
-                    className="w-full h-[56px] px-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all"
-                  />
-                  {/* Phone */}
-                  <input
-                    type="tel"
-                    placeholder="Enter Phone"
-                    className="w-full h-[56px] px-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all"
-                  />
-                </div>
-                {/* Message */}
-                <textarea
-                  placeholder="Enter Message"
-                  rows={6}
-                  required
-                  className="w-full p-6 bg-white border border-[#e4e9f2] rounded-[8px] text-[#5b6472] font-inter text-[15px] focus:outline-none focus:border-[#06bae1] focus:ring-1 focus:ring-[#06bae1] transition-all resize-none"
-                ></textarea>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center bg-[#06bae1] hover:bg-[#05a6c9] text-white font-inter font-bold text-[14px] px-8 py-4 rounded-[4px] transition-colors"
-                >
-                  Send Message
-                </button>
-              </form>
+              <ContactForm formType="contact" showSubject={true} />
             </div>
           </div>
         </section>
