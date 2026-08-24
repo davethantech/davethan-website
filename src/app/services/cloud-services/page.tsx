@@ -67,12 +67,18 @@ export default function CloudServicesPage() {
             {/* Provider logos bottom-right (desktop only) */}
             <div className="hidden lg:flex absolute -bottom-8 right-[120px] z-20 items-center">
               {[
-                { label: 'AWS', bg: 'bg-[#FF9900]' },
-                { label: 'Azure', bg: 'bg-[#0078D4]' },
-                { label: 'GCP', bg: 'bg-[#4285F4]' },
+                { src: '/AWS.svg', alt: 'Amazon Web Services', bg: 'bg-white' },
+                { src: '/Azure.svg', alt: 'Microsoft Azure', bg: 'bg-white' },
+                { src: '/GoogleCloud.svg', alt: 'Google Cloud', bg: 'bg-white' },
               ].map((provider, i) => (
-                <div key={i} className={`w-[72px] h-[72px] rounded-full ${provider.bg} -ml-4 first:ml-0 border-4 border-white shadow-md flex items-center justify-center`}>
-                  <span className="text-white font-roboto font-bold text-[11px] text-center leading-tight">{provider.label}</span>
+                <div key={i} className={`w-[72px] h-[72px] rounded-full ${provider.bg} -ml-4 first:ml-0 border-4 border-[#070933] shadow-md flex items-center justify-center overflow-hidden p-3`}>
+                  <Image
+                    src={provider.src}
+                    alt={provider.alt}
+                    width={48}
+                    height={48}
+                    className="object-contain w-full h-full"
+                  />
                 </div>
               ))}
             </div>
