@@ -22,34 +22,40 @@ export default function ITConsultancyPage() {
       <main>
 
         {/* HERO SECTION */}
-        <section className="relative w-full bg-white overflow-hidden flex flex-col lg:flex-row items-stretch pt-[60px] lg:pt-[80px]">
-          {/* Left Content */}
-          <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:pl-[80px] lg:pr-12 flex flex-col justify-center py-2 lg:py-16 z-10">
-            <div className="inline-block bg-[rgba(191,249,234,0.58)] rounded-full px-6 py-2 mb-6 self-start">
-              <span className="text-[#0a0d53] font-inter font-bold text-[11px] uppercase">
-                IT CONSULTANCY
-              </span>
+        <section className="relative w-full overflow-hidden bg-white" style={{ minHeight: '520px' }}>
+          <div className="max-w-[1440px] mx-auto">
+            <div className="flex flex-col lg:flex-row items-stretch">
+
+              {/* Left Content */}
+              <div className="flex-1 px-4 sm:px-6 lg:pl-[80px] lg:pr-16 flex flex-col justify-center pt-28 pb-14 lg:pt-32 lg:pb-20 z-10">
+                <div className="inline-block bg-[rgba(191,249,234,0.58)] rounded-full px-6 py-2 mb-6 self-start">
+                  <span className="text-[#0a0d53] font-inter font-bold text-[11px] uppercase">
+                    IT CONSULTANCY
+                  </span>
+                </div>
+
+                <h1 className="text-[#0a0d53] font-roboto font-bold text-[40px] sm:text-[48px] lg:text-[56px] leading-tight mb-6 max-w-[560px]">
+                  Your <span className="text-[#06bae1]">Outsourced IT Strategy</span> Partner
+                </h1>
+
+                <p className="text-[#5b6472] font-poppins text-[15px] lg:text-[16px] leading-relaxed max-w-[480px]">
+                  Wherever your business is headed, whenever you need us.
+                </p>
+              </div>
+
+              {/* Right Image — spans full height on desktop, stacks below on mobile */}
+              <div className="w-full lg:w-[52%] h-[300px] sm:h-[400px] lg:h-auto relative shrink-0">
+                <Image
+                  src="/IT-Consultancy-Hero.png"
+                  alt="IT Consultancy Team"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 52vw"
+                  className="object-cover object-center lg:rounded-tl-[80px] lg:rounded-bl-[80px] rounded-tl-[32px] rounded-tr-[32px] lg:rounded-tr-none"
+                  priority
+                />
+              </div>
+
             </div>
-
-            <h1 className="text-[#0a0d53] font-roboto font-bold text-[40px] sm:text-[48px] lg:text-[56px] leading-tight mb-6 max-w-[600px]">
-              Your <span className="text-[#06bae1]">Outsourced IT Strategy</span> Partner
-            </h1>
-
-            <p className="text-[#5b6472] font-poppins text-[15px] lg:text-[16px] leading-relaxed max-w-[500px]">
-              Wherever your business is headed, whenever you need us.
-            </p>
-          </div>
-
-          {/* Right Image */}
-          <div className="w-full lg:w-[50%] h-[300px] sm:h-[400px] lg:h-auto relative shrink-0">
-            <Image
-              src="/IT-Consultancy-Hero.png"
-              alt="IT Consultancy Team"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover lg:rounded-tl-[80px] lg:rounded-bl-[80px] rounded-tl-[40px] rounded-tr-[40px] lg:rounded-tr-none"
-              priority
-            />
           </div>
         </section>
 
@@ -94,7 +100,7 @@ export default function ITConsultancyPage() {
         {/* WE'RE HERE TO HELP */}
         <section className="bg-[#070933] overflow-hidden rounded-tr-[60px] rounded-bl-[60px] lg:rounded-tr-[120px] lg:rounded-bl-[120px] mx-0 lg:mx-0 my-8 lg:my-16">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] flex flex-col lg:flex-row items-center justify-between">
-            <div className="flex-1 py-16 lg:py-24 pr-0 lg:pr-12">
+            <div className="flex-1 py-12 lg:py-24 pr-0 lg:pr-12">
               <h2 className="text-white font-roboto font-bold text-[32px] lg:text-[40px] leading-tight mb-8">
                 We&apos;re Here <span className="text-[#06bae1]">To Help</span>
               </h2>
@@ -105,13 +111,14 @@ export default function ITConsultancyPage() {
                 &mdash; Davethan Leadership Team
               </p>
             </div>
-            <div className="flex-1 relative w-full h-[300px] lg:h-[450px] flex justify-end">
-              <div className="relative w-full min-h-[300px] lg:min-h-[450px] h-full max-w-[800px] right-0">
+            {/* Image — uses aspect-ratio on mobile so the subject is never cropped */}
+            <div className="w-full lg:w-[48%] shrink-0">
+              <div className="relative w-full aspect-[3/4] lg:aspect-auto lg:h-[480px]">
                 <Image
                   src="/here-to-help.png"
                   alt="Woman with VR headset"
                   fill
-                  className="object-cover object-left lg:object-right rounded-tl-[80px] rounded-bl-[80px] lg:rounded-l-[200px]"
+                  className="object-cover object-top rounded-tl-[60px] rounded-tr-[60px] lg:rounded-tr-none lg:rounded-tl-[160px] lg:rounded-bl-[160px]"
                 />
               </div>
             </div>
