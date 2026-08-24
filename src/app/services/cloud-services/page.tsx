@@ -219,7 +219,7 @@ export default function CloudServicesPage() {
                 <p className="font-inter text-[#5b6472] text-[11px] leading-relaxed mb-6 px-2">
                   Davethan Technologies has been guiding cloud strategy for growing teams since 2019.
                 </p>
-                <Link href="#" className="bg-[#06bae1] text-white font-inter font-bold text-[11px] px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
+                <Link href="/contact" className="bg-[#06bae1] text-white font-inter font-bold text-[11px] px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
                   Read More
                 </Link>
               </div>
@@ -241,9 +241,9 @@ export default function CloudServicesPage() {
               </div>
 
               {/* More Services Circle (Far Right) */}
-              <div className="hidden lg:flex absolute top-0 -right-12 translate-x-full items-center justify-center w-[80px] h-[80px] rounded-full bg-[rgba(6,186,225,0.15)] cursor-pointer hover:bg-[rgba(6,186,225,0.25)] transition-colors">
+              <Link href="/services" className="hidden lg:flex absolute top-0 -right-12 translate-x-full items-center justify-center w-[80px] h-[80px] rounded-full bg-[rgba(6,186,225,0.15)] cursor-pointer hover:bg-[rgba(6,186,225,0.25)] transition-colors">
                 <span className="text-[#0a0d53] font-bold text-[10px] text-center leading-tight">More<br />Services +</span>
-              </div>
+              </Link>
 
               {/* Mobile Grid Layout */}
               <div className="grid grid-cols-2 gap-8 lg:hidden mt-12 w-full">
@@ -261,9 +261,9 @@ export default function CloudServicesPage() {
                   </div>
                 ))}
                 <div className="col-span-2 flex justify-center mt-4">
-                  <div className="flex items-center justify-center w-[80px] h-[80px] rounded-full bg-[rgba(6,186,225,0.15)] cursor-pointer">
+                  <Link href="/services" className="flex items-center justify-center w-[80px] h-[80px] rounded-full bg-[rgba(6,186,225,0.15)] cursor-pointer hover:bg-[rgba(6,186,225,0.25)] transition-colors">
                     <span className="text-[#0a0d53] font-bold text-[10px] text-center leading-tight">More<br />Services +</span>
-                  </div>
+                  </Link>
                 </div>
               </div>
 
