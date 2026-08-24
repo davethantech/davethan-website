@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { CtaBlock } from '@/components/shared/CtaBlock';
 
 export default function Home() {
   return (
@@ -267,31 +268,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA SECTION */}
-        <section className="bg-[#070933] py-24 relative z-10">
-          {/* Middle Line (Passes behind the card) */}
-          <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[rgba(255,255,255,0.08)] -translate-y-1/2 z-0" />
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="bg-white rounded-[24px] p-12 flex flex-col lg:flex-row items-center justify-between gap-8 max-w-5xl mx-auto">
-              <div className="space-y-4 max-w-xl">
-                <h2 className="text-[#0a0d53] font-roboto font-bold text-[26px]">
-                  Start the conversation with a free 30-minute consultation
-                </h2>
-                <p className="text-[#0a0d53] font-inter text-[13px]">
-                  Let's discuss your IT strategy, services, and business solutions & compliance concerns.
-                </p>
-              </div>
-              <Link href="/contact" className="shrink-0">
-                <div className="bg-[rgba(6,186,225,0.2)] border border-[#0a0d53] rounded-[9px] h-[52px] px-8 flex items-center justify-center hover:bg-[rgba(6,186,225,0.3)] transition-colors">
-                  <span className="text-[#0a0d53] font-inter font-bold text-[14px]">
-                    Book your call
-                  </span>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CtaBlock />
 
         {/* SEPARATOR BETWEEN CTA AND TEAM */}
         <div className="bg-[#070933]">

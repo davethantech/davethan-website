@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MonitorPlay, Lightbulb, Cloud } from "lucide-react";
+import { CtaBlock } from "@/components/shared/CtaBlock";
 
 export default function ServicesPage() {
   return (
@@ -311,29 +312,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* CTA BANNER */}
-        <section className="py-16 px-4 bg-white">
-          <div className="max-w-[1280px] mx-auto bg-white border border-[#e4e9f2] rounded-[24px] shadow-[0px_8px_32px_12px_rgba(191,249,234,0.35)] px-8 py-16 md:px-16 lg:px-24 flex flex-col lg:flex-row items-center justify-between gap-12">
-
-            <div className="text-center lg:text-left flex-1 max-w-2xl">
-              <h3 className="text-[#0a0d53] font-roboto font-bold text-[28px] lg:text-[36px] leading-tight mb-4">
-                Start the conversation with a free 30-minute consultation
-              </h3>
-              <p className="text-[#0a0d53] font-inter text-[15px] leading-relaxed opacity-80">
-                Let's discuss your IT strategy, services, and business solutions & compliance concerns.
-              </p>
-            </div>
-
-            <Link href="/contact">
-              <div className="bg-[#bff9ea]/60 border border-[#0a0d53] rounded-[10px] h-[56px] px-[40px] flex items-center justify-center hover:bg-[#bff9ea] transition-colors shrink-0 cursor-pointer">
-                <span className="text-[#0a0d53] font-inter font-bold text-[15px]">
-                  Book your call
-                </span>
-              </div>
-            </Link>
-
-          </div>
-        </section>
+        <CtaBlock />
 
       </main>
 

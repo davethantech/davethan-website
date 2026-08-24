@@ -2,7 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { Server, DollarSign, RefreshCw, Clock, CloudUpload, Map, ArrowRight } from 'lucide-react';
+import { Server, DollarSign, RefreshCw, Clock, CloudUpload, Map, ArrowRight, Globe } from 'lucide-react';
+import { CtaBlock } from '@/components/shared/CtaBlock';
 
 export const metadata = {
   title: 'Cloud Services | Davethan Technologies Limited',
@@ -63,10 +64,16 @@ export default function CloudServicesPage() {
               Contact Us <ArrowRight className="w-4 h-4" />
             </Link>
 
-            {/* Floating circles bottom-right (desktop only) */}
-            <div className="hidden lg:flex absolute -bottom-8 right-[120px] z-20">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="w-[72px] h-[72px] rounded-full bg-[#06bae1] -ml-4 first:ml-0 border-4 border-white shadow-md" />
+            {/* Provider logos bottom-right (desktop only) */}
+            <div className="hidden lg:flex absolute -bottom-8 right-[120px] z-20 items-center">
+              {[
+                { label: 'AWS', bg: 'bg-[#FF9900]' },
+                { label: 'Azure', bg: 'bg-[#0078D4]' },
+                { label: 'GCP', bg: 'bg-[#4285F4]' },
+              ].map((provider, i) => (
+                <div key={i} className={`w-[72px] h-[72px] rounded-full ${provider.bg} -ml-4 first:ml-0 border-4 border-white shadow-md flex items-center justify-center`}>
+                  <span className="text-white font-roboto font-bold text-[11px] text-center leading-tight">{provider.label}</span>
+                </div>
               ))}
             </div>
           </div>
@@ -137,7 +144,9 @@ export default function CloudServicesPage() {
 
                 {/* Floating badge: 50+ Successful Migrations */}
                 <div className="absolute lg:bottom-2 bottom-2 left-[4%] lg:left-[10%] bg-[#0a0d53] rounded-[16px] px-5 py-4 flex items-center gap-4 shadow-xl border border-[rgba(255,255,255,0.08)]">
-                  <div className="w-[44px] h-[44px] rounded-full bg-[#06bae1] shrink-0" />
+                  <div className="w-[44px] h-[44px] rounded-full bg-[#06bae1] shrink-0 flex items-center justify-center">
+                    <Globe className="w-5 h-5 text-white" />
+                  </div>
                   <div>
                     <h4 className="text-white font-roboto font-bold text-[24px] leading-none">50+</h4>
                     <p className="text-[rgba(255,255,255,0.6)] text-[11px] mt-1">Successful Migrations</p>
@@ -271,31 +280,14 @@ export default function CloudServicesPage() {
                   We&apos;ve deployed cloud infrastructure for 50+ businesses across two continents.
                 </h2>
               </div>
-              <Link href="#" className="font-inter font-bold text-[#06bae1] text-[14px] hover:underline inline-flex items-center gap-1 whitespace-nowrap shrink-0">
+              <Link href="/blog" className="font-inter font-bold text-[#06bae1] text-[14px] hover:underline inline-flex items-center gap-1 whitespace-nowrap shrink-0">
                 View More <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
         </section>
 
-        {/* CTA SECTION */}
-        <section className="pb-16 lg:pb-24 bg-white">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px]">
-            <div className="bg-[#f8f9fa] border border-[#e4e9f2] rounded-[24px] p-8 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left">
-              <div className="max-w-[700px]">
-                <h2 className="text-[#0a0d53] font-roboto font-bold text-[28px] lg:text-[40px] leading-tight mb-4">
-                  Start the conversation with a free 30-minute consultation
-                </h2>
-                <p className="text-[#5b6472] font-inter text-[15px]">
-                  Let&apos;s discuss your IT strategy, services, and business solutions & compliance concerns.
-                </p>
-              </div>
-              <button className="bg-transparent border-2 border-[#06bae1] text-[#0a0d53] font-bold font-inter text-[14px] px-8 py-4 rounded-[8px] hover:bg-[#06bae1] hover:text-white transition-colors whitespace-nowrap shrink-0">
-                Book your call
-              </button>
-            </div>
-          </div>
-        </section>
+        <CtaBlock />
 
       </main>
       <Footer />

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { CtaBlock } from '@/components/shared/CtaBlock';
 import { Check, ClipboardList, Eye, Zap, TrendingUp } from 'lucide-react';
 
 export const metadata = {
@@ -155,26 +156,7 @@ export default function ManagedITPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-12 lg:py-20 bg-white">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px]">
-            <div className="bg-white border border-[#e4e9f2] rounded-[24px] shadow-[0px_4px_18px_4px_rgba(191,249,234,0.4)] px-8 sm:px-16 py-12 flex flex-col lg:flex-row items-center justify-between gap-8">
-              <div>
-                <h3 className="font-roboto font-bold text-[#0a0d53] text-[22px] sm:text-[26px] leading-tight mb-3 max-w-[640px]">
-                  Start the conversation with a free 30-minute consultation
-                </h3>
-                <p className="font-inter text-[#0a0d53] text-[13px]">
-                  Let&apos;s discuss your IT strategy, services, and business solutions &amp; compliance concerns.
-                </p>
-              </div>
-              <Link href="/contact" className="shrink-0">
-                <div className="bg-[rgba(191,249,234,0.6)] border border-[#0a0d53] rounded-[9px] h-[52px] px-8 flex items-center justify-center hover:bg-[#bff9ea] transition-colors">
-                  <span className="font-inter font-bold text-[#0a0d53] text-[14px] whitespace-nowrap">Book your call</span>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CtaBlock />
 
       </main>
       <Footer />

@@ -4,6 +4,7 @@ import { Server, ShieldCheck, Cloud, Lightbulb, User } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
+import { CtaBlock } from "@/components/shared/CtaBlock";
 
 export const metadata = {
   title: 'About Us | Davethan Technologies Limited',
@@ -239,25 +240,7 @@ export default function AboutPage() {
             </span>
           </div>
 
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 mt-16">
-            <div className="bg-white rounded-[24px] p-12 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0px_4px_18px_13px_rgba(191,249,234,0.12)]">
-              <div className="space-y-4 max-w-xl">
-                <h2 className="text-[#0a0d53] font-roboto font-bold text-[26px]">
-                  Start the conversation with a free 30-minute consultation
-                </h2>
-                <p className="text-[#0a0d53] font-inter text-[13px]">
-                  Let's discuss your IT strategy, services, and business solutions & compliance concerns.
-                </p>
-              </div>
-              <Link href="/contact" className="shrink-0">
-                <div className="bg-[rgba(6,186,225,0.2)] border border-[#0a0d53] rounded-[9px] h-[52px] px-8 flex items-center justify-center hover:bg-[rgba(6,186,225,0.3)] transition-colors">
-                  <span className="text-[#0a0d53] font-inter font-bold text-[14px]">
-                    Book your call
-                  </span>
-                </div>
-              </Link>
-            </div>
-          </div>
+          <CtaBlock />
         </section>
       </main>
       <Footer />
