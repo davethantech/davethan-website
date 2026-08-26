@@ -11,6 +11,7 @@ export function ConsultancyForm() {
   const [fields, setFields] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     service: '',
     message: '',
@@ -36,6 +37,7 @@ export function ConsultancyForm() {
           formType: 'consultancy', 
           name: fields.name,
           email: fields.email,
+          phone: fields.phone,
           subject: subject,
           message: fields.message
         }),
@@ -48,7 +50,7 @@ export function ConsultancyForm() {
       }
 
       setFormState('success');
-      setFields({ name: '', email: '', company: '', service: '', message: '' });
+      setFields({ name: '', email: '', phone: '', company: '', service: '', message: '' });
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Something went wrong.';
       setErrorMessage(message);
@@ -97,6 +99,15 @@ export function ConsultancyForm() {
         placeholder="Email"
         required
         value={fields.email}
+        onChange={handleChange}
+        disabled={formState === 'loading'}
+        className={inputClass}
+      />
+      <input
+        name="phone"
+        type="tel"
+        placeholder="Phone number"
+        value={fields.phone}
         onChange={handleChange}
         disabled={formState === 'loading'}
         className={inputClass}

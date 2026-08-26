@@ -86,12 +86,12 @@ export default function ITConsultancyPage() {
                   <p className="font-inter text-[#5b6472] text-[14px] leading-relaxed mb-8 flex-grow">
                     {service.desc}
                   </p>
-                  <div className="flex items-center justify-between mt-auto">
-                    <span className="font-inter font-bold text-[#06bae1] text-[13px] hover:underline cursor-pointer">Learn more &rarr;</span>
-                    <div className="w-[32px] h-[32px] rounded-full bg-[#06bae1] flex items-center justify-center">
+                  <Link href="#contact" className="flex items-center justify-between mt-auto group cursor-pointer">
+                    <span className="font-inter font-bold text-[#06bae1] text-[13px] group-hover:underline">Learn more &rarr;</span>
+                    <div className="w-[32px] h-[32px] rounded-full bg-[#06bae1] flex items-center justify-center group-hover:bg-[#05a6c9] transition-colors">
                       <ArrowRight className="w-4 h-4 text-white" />
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -158,7 +158,7 @@ export default function ITConsultancyPage() {
         </section>
 
         {/* CONTACT SECTION */}
-        <section className="bg-[#070933] overflow-hidden lg:rounded-tr-[120px] lg:rounded-bl-[120px] mx-0 lg:mx-1 my-8 lg:my-16">
+        <section id="contact" className="bg-[#070933] overflow-hidden lg:rounded-tr-[120px] lg:rounded-bl-[120px] mx-0 lg:mx-1 my-8 lg:my-16">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[80px] flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-12">
             <div className="flex-1 py-16 lg:py-24 w-full max-w-[500px]">
               <h2 className="text-white font-roboto font-bold text-[32px] lg:text-[40px] leading-tight mb-3">
