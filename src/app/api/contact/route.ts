@@ -33,10 +33,8 @@ export async function POST(request: Request) {
     });
 
     // 2. Send email notification via Resend
-    // NOTE: Resend free tier requires sending FROM onboarding@resend.dev until
-    // the domain (davethan.tech) is verified in the Resend dashboard.
-    // Once verified, change fromEmail to 'noreply@davethan.tech'
-    const fromEmail = 'onboarding@resend.dev';
+    // Domain is now verified, so we can send from the official domain
+    const fromEmail = 'noreply@davethan.tech';
     const toEmail = 'info@davethan.tech';
 
     const formLabels: Record<string, string> = {
