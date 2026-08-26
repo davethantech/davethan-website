@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ArrowRight, Users, Handshake, TrendingUp, CircleDollarSign, Award, HeartHandshake } from 'lucide-react';
+import { ConsultancyForm } from '@/components/shared/ConsultancyForm';
 
 export const metadata = {
   title: 'IT Consultancy | Davethan Technologies Limited',
@@ -167,38 +168,7 @@ export default function ITConsultancyPage() {
                 Get in touch with us today to see how we can help you.
               </p>
 
-              <form className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Full name"
-                  className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-[8px] px-4 py-3 text-white placeholder-[rgba(255,255,255,0.4)] focus:outline-none focus:border-[#06bae1] transition-colors font-inter text-[14px]"
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-[8px] px-4 py-3 text-white placeholder-[rgba(255,255,255,0.4)] focus:outline-none focus:border-[#06bae1] transition-colors font-inter text-[14px]"
-                />
-                <input
-                  type="text"
-                  placeholder="Company"
-                  className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-[8px] px-4 py-3 text-white placeholder-[rgba(255,255,255,0.4)] focus:outline-none focus:border-[#06bae1] transition-colors font-inter text-[14px]"
-                />
-                <select className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-[8px] px-4 py-3 text-[rgba(255,255,255,0.4)] focus:outline-none focus:border-[#06bae1] transition-colors font-inter text-[14px] appearance-none" defaultValue="">
-                  <option value="" disabled>&mdash; Choose a service &mdash;</option>
-                  <option value="it-consultancy" className="text-black">IT Consultancy</option>
-                  <option value="managed-it" className="text-black">Managed IT</option>
-                  <option value="cloud" className="text-black">Cloud Services</option>
-                </select>
-                <textarea
-                  placeholder="Message"
-                  rows={4}
-                  className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-[8px] px-4 py-3 text-white placeholder-[rgba(255,255,255,0.4)] focus:outline-none focus:border-[#06bae1] transition-colors font-inter text-[14px] resize-none"
-                ></textarea>
-
-                <button type="button" className="bg-[#06bae1] text-[#0a0d53] font-bold font-inter text-[14px] px-8 py-3 rounded-[8px] hover:opacity-90 transition-opacity mt-4 inline-block">
-                  Send us a Message &rarr;
-                </button>
-              </form>
+              <ConsultancyForm />
             </div>
             <div className="flex-1 relative w-full h-[400px] lg:h-[700px] flex justify-end shrink-0 hidden lg:flex py-0 lg:py-12">
               <div className="relative w-full h-full lg:max-w-[700px] right-0">
