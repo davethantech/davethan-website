@@ -5,6 +5,8 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://davethan.tech';
+
 export async function POST(request: Request) {
   try {
     const data = await request.json();
@@ -52,23 +54,56 @@ export async function POST(request: Request) {
     // For now, we send the recommended Welcome email.
     
     const fromEmail = 'noreply@davethan.tech';
+    const unsubscribeToken = Buffer.from(email).toString('base64');
+    const unsubscribeUrl = `${SITE_URL}/api/unsubscribe?token=${unsubscribeToken}`;
 
     await resend.emails.send({
       from: `Davethan Newsletter <${fromEmail}>`,
       to: [email],
       subject: 'Welcome to the Davethan Newsletter!',
+      headers: {
+        'List-Unsubscribe': `<${unsubscribeUrl}>`,
+        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+      },
       html: `
-        <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px;background:#ffffff;border:1px solid #e4e9f2;border-radius:12px;text-align:center;">
-          <img src="https://davethan.tech/davethan_logo.webp" alt="Davethan" width="120" style="margin-bottom:24px;" />
-          <h2 style="color:#0a0d53;margin-bottom:16px;">Welcome aboard!</h2>
-          <p style="color:#5b6472;font-size:16px;line-height:1.6;margin-bottom:24px;">
-            Thank you for subscribing to the Davethan Technologies newsletter. You're now on the list to receive our latest insights on IT strategy, cybersecurity, and digital transformation.
-          </p>
-          <hr style="border:none;border-top:1px solid #e4e9f2;margin-bottom:24px;" />
-          <p style="color:#9ca3af;font-size:12px;">
-            If you didn't request this, you can safely ignore this email.
-          </p>
-        </div>
+        <!DOCTYPE html>
+        <html>
+        <body style="margin:0;padding:0;background:#f8f9fc;font-family:sans-serif;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td align="center" style="padding:40px 16px;">
+                <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:16px;border:1px solid #e4e9f2;overflow:hidden;">
+                  <tr>
+                    <td style="background:#0a0d53;padding:28px 40px;">
+                      <img src="${SITE_URL}/davethan_logo.webp" alt="Davethan" width="110" style="display:block;" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:40px;">
+                      <h2 style="color:#0a0d53;margin:0 0 16px;">Welcome aboard! 👋</h2>
+                      <p style="color:#5b6472;font-size:15px;line-height:1.8;margin:0 0 20px;">
+                        Thank you for subscribing to the Davethan Technologies newsletter. You're now on the list to receive our latest insights on IT strategy, cybersecurity, cloud solutions, and digital transformation.
+                      </p>
+                      <p style="color:#5b6472;font-size:15px;line-height:1.8;margin:0;">
+                        Stay tuned — great things are coming your way.
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0 40px;"><hr style="border:none;border-top:1px solid #e4e9f2;" /></td>
+                  </tr>
+                  <tr>
+                    <td style="padding:24px 40px;text-align:center;">
+                      <p style="color:#9ca3af;font-size:12px;margin:0 0 8px;">You're receiving this because you subscribed to the Davethan Technologies newsletter.</p>
+                      <a href="${unsubscribeUrl}" style="color:#06bae1;font-size:12px;">Unsubscribe</a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+        </html>
       `,
     });
 
