@@ -11,6 +11,7 @@ import { Categories } from './collections/Categories';
 import { Media } from './collections/Media';
 import { Jobs } from './collections/Jobs';
 import { FormSubmissions } from './collections/FormSubmissions';
+import { Subscribers } from './collections/Subscribers';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -37,6 +38,7 @@ export default buildConfig({
     Media,
     Jobs,
     FormSubmissions,
+    Subscribers,
   ],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { NewsletterForm } from '@/components/shared/NewsletterForm';
 
 export function Footer() {
   return (
@@ -27,18 +28,9 @@ export function Footer() {
           </div>
 
           {/* Newsletter Subscribe */}
-          <div className="flex-1 lg:max-w-xs">
+          <div className="lg:col-span-1">
             <h4 className="text-xs font-semibold text-gray-400 mb-4 tracking-wider uppercase">SUBSCRIBE TO OUR NEWSLETTER</h4>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="w-full px-4 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-cyan-400"
-              />
-              <button className="bg-cyan-100 text-cyan-800 px-4 py-2 rounded-md text-sm font-semibold hover:bg-cyan-200 transition-colors">
-                Subscribe
-              </button>
-            </div>
+            <NewsletterForm />
           </div>
         </div>
 
