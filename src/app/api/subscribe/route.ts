@@ -34,14 +34,14 @@ export async function POST(request: Request) {
 
     if (existing.docs.length > 0) {
       const subscriber = existing.docs[0];
-      
+
       if (subscriber.status === 'active') {
         return NextResponse.json(
           { error: 'You are already subscribed!' },
           { status: 400 }
         );
       }
-      
+
       // If they are unsubscribed, reactivate them
       await payload.update({
         collection: 'subscribers',
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
     // (If the Resend Audience feature is fully set up, we could also use the Contacts API here:
     //  resend.contacts.create({ email, audienceId: '...' }))
     // For now, we send the recommended Welcome email.
-    
+
     const fromEmail = 'noreply@davethan.tech';
     const unsubscribeToken = Buffer.from(email).toString('base64');
     const unsubscribeUrl = `${SITE_URL}/api/unsubscribe?token=${unsubscribeToken}`;
@@ -90,7 +90,7 @@ export async function POST(request: Request) {
                   <tr>
                     <td style="background:#06bae1;padding:28px 40px;text-align:center;">
                       <div style="background:#ffffff;display:inline-block;padding:12px 24px;border-radius:8px;">
-                        <img src="${SITE_URL}/davethan_logo.webp" alt="Davethan Technologies" width="150" style="display:block;margin:0 auto;" />
+                        <img src="${SITE_URL}/davethan_logo.jpg" alt="Davethan Technologies" width="150" style="display:block;margin:0 auto;" />
                       </div>
                     </td>
                   </tr>
