@@ -19,8 +19,10 @@ function buildNewsletterHtml(subject: string, bodyHtml: string, unsubscribeUrl: 
           <td align="center" style="padding:40px 16px;">
             <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:16px;border:1px solid #e4e9f2;overflow:hidden;">
               <tr>
-                <td style="background #06bae1; padding:28px 40px 16px;text-align:center;border-bottom:2px solid #06bae1;">
-                  <img src="${SITE_URL}/davethan_logo.jpg" alt="Davethan Technologies" width="150" style="display:inline-block;" />
+                <td style="background:#06bae1;padding:28px 40px;text-align:center;">
+                  <div style="background:#ffffff;display:inline-block;padding:12px 24px;border-radius:8px;">
+                    <img src="${SITE_URL}/davethan_logo.webp" alt="Davethan Technologies" width="150" style="display:block;margin:0 auto;" />
+                  </div>
                 </td>
               </tr>
               <!-- Body -->
