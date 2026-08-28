@@ -33,20 +33,34 @@ export async function POST(request: Request) {
     });
 
     if (existing.docs.length > 0) {
-      return NextResponse.json(
-        { error: 'You are already subscribed!' },
-        { status: 400 }
-      );
+      const subscriber = existing.docs[0];
+      
+      if (subscriber.status === 'active') {
+        return NextResponse.json(
+          { error: 'You are already subscribed!' },
+          { status: 400 }
+        );
+      }
+      
+      // If they are unsubscribed, reactivate them
+      await payload.update({
+        collection: 'subscribers',
+        id: subscriber.id,
+        data: {
+          status: 'active',
+        },
+      });
+      // Skip creating a new record
+    } else {
+      // 3. Save to Payload CMS (Backup list)
+      await payload.create({
+        collection: 'subscribers',
+        data: {
+          email,
+          status: 'active',
+        },
+      });
     }
-
-    // 3. Save to Payload CMS (Backup list)
-    await payload.create({
-      collection: 'subscribers',
-      data: {
-        email,
-        status: 'active',
-      },
-    });
 
     // 4. Send Welcome Email via Resend
     // (If the Resend Audience feature is fully set up, we could also use the Contacts API here:
@@ -74,8 +88,8 @@ export async function POST(request: Request) {
               <td align="center" style="padding:40px 16px;">
                 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:16px;border:1px solid #e4e9f2;overflow:hidden;">
                   <tr>
-                    <td style="background:#0a0d53;padding:28px 40px;">
-                      <img src="${SITE_URL}/davethan_logo.webp" alt="Davethan" width="110" style="display:block;" />
+                    <td style="background:#ffffff;padding:28px 40px 16px;text-align:center;border-bottom:2px solid #06bae1;">
+                      <img src="${SITE_URL}/davethan_logo.webp" alt="Davethan" width="150" style="display:inline-block;" />
                     </td>
                   </tr>
                   <tr>
