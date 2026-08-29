@@ -1,9 +1,4 @@
 import type { CollectionConfig } from 'payload';
-import {
-  lexicalEditor,
-  FixedToolbarFeature,
-  InlineToolbarFeature,
-} from '@payloadcms/richtext-lexical';
 
 /**
  * Posts Collection
@@ -141,13 +136,6 @@ export const Posts: CollectionConfig = {
     {
       name: 'content',
       type: 'richText',
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-          FixedToolbarFeature(),
-          InlineToolbarFeature(),
-        ],
-      }),
       label: 'Article Content',
       required: true,
       admin: {
