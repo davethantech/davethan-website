@@ -106,15 +106,18 @@ function renderLexicalNode(node: Record<string, unknown>, key: string | number):
     case 'heading': {
       const tag = (node.tag as string) || 'h2';
       const text = children.map((c, i) => renderLexicalNode(c, i));
-      return tag === 'h2' ? (
-        <h2 key={key} className="text-[#0a0d53] font-roboto font-bold text-[22px] sm:text-[26px] lg:text-[30px] mt-10 mb-5">
-          {text}
-        </h2>
-      ) : (
-        <h3 key={key} className="text-[#0a0d53] font-roboto font-bold text-[18px] sm:text-[20px] mt-8 mb-4">
-          {text}
-        </h3>
-      );
+      
+      if (tag === 'h1') {
+        return <h1 key={key} className="text-[#0a0d53] font-roboto font-bold text-[26px] sm:text-[32px] lg:text-[36px] mt-12 mb-6">{text}</h1>;
+      }
+      if (tag === 'h2') {
+        return <h2 key={key} className="text-[#0a0d53] font-roboto font-bold text-[22px] sm:text-[26px] lg:text-[30px] mt-10 mb-5">{text}</h2>;
+      }
+      if (tag === 'h3') {
+        return <h3 key={key} className="text-[#0a0d53] font-roboto font-bold text-[18px] sm:text-[20px] mt-8 mb-4">{text}</h3>;
+      }
+      // h4, h5, h6 fallback
+      return <h4 key={key} className="text-[#0a0d53] font-roboto font-bold text-[16px] sm:text-[18px] mt-6 mb-3">{text}</h4>;
     }
 
     case 'list': {
@@ -223,16 +226,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </section>
 
         {/* ─── HERO IMAGE ─── */}
-        <div className="relative w-full h-[220px] sm:h-[320px] lg:h-[480px] mt-10">
-          <Image
-            src={heroUrl}
-            alt={post.title}
-            fill
-            className="object-cover"
-            priority
-            quality={85}
-            sizes="100vw"
-          />
+        <div className="max-w-[1200px] mx-auto px-0 sm:px-6 lg:px-[80px] mt-10">
+          <div className="relative w-full h-[220px] sm:h-[320px] lg:h-[480px] sm:rounded-[24px] overflow-hidden">
+            <Image
+              src={heroUrl}
+              alt={post.title}
+              fill
+              className="object-cover"
+              priority
+              quality={85}
+              sizes="(max-width: 1200px) 100vw, 1200px"
+            />
+          </div>
         </div>
 
         {/* ─── ARTICLE BODY ─── */}
