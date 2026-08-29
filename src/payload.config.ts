@@ -45,9 +45,10 @@ export default buildConfig({
   ],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
-      ...defaultFeatures,
+      // Filter out the buggy inline floating toolbar
+      ...defaultFeatures.filter((feature) => feature.key !== 'toolbarInline'),
+      // Add the classic, reliable pinned top toolbar
       FixedToolbarFeature(),
-      InlineToolbarFeature(),
     ],
   }),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',
