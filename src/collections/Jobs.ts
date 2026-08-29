@@ -1,5 +1,20 @@
 import type { CollectionConfig } from 'payload';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import {
+  lexicalEditor,
+  HeadingFeature,
+  BoldFeature,
+  ItalicFeature,
+  UnderlineFeature,
+  StrikethroughFeature,
+  UnorderedListFeature,
+  OrderedListFeature,
+  BlockquoteFeature,
+  LinkFeature,
+  ParagraphFeature,
+  AlignFeature,
+  FixedToolbarFeature,
+  InlineToolbarFeature,
+} from '@payloadcms/richtext-lexical';
 
 /**
  * Jobs Collection
@@ -61,11 +76,27 @@ export const Jobs: CollectionConfig = {
     {
       name: 'description',
       type: 'richText',
-      editor: lexicalEditor({}),
+      editor: lexicalEditor({
+        features: [
+          ParagraphFeature(),
+          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          BoldFeature(),
+          ItalicFeature(),
+          UnderlineFeature(),
+          StrikethroughFeature(),
+          UnorderedListFeature(),
+          OrderedListFeature(),
+          BlockquoteFeature(),
+          LinkFeature(),
+          AlignFeature(),
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ],
+      }),
       label: 'Job Description',
       required: true,
       admin: {
-        description: 'Full job description, requirements, and responsibilities.',
+        description: 'Use the toolbar above to format the job description. Use Heading 2 for sections (e.g. "Responsibilities", "Requirements"), bullet lists for items.',
       },
     },
     {

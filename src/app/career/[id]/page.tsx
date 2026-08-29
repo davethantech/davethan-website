@@ -45,15 +45,15 @@ function renderLexicalNode(node: Record<string, unknown>, key: string | number):
     case 'heading': {
       const tag = (node.tag as string) || 'h2';
       const text = children.map((c, i) => renderLexicalNode(c, i));
-      return tag === 'h2' ? (
-        <h2 key={key} className="text-[#0a0d53] font-roboto font-bold text-[24px] sm:text-[28px] mt-10 mb-5">
-          {text}
-        </h2>
-      ) : (
-        <h3 key={key} className="text-[#0a0d53] font-roboto font-bold text-[20px] sm:text-[22px] mt-8 mb-4">
-          {text}
-        </h3>
-      );
+
+      if (tag === 'h2') {
+        return <h2 key={key} className="text-[#0a0d53] font-roboto font-bold text-[24px] sm:text-[28px] mt-10 mb-5">{text}</h2>;
+      }
+      if (tag === 'h3') {
+        return <h3 key={key} className="text-[#0a0d53] font-roboto font-bold text-[20px] sm:text-[22px] mt-8 mb-4">{text}</h3>;
+      }
+      // h4 and below
+      return <h4 key={key} className="text-[#0a0d53] font-roboto font-bold text-[17px] sm:text-[18px] mt-6 mb-3">{text}</h4>;
     }
 
     case 'list': {
