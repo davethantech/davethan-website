@@ -139,7 +139,7 @@ export const Posts: CollectionConfig = {
       label: 'Article Content',
       required: true,
       admin: {
-        description: 'Use the toolbar above to format your content. Use Heading 2 for section titles, Heading 3 for sub-sections. Bold, italic, lists, and links are all available.',
+        description: 'Select any text to reveal the formatting toolbar. Use Heading 2 for section titles, Heading 3 for sub-sections. Bold, italic, lists, and links are all available.',
       },
     },
   ],

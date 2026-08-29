@@ -1,5 +1,5 @@
 import type { CollectionConfig, CollectionBeforeChangeHook } from 'payload';
-import { lexicalEditor, lexicalHTMLField } from '@payloadcms/richtext-lexical';
+import { lexicalHTMLField } from '@payloadcms/richtext-lexical';
 import { Resend } from 'resend';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://davethan.tech';
@@ -153,7 +153,6 @@ export const Newsletters: CollectionConfig = {
       type: 'richText',
       label: 'Email Body',
       required: true,
-      editor: lexicalEditor({}),
       admin: {
         description:
           'Write the newsletter content here using the editor. Use headings, bold, bullet points, and links — no HTML required.',
