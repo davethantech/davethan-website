@@ -12,6 +12,13 @@ const nextConfig: NextConfig = {
     return webpackConfig;
   },
   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
+    ],
     qualities: [25, 50, 75, 85, 100],
   },
 };
