@@ -1,5 +1,6 @@
 import configPromise from '@payload-config';
 import '@payloadcms/next/css';
+import '@payloadcms/richtext-lexical/dist/exports/client/bundled.css';
 import '../../payload-theme.css';
 import { RootLayout, handleServerFunctions } from '@payloadcms/next/layouts';
 import { importMap } from './importMap';
