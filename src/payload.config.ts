@@ -1,6 +1,6 @@
 import { buildConfig } from 'payload';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { lexicalEditor, FixedToolbarFeature, InlineToolbarFeature } from '@payloadcms/richtext-lexical';
+import { slateEditor } from '@payloadcms/richtext-slate';
 import { cloudinaryStorage } from 'payload-storage-cloudinary';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -43,13 +43,7 @@ export default buildConfig({
     Subscribers,
     Newsletters,
   ],
-  editor: lexicalEditor({
-    features: ({ defaultFeatures }) => [
-      ...defaultFeatures,
-      FixedToolbarFeature(),
-      InlineToolbarFeature(),
-    ],
-  }),
+  editor: slateEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',
   db: mongooseAdapter({
     url: process.env.MONGODB_URI || '',
