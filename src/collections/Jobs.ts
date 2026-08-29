@@ -1,5 +1,4 @@
 import type { CollectionConfig } from 'payload';
-import { lexicalEditor, FixedToolbarFeature, InlineToolbarFeature } from '@payloadcms/richtext-lexical';
 
 /**
  * Jobs Collection
@@ -63,13 +62,6 @@ export const Jobs: CollectionConfig = {
       type: 'richText',
       label: 'Job Description',
       required: true,
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-          FixedToolbarFeature(),
-          InlineToolbarFeature(),
-        ],
-      }),
       admin: {
         description: 'Provide full details about the role, responsibilities, and requirements.',
       },

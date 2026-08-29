@@ -1,6 +1,6 @@
 import { buildConfig } from 'payload';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { lexicalEditor, FixedToolbarFeature, InlineToolbarFeature } from '@payloadcms/richtext-lexical';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { cloudinaryStorage } from 'payload-storage-cloudinary';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -43,14 +43,7 @@ export default buildConfig({
     Subscribers,
     Newsletters,
   ],
-  editor: lexicalEditor({
-    features: ({ defaultFeatures }) => [
-      // Filter out the buggy inline floating toolbar
-      ...defaultFeatures.filter((feature) => feature.key !== 'toolbarInline'),
-      // Add the classic, reliable pinned top toolbar
-      FixedToolbarFeature(),
-    ],
-  }),
+  editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',
   db: mongooseAdapter({
     url: process.env.MONGODB_URI || '',
