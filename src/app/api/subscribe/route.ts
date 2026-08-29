@@ -3,11 +3,10 @@ import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://davethan.tech';
 
 export async function POST(request: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY || 'dummy_key_for_build');
   try {
     const data = await request.json();
     const { email } = data;
