@@ -1,5 +1,9 @@
 import type { CollectionConfig } from 'payload';
-import { slateEditor } from '@payloadcms/richtext-slate';
+import {
+  lexicalEditor,
+  FixedToolbarFeature,
+  InlineToolbarFeature,
+} from '@payloadcms/richtext-lexical';
 
 /**
  * Jobs Collection
@@ -61,11 +65,12 @@ export const Jobs: CollectionConfig = {
     {
       name: 'description',
       type: 'richText',
-      editor: slateEditor({
-        admin: {
-          elements: ['h2', 'h3', 'h4', 'ul', 'ol', 'link', 'blockquote', 'indent'],
-          leaves: ['bold', 'italic', 'underline', 'strikethrough'],
-        },
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ],
       }),
       label: 'Job Description',
       required: true,

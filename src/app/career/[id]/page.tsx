@@ -25,55 +25,80 @@ const typeLabels: Record<string, string> = {
   'internship': 'Internship',
 };
 
-function renderSlateNode(node: any, key: string | number): React.ReactNode {
-  if (Array.isArray(node)) {
-    return <>{node.map((c, i) => renderSlateNode(c, i))}</>;
-  }
-
-  if (node.text !== undefined) {
-    let el: React.ReactNode = node.text;
-    if (node.bold) el = <strong>{el}</strong>;
-    if (node.italic) el = <em>{el}</em>;
-    if (node.underline) el = <u>{el}</u>;
-    if (node.strikethrough) el = <s>{el}</s>;
-    if (node.code) el = <code className="bg-gray-100 rounded px-1 py-0.5 text-[#0a0d53] text-[14px]">{el}</code>;
-    return <span key={key}>{el}</span>;
-  }
-
-  const type = node.type;
-  const children = Array.isArray(node.children) ? node.children : [];
-  const renderedChildren = children.map((c: any, i: number) => renderSlateNode(c, i));
+function renderLexicalNode(node: Record<string, unknown>, key: string | number): React.ReactNode {
+  const type = node.type as string;
+  const children = (node.children as Record<string, unknown>[] | undefined) ?? [];
 
   switch (type) {
-    case 'h1':
-    case 'h2':
-      return <h2 key={key} className="text-[#0a0d53] font-roboto font-bold text-[24px] sm:text-[28px] mt-10 mb-5">{renderedChildren}</h2>;
-    case 'h3':
-      return <h3 key={key} className="text-[#0a0d53] font-roboto font-bold text-[20px] sm:text-[22px] mt-8 mb-4">{renderedChildren}</h3>;
-    case 'h4':
-    case 'h5':
-    case 'h6':
-      return <h4 key={key} className="text-[#0a0d53] font-roboto font-bold text-[17px] sm:text-[18px] mt-6 mb-3">{renderedChildren}</h4>;
-    case 'ul':
-      return <ul key={key} className="list-disc list-inside space-y-2 mb-6 text-[#5b6472] font-inter text-[15px] leading-[1.8]">{renderedChildren}</ul>;
-    case 'ol':
-      return <ol key={key} className="list-decimal list-inside space-y-2 mb-6 text-[#5b6472] font-inter text-[15px] leading-[1.8]">{renderedChildren}</ol>;
-    case 'li':
-      return <li key={key}>{renderedChildren}</li>;
-    case 'link':
-      return <a key={key} href={node.url} target={node.newTab ? '_blank' : undefined} className="text-[#06bae1] hover:underline font-bold transition-colors">{renderedChildren}</a>;
-    case 'blockquote':
-      return <blockquote key={key} className="border-l-4 border-[#06bae1] pl-6 my-6 text-[#5b6472] italic font-inter text-[15px] leading-relaxed">{renderedChildren}</blockquote>;
-    case 'indent':
-      return <div key={key} className="pl-6">{renderedChildren}</div>;
+    case 'root':
+      return <>{children.map((c, i) => renderLexicalNode(c, i))}</>;
+
+    case 'paragraph': {
+      const text = children.map((c, i) => renderLexicalNode(c, i));
+      return (
+        <p key={key} className="text-[#5b6472] font-inter text-[15px] sm:text-[16px] leading-[1.8] mb-4">
+          {text}
+        </p>
+      );
+    }
+
+    case 'heading': {
+      const tag = (node.tag as string) || 'h2';
+      const text = children.map((c, i) => renderLexicalNode(c, i));
+
+      if (tag === 'h2') {
+        return <h2 key={key} className="text-[#0a0d53] font-roboto font-bold text-[24px] sm:text-[28px] mt-10 mb-5">{text}</h2>;
+      }
+      if (tag === 'h3') {
+        return <h3 key={key} className="text-[#0a0d53] font-roboto font-bold text-[20px] sm:text-[22px] mt-8 mb-4">{text}</h3>;
+      }
+      // h4 and below
+      return <h4 key={key} className="text-[#0a0d53] font-roboto font-bold text-[17px] sm:text-[18px] mt-6 mb-3">{text}</h4>;
+    }
+
+    case 'list': {
+      const items = children.map((c, i) => renderLexicalNode(c, i));
+      return node.listType === 'number' ? (
+        <ol key={key} className="list-decimal list-inside space-y-2 mb-6 text-[#5b6472] font-inter text-[15px] leading-[1.8]">
+          {items}
+        </ol>
+      ) : (
+        <ul key={key} className="list-disc list-inside space-y-2 mb-6 text-[#5b6472] font-inter text-[15px] leading-[1.8]">
+          {items}
+        </ul>
+      );
+    }
+
+    case 'listitem':
+      return <li key={key}>{children.map((c, i) => renderLexicalNode(c, i))}</li>;
+
+    case 'text': {
+      let el: React.ReactNode = node.text as string;
+      const format = (node.format as number) || 0;
+      if (format & 1) el = <strong>{el}</strong>;
+      if (format & 2) el = <em>{el}</em>;
+      if (format & 8) el = <u>{el}</u>;
+      return <span key={key}>{el}</span>;
+    }
+
+    case 'linebreak':
+      return <br key={key} />;
+
+    case 'quote':
+      return (
+        <blockquote key={key} className="border-l-4 border-[#06bae1] pl-6 my-6 text-[#5b6472] italic font-inter text-[15px] leading-relaxed">
+          {children.map((c, i) => renderLexicalNode(c, i))}
+        </blockquote>
+      );
+
     default:
-      return <p key={key} className="text-[#5b6472] font-inter text-[15px] sm:text-[16px] leading-[1.8] mb-4">{renderedChildren}</p>;
+      return null;
   }
 }
 
-function RichTextContent({ content }: { content: any }) {
-  if (!content) return null;
-  return <>{renderSlateNode(content, 'root')}</>;
+function RichTextContent({ content }: { content: Record<string, unknown> }) {
+  const root = (content?.root as Record<string, unknown>) ?? content;
+  return <>{renderLexicalNode(root, 'root')}</>;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
