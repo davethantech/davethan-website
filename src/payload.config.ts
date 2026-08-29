@@ -1,6 +1,6 @@
 import { buildConfig } from 'payload';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { lexicalEditor, InlineToolbarFeature } from '@payloadcms/richtext-lexical';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { cloudinaryStorage } from 'payload-storage-cloudinary';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -20,6 +20,7 @@ const dirname = path.dirname(filename);
 export default buildConfig({
   admin: {
     user: Users.slug,
+    suppressHydrationWarning: true,
     meta: {
       titleSuffix: '— Davethan CMS',
       icons: [{ rel: 'icon', url: '/favicon.ico' }],
@@ -42,12 +43,7 @@ export default buildConfig({
     Subscribers,
     Newsletters,
   ],
-  editor: lexicalEditor({
-    features: ({ defaultFeatures }) => [
-      ...defaultFeatures,
-      InlineToolbarFeature(),
-    ],
-  }),
+  editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',
   db: mongooseAdapter({
     url: process.env.MONGODB_URI || '',
