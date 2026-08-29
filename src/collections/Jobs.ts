@@ -1,17 +1,6 @@
 import type { CollectionConfig } from 'payload';
 import {
   lexicalEditor,
-  HeadingFeature,
-  BoldFeature,
-  ItalicFeature,
-  UnderlineFeature,
-  StrikethroughFeature,
-  UnorderedListFeature,
-  OrderedListFeature,
-  BlockquoteFeature,
-  LinkFeature,
-  ParagraphFeature,
-  AlignFeature,
   FixedToolbarFeature,
   InlineToolbarFeature,
 } from '@payloadcms/richtext-lexical';
@@ -77,18 +66,8 @@ export const Jobs: CollectionConfig = {
       name: 'description',
       type: 'richText',
       editor: lexicalEditor({
-        features: [
-          ParagraphFeature(),
-          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-          BoldFeature(),
-          ItalicFeature(),
-          UnderlineFeature(),
-          StrikethroughFeature(),
-          UnorderedListFeature(),
-          OrderedListFeature(),
-          BlockquoteFeature(),
-          LinkFeature(),
-          AlignFeature(),
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ],
