@@ -54,16 +54,20 @@ html[data-theme] #nav {
 
 html[data-theme] aside a,
 html[data-theme] aside span,
+html[data-theme] aside button,
 html[data-theme] .nav a,
-html[data-theme] .nav span {
+html[data-theme] .nav span,
+html[data-theme] .nav button {
   color: rgba(255, 255, 255, 0.7) !important;
   transition: all 0.2s ease !important;
 }
 
 html[data-theme] aside a:hover,
 html[data-theme] aside a.active,
+html[data-theme] aside button:hover,
 html[data-theme] .nav a:hover,
-html[data-theme] .nav a.active {
+html[data-theme] .nav a.active,
+html[data-theme] .nav button:hover {
   color: var(--davethan-cyan) !important;
   background-color: rgba(255, 255, 255, 0.05) !important;
 }
