@@ -50,6 +50,8 @@ html[data-theme] .nav,
 html[data-theme] #nav {
   background-color: var(--davethan-deep) !important;
   border-right: none !important;
+  overflow-y: auto !important;
+  padding-bottom: 40px !important;
 }
 
 html[data-theme] aside a,
