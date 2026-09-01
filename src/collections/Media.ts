@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { isAdminOrEditor } from '../access';
 
 /**
  * Media Collection
@@ -14,6 +15,9 @@ export const Media: CollectionConfig = {
   },
   access: {
     read: () => true,
+    create: isAdminOrEditor,
+    update: isAdminOrEditor,
+    delete: isAdminOrEditor,
   },
   upload: {
     // Accepted MIME types

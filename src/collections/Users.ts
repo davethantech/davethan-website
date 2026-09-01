@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { isAdmin, isSelfOrAdmin, isAdminFieldAccess } from '../access';
 
 /**
  * Users Collection
@@ -10,6 +11,12 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
     description: 'Admin users who have access to the Payload CMS dashboard.',
     group: 'Admin',
+  },
+  access: {
+    create: isAdmin,
+    read: isSelfOrAdmin,
+    update: isSelfOrAdmin,
+    delete: isAdmin,
   },
   auth: true,
   fields: [
@@ -35,6 +42,10 @@ export const Users: CollectionConfig = {
       ],
       defaultValue: 'editor',
       required: true,
+      access: {
+        read: isAdminFieldAccess,
+        update: isAdminFieldAccess,
+      },
     },
   ],
 };

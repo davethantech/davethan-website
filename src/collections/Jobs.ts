@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { isAdminOrEditor } from '../access';
 
 /**
  * Jobs Collection
@@ -15,6 +16,9 @@ export const Jobs: CollectionConfig = {
   },
   access: {
     read: () => true,
+    create: isAdminOrEditor,
+    update: isAdminOrEditor,
+    delete: isAdminOrEditor,
   },
   fields: [
     {

@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { isAdminOrEditor } from '../access';
 
 /**
  * Posts Collection
@@ -21,6 +22,9 @@ export const Posts: CollectionConfig = {
   },
   access: {
     read: () => true,
+    create: isAdminOrEditor,
+    update: isAdminOrEditor,
+    delete: isAdminOrEditor,
   },
   fields: [
     // ─── Identity ────────────────────────────────────────────────────────────

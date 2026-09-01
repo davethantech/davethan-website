@@ -1,6 +1,7 @@
 import type { CollectionConfig, CollectionBeforeChangeHook } from 'payload';
 import { lexicalHTMLField } from '@payloadcms/richtext-lexical';
 import { Resend } from 'resend';
+import { isAdminOrEditor } from '../access';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://davethan.tech';
 
@@ -133,10 +134,10 @@ export const Newsletters: CollectionConfig = {
     group: 'Email',
   },
   access: {
-    read: ({ req: { user } }) => Boolean(user),
-    create: ({ req: { user } }) => Boolean(user),
-    update: ({ req: { user } }) => Boolean(user),
-    delete: ({ req: { user } }) => Boolean(user),
+    read: () => true,
+    create: isAdminOrEditor,
+    update: isAdminOrEditor,
+    delete: isAdminOrEditor,
   },
   fields: [
     {

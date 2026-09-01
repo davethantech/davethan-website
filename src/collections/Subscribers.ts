@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload';
+import { isAdmin } from '../access';
 
 export const Subscribers: CollectionConfig = {
   slug: 'subscribers',
@@ -8,9 +9,9 @@ export const Subscribers: CollectionConfig = {
   },
   access: {
     create: () => true, // Anyone can subscribe
-    read: ({ req: { user } }) => Boolean(user), // Only admins can read the list
-    update: ({ req: { user } }) => Boolean(user),
-    delete: ({ req: { user } }) => Boolean(user),
+    read: isAdmin, // Only admins can read the list
+    update: isAdmin,
+    delete: isAdmin,
   },
   fields: [
     {

@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload';
+import { isAdmin } from '../access';
 
 export const FormSubmissions: CollectionConfig = {
   slug: 'form-submissions',
@@ -8,9 +9,9 @@ export const FormSubmissions: CollectionConfig = {
   },
   access: {
     create: () => true, // allow public submissions
-    read: ({ req: { user } }) => Boolean(user), // only admins can read
-    update: ({ req: { user } }) => Boolean(user),
-    delete: ({ req: { user } }) => Boolean(user),
+    read: isAdmin, // only super-admins can read
+    update: isAdmin,
+    delete: isAdmin,
   },
   fields: [
     {
