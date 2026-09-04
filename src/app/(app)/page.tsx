@@ -11,43 +11,58 @@ export default function Home() {
 
       <main>
         {/* HERO SECTION */}
-        <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-4 lg:px-8 pt-4 lg:pt-4 pb-24 flex flex-col lg:flex-row items-start justify-between gap-12">
-          {/* Left Content */}
-          <div className="flex-1 space-y-6 z-10 max-w-2xl mt-4 lg:mt-12">
-            <h2 className="text-[#06bae1] font-roboto font-bold text-[20px] tracking-wide">
-              IT Partner For Founders & Growing Teams
-            </h2>
-            <h1 className="text-[40px] lg:text-[48px] font-roboto font-semibold text-[#0a0d53] leading-tight">
-              Scaling businesses with proven IT strategy
-            </h1>
-            <p className="text-[rgba(10,13,83,0.66)] font-poppins text-[20px] leading-relaxed max-w-xl">
-              Managed infrastructure, cybersecurity, and cloud strategy built for teams who don't have time to babysit their tech.
-            </p>
-            <div className="pt-6">
-              <Link href="/about" className="inline-block mt-4">
-                <div
-                  className="rounded-[10px] px-[36px] py-[16px] flex items-center justify-center transition-transform hover:scale-105 shadow-[0px_4px_4px_0px_rgba(6,186,225,0.4)]"
-                  style={{ backgroundImage: "linear-gradient(270deg, rgb(191, 249, 234) 0%, rgb(6, 186, 225) 100%)" }}
-                >
-                  <span className="text-[#0a0d53] font-roboto font-bold text-[20px]">
-                    Learn More
-                  </span>
-                </div>
-              </Link>
-            </div>
-          </div>
+        <section className="relative w-full bg-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-0 flex flex-col lg:flex-row items-center lg:items-stretch min-h-[420px] lg:min-h-[500px]">
 
-          {/* Right Visual */}
-          <div className="flex-1 relative h-[400px] lg:h-[630px] w-full flex items-start justify-end lg:-mr-12 -mt-4 lg:-mt-4">
-            <div className="relative w-[120%] lg:w-[700px] min-h-[400px] lg:min-h-[630px] h-full right-[-10%] lg:right-[-50px]">
-              <Image
-                src="/Robot_hand_holding_glowing_globe.png"
-                alt="Robot hand holding glowing globe"
-                fill
-                sizes="(max-width: 1024px) 120vw, 700px"
-                className="object-contain object-right-top lg:object-right-top"
-                priority
-              />
+            {/* Left Content */}
+            <div className="flex-1 flex flex-col justify-center z-10 pb-8 lg:pb-20 pt-8 lg:pt-20 pr-0 lg:pr-8">
+              {/* Main Headline */}
+              <h1 className="font-roboto font-bold leading-[1.05] mb-4">
+                <span className="block text-[clamp(2.2rem,5.5vw,4rem)] text-[#0a0d53]">
+                  Scale Smarter,
+                </span>
+                <span className="block text-[clamp(2.2rem,5.5vw,4rem)] text-[#0a0d53]">
+                  Not Harder:
+                </span>
+                <span className="block text-[clamp(2.2rem,5.5vw,4rem)] text-[#06bae1]">
+                  IT Solution
+                </span>
+                <span className="block text-[clamp(2.2rem,5.5vw,4rem)] text-[#06bae1]">
+                  Built For
+                </span>
+                <span className="block text-[clamp(2.2rem,5.5vw,4rem)] text-[#06bae1]">
+                  Founders
+                </span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-[rgba(10,13,83,0.72)] font-poppins text-[14px] sm:text-[15px] leading-relaxed max-w-sm mb-6">
+                Let&apos;s reshape your business by harnessing the capabilities of cloud technology.
+              </p>
+
+              {/* CTA Button */}
+              <div>
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-2 border border-[#06bae1] text-[#0a0d53] font-roboto font-bold text-[12px] tracking-widest uppercase px-6 py-3 rounded-full hover:bg-[#06bae1] hover:text-white transition-all duration-300"
+                >
+                  Learn More <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Visual — Globe Image */}
+            <div className="flex-1 relative flex items-center justify-center lg:justify-end w-full min-h-[240px] lg:min-h-[500px]">
+              <div className="relative w-full max-w-[560px] lg:max-w-none lg:w-[600px] aspect-[16/9] lg:aspect-auto lg:h-full">
+                <Image
+                  src="/globe-hero.webp"
+                  alt="Global network map representing Davethan's worldwide IT reach"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </section>
