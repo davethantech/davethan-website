@@ -54,11 +54,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
   try {
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
       collection: 'posts',
-      where: { slug: { equals: slug } },
+      where: { slug: { equals: decodedSlug } },
       limit: 1,
       depth: 2,
     });
@@ -183,13 +184,14 @@ function RichTextContent({ content }: { content: Record<string, unknown> }) {
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
 
   const payload = await getPayloadClient();
 
   // Fetch the specific post by slug
   const { docs } = await payload.find({
     collection: 'posts',
-    where: { slug: { equals: slug } },
+    where: { slug: { equals: decodedSlug } },
     limit: 1,
     depth: 2,
   });
@@ -206,7 +208,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     where: {
       and: [
         { 'category.id': { equals: categoryId } },
-        { slug: { not_equals: slug } },
+        { slug: { not_equals: decodedSlug } },
       ],
     },
     limit: 3,
