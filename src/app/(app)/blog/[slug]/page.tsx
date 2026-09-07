@@ -64,14 +64,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     });
     const post = docs[0] as Post | undefined;
     if (!post) return { title: 'Post Not Found | Davethan Blog' };
+    
+    // Ensure OG image URL is absolute for crawlers like WhatsApp
+    let imageUrl = getImageUrl(post.heroImage);
+    if (!imageUrl.startsWith('http')) {
+      imageUrl = `https://davethan.tech${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
+    }
+
     return {
       title: `${post.title} | Davethan Blog`,
       description: post.excerpt ?? '',
       openGraph: {
         title: post.title,
         description: post.excerpt ?? '',
-        images: [{ url: getImageUrl(post.heroImage) }],
+        images: [{ url: imageUrl }],
         url: `https://davethan.tech/blog/${slug}`,
+        type: 'article',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: post.title,
+        description: post.excerpt ?? '',
+        images: [imageUrl],
       },
     };
   } catch {
