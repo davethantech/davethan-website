@@ -80,10 +80,10 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { id: 1, title: "Managed IT",     Icon: Server,       bg: "bg-[#06bae1]",   iconColor: "text-white" },
-              { id: 2, title: "Cybersecurity",  Icon: ShieldCheck,  bg: "bg-[#0a0d53]",   iconColor: "text-[#06bae1]" },
-              { id: 3, title: "Cloud Services", Icon: Cloud,         bg: "bg-[#06bae1]",   iconColor: "text-white" },
-              { id: 4, title: "IT Consultancy", Icon: Lightbulb,    bg: "bg-[#0a0d53]",   iconColor: "text-[#06bae1]" },
+              { id: 1, title: "Managed IT", Icon: Server, bg: "bg-[#06bae1]", iconColor: "text-white" },
+              { id: 2, title: "Cybersecurity", Icon: ShieldCheck, bg: "bg-[#0a0d53]", iconColor: "text-[#06bae1]" },
+              { id: 3, title: "Cloud Services", Icon: Cloud, bg: "bg-[#06bae1]", iconColor: "text-white" },
+              { id: 4, title: "IT Consultancy", Icon: Lightbulb, bg: "bg-[#0a0d53]", iconColor: "text-[#06bae1]" },
             ].map(service => (
               <div key={service.id} className="flex flex-col items-center gap-6">
                 <div className={`w-[88px] h-[88px] rounded-full flex items-center justify-center shrink-0 ${service.bg}`}>
@@ -121,7 +121,7 @@ export default function AboutPage() {
               </div>
 
               <div className="mt-8 bg-[#bff9ea] rounded-[15px] p-4 w-fit flex flex-col items-center justify-center text-[#0a0d53] font-inter font-bold text-[14px]">
-                <span>2019</span>
+                <span>2023</span>
                 <span>Year founded</span>
               </div>
 

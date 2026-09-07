@@ -217,7 +217,7 @@ export default function CloudServicesPage() {
                 </div>
                 <h3 className="font-poppins font-bold text-[#0a0d53] text-[18px] mb-3">Cloud Migration</h3>
                 <p className="font-inter text-[#5b6472] text-[11px] leading-relaxed mb-6 px-2">
-                  Davethan Technologies has been guiding cloud strategy for growing teams since 2019.
+                  Davethan Technologies has been guiding cloud strategy for growing teams since 2023.
                 </p>
                 <Link href="/contact" className="bg-[#06bae1] text-white font-inter font-bold text-[11px] px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
                   Read More
