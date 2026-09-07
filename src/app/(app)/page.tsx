@@ -15,7 +15,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-0 flex flex-col lg:flex-row items-center lg:items-stretch min-h-[420px] lg:min-h-[500px]">
 
             {/* Left Content */}
-            <div className="flex-1 flex flex-col justify-center z-10 pb-8 lg:pb-20 pt-8 lg:pt-20 pr-0 lg:pr-8">
+            <div className="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left z-10 pb-8 lg:pb-20 pt-8 lg:pt-20 pr-0 lg:pr-8">
               {/* Main Headline */}
               <h1 className="font-roboto font-bold leading-[1.05] mb-4">
                 <span className="block text-[clamp(2.2rem,5.5vw,4rem)] text-[#0a0d53]">
@@ -36,7 +36,7 @@ export default function Home() {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-[rgba(10,13,83,0.72)] font-poppins text-[14px] sm:text-[15px] leading-relaxed max-w-sm mb-6">
+              <p className="text-[rgba(10,13,83,0.72)] font-poppins text-[14px] sm:text-[15px] leading-relaxed max-w-sm mb-6 mx-auto lg:mx-0">
                 Let&apos;s reshape your business by harnessing the capabilities of cloud technology.
               </p>
 
