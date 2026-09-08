@@ -235,7 +235,7 @@ export default function AboutPage() {
           <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[rgba(255,255,255,0.08)] -translate-y-1/2 z-0" />
 
           <div className="absolute top-12 w-full text-center z-10">
-            <span className="text-[rgba(255,255,255,0.6)] font-jetbrains text-[12px] tracking-wider uppercase">
+            <span className="text-[rgba(159, 145, 145, 0.6)] font-jetbrains text-[12px] tracking-wider uppercase">
               THE ENGINEERS WHO KEEP YOUR SYSTEMS RUNNING
             </span>
           </div>
