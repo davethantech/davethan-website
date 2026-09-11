@@ -269,6 +269,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 { name: 'TWITTER', url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://davethan.tech/blog/${slug}` },
                 { name: 'FACEBOOK', url: `https://www.facebook.com/sharer/sharer.php?u=https://davethan.tech/blog/${slug}` },
                 { name: 'LINKEDIN', url: `https://www.linkedin.com/sharing/share-offsite/?url=https://davethan.tech/blog/${slug}` },
+                { name: 'INSTAGRAM', url: 'https://www.instagram.com/davethantechnologies_/' },
               ].map((platform) => (
                 <a
                   key={platform.name}
@@ -296,6 +297,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     { name: 'TWITTER', url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://davethan.tech/blog/${slug}` },
                     { name: 'FACEBOOK', url: `https://www.facebook.com/sharer/sharer.php?u=https://davethan.tech/blog/${slug}` },
                     { name: 'LINKEDIN', url: `https://www.linkedin.com/sharing/share-offsite/?url=https://davethan.tech/blog/${slug}` },
+                    { name: 'INSTAGRAM', url: 'https://www.instagram.com/davethantechnologies_/' },
                   ].map((platform) => (
                     <a
                       key={platform.name}
