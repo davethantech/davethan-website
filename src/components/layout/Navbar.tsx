@@ -14,9 +14,9 @@ export function Navbar() {
     <header className="w-full relative z-50">
       {/* Utility Bar */}
       <div className="hidden lg:flex w-full bg-[#070933] text-white py-2 px-8 justify-end items-center text-xs font-roboto gap-4">
-        <span>+44 0208 058 0860</span>
+        <span>+44 1454 800509</span>
         <span className="text-gray-500">·</span>
-        <span>+234 812 279 8051</span>
+        <span>+234 814 882 3613</span>
         <span className="text-gray-500">·</span>
         <span>✉ info@davethan.tech</span>
         <span className="text-gray-500">·</span>

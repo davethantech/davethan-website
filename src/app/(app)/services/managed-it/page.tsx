@@ -111,8 +111,8 @@ export default function ManagedITPage() {
               </div>
               <p className="font-inter text-[#0a0d53] text-[14px] mb-2">Talk to our team today</p>
               <div className="flex flex-col gap-1">
-                <a href="tel:+442080580860" className="font-inter font-bold text-[#06bae1] text-[18px] hover:underline">+44 0208 058 0860 (UK)</a>
-                <a href="tel:+2348122798051" className="font-inter font-bold text-[#06bae1] text-[18px] hover:underline">+234 812 279 8051 (NG)</a>
+                <a href="tel:+441454800509" className="font-inter font-bold text-[#06bae1] text-[18px] hover:underline">+44 1454 800509 (UK)</a>
+                <a href="tel:+2348148823613" className="font-inter font-bold text-[#06bae1] text-[18px] hover:underline">+234 814 882 3613 (NG)</a>
               </div>
             </div>
           </div>

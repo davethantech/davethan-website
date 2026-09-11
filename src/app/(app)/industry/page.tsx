@@ -134,7 +134,7 @@ export default function IndustryPage() {
                 </Link>
                 <div className="flex flex-col">
                   <span className="text-[#0a0d53] font-inter text-[11px] opacity-70 mb-1">Have Questions?</span>
-                  <span className="text-[#0a0d53] font-inter font-semibold text-[14px]">+44 0208 058 0860</span>
+                  <span className="text-[#0a0d53] font-inter font-semibold text-[14px]">+44 1454 800509</span>
                 </div>
               </div>
             </div>

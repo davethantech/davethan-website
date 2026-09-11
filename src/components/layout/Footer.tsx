@@ -121,10 +121,10 @@ export function Footer() {
           <div>
             <h4 className="text-xs font-semibold text-gray-400 mb-4 tracking-wider uppercase">ADDRESS</h4>
             <ul className="space-y-3 text-xs text-gray-600 leading-relaxed">
-              <li>+44 0208 058 0860 (UK)</li>
-              <li>+234 812 279 8051 (Nigeria)</li>
+              <li>+44 1454 800509 (UK)</li>
+              <li>+234 814 882 3613 (Nigeria)</li>
               <li>info@davethan.tech</li>
-              <li className="pt-2">UK: 4th floor Victoria House, Chelmsford, Essex CM1 1JR</li>
+              <li className="pt-2">UK: Rombourne Office Suite, 160 Aztec West, Almondsbury, Bristol, BS32 4TU</li>
               <li className="pt-2">Nigeria: Plot 104 Emmanuel Adiele Street, off Mike Akhigbe Way, Jabi, Abuja 240102, FCT</li>
             </ul>
           </div>
