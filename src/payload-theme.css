@@ -200,35 +200,10 @@ html[data-theme] .document-header {
   box-shadow: 0px 4px 16px rgba(6, 186, 225, 0.04) !important;
 }
 
-/* --- AUTH PAGES LOGO (Reset Password / Forgot Password) ---
- * Payload's MinimalTemplate does not always render the graphics.Logo on
- * reset/forgot-password pages in v3.87.x. This injects the logo via CSS
- * on any full-page auth container that holds a form but no sidebar.
- * The selector targets the wrapper Payload renders for minimal auth views.
+/* --- AUTH PAGES (Reset Password / Forgot Password) ---
+ * Ensure label colors stay on-brand on all auth pages.
+ * The graphics.Logo component handles the logo rendering automatically.
  */
-html[data-theme] .template-minimal,
-html[data-theme] [class*="template-minimal"] {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  padding-top: 48px !important;
-}
-
-html[data-theme] .template-minimal::before,
-html[data-theme] [class*="template-minimal"]::before {
-  content: '' !important;
-  display: block !important;
-  width: 180px !important;
-  height: 60px !important;
-  background-image: url('/davethan_logo.webp') !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: contain !important;
-  margin-bottom: 32px !important;
-  flex-shrink: 0 !important;
-}
-
-/* Ensure label colors stay on-brand on auth pages */
 html[data-theme] .template-minimal label,
 html[data-theme] [class*="template-minimal"] label {
   color: var(--davethan-text) !important;
