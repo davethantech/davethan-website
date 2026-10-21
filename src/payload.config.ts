@@ -1,6 +1,7 @@
 import { buildConfig } from 'payload';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { lexicalEditor, FixedToolbarFeature, InlineToolbarFeature } from '@payloadcms/richtext-lexical';
+import { resendAdapter } from '@payloadcms/email-resend';
 import { cloudinaryStorage } from 'payload-storage-cloudinary';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -51,6 +52,11 @@ export default buildConfig({
     ],
   }),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',
+  email: resendAdapter({
+    defaultFromAddress: 'noreply@davethan.tech',
+    defaultFromName: 'Davethan CMS',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
   db: mongooseAdapter({
     url: process.env.MONGODB_URI || '',
   }),
