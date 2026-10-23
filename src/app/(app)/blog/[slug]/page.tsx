@@ -5,6 +5,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CtaBlock } from '@/components/shared/CtaBlock';
 import { getPayloadClient } from '@/lib/payload';
+import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
 import type { Post, Category, Media } from '@/payload-types';
 
 // ─── ISR: Revalidate at most every 60 seconds ────────────────────────────────
@@ -94,116 +95,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-// ─── Rich Text renderer ───────────────────────────────────────────────────────
+// ─── Rich Text Renderer ──────────────────────────────────────────────────────
+//
+// Uses Payload's built-in convertLexicalToHTML which handles ALL node types:
+// headings, paragraphs, bold, italic, links, images (upload nodes), lists,
+// blockquotes, tables, horizontal rules, code blocks — everything.
+// Branded via a scoped CSS class applied to the wrapper div.
 
-/**
- * Minimal lexical rich-text → HTML renderer.
- * Handles paragraph, heading, unordered-list, and list-item nodes.
- * Extend as needed for more node types.
- */
-function renderLexicalNode(node: Record<string, unknown>, key: string | number): React.ReactNode {
-  const type = node.type as string;
-  const children = (node.children as Record<string, unknown>[] | undefined) ?? [];
-
-  switch (type) {
-    case 'root':
-      return <>{children.map((c, i) => renderLexicalNode(c, i))}</>;
-
-    case 'paragraph': {
-      const text = children.map((c, i) => renderLexicalNode(c, i));
-      return (
-        <p key={key} className="text-[#5b6472] font-inter text-[14px] sm:text-[15px] leading-[1.8] mb-4">
-          {text}
-        </p>
-      );
-    }
-
-    case 'heading': {
-      const tag = (node.tag as string) || 'h2';
-      const text = children.map((c, i) => renderLexicalNode(c, i));
-      
-      if (tag === 'h1') {
-        return <h1 key={key} className="text-[#0a0d53] font-roboto font-bold text-[26px] sm:text-[32px] lg:text-[36px] mt-12 mb-6">{text}</h1>;
-      }
-      if (tag === 'h2') {
-        return <h2 key={key} className="text-[#0a0d53] font-roboto font-bold text-[22px] sm:text-[26px] lg:text-[30px] mt-10 mb-5">{text}</h2>;
-      }
-      if (tag === 'h3') {
-        return <h3 key={key} className="text-[#0a0d53] font-roboto font-bold text-[18px] sm:text-[20px] mt-8 mb-4">{text}</h3>;
-      }
-      // h4, h5, h6 fallback
-      return <h4 key={key} className="text-[#0a0d53] font-roboto font-bold text-[16px] sm:text-[18px] mt-6 mb-3">{text}</h4>;
-    }
-
-    case 'list': {
-      const items = children.map((c, i) => renderLexicalNode(c, i));
-      return node.listType === 'number' ? (
-        <ol key={key} className="list-decimal list-inside space-y-2 mb-6 text-[#5b6472] font-inter text-[14px] sm:text-[15px] leading-[1.8]">
-          {items}
-        </ol>
-      ) : (
-        <ul key={key} className="list-disc list-inside space-y-2 mb-6 text-[#5b6472] font-inter text-[14px] sm:text-[15px] leading-[1.8]">
-          {items}
-        </ul>
-      );
-    }
-
-    case 'listitem':
-      return <li key={key}>{children.map((c, i) => renderLexicalNode(c, i))}</li>;
-
-    case 'text': {
-      let el: React.ReactNode = node.text as string;
-      const format = (node.format as number) || 0;
-      if (format & 1) el = <strong>{el}</strong>;
-      if (format & 2) el = <em>{el}</em>;
-      if (format & 8) el = <u>{el}</u>;
-      return <span key={key}>{el}</span>;
-    }
-
-    case 'linebreak':
-      return <br key={key} />;
-
-    case 'quote':
-      return (
-        <blockquote key={key} className="border-l-4 border-[#06bae1] pl-6 my-6 text-[#5b6472] italic font-inter text-[15px] leading-relaxed">
-          {children.map((c, i) => renderLexicalNode(c, i))}
-        </blockquote>
-      );
-
-    case 'upload': {
-      // Inline image inserted via the Upload feature in the Lexical editor
-      const value = node.value as Record<string, unknown> | undefined;
-      if (!value) return null;
-      const src = (value.url ?? value.cloudinaryUrl) as string | undefined;
-      const alt = (value.alt ?? '') as string;
-      const caption = (node.fields as Record<string, unknown> | undefined)?.caption as string | undefined;
-      if (!src) return null;
-      return (
-        <figure key={key} className="my-8">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            alt={alt}
-            className="w-full rounded-[16px] object-cover shadow-sm"
-            loading="lazy"
-          />
-          {caption && (
-            <figcaption className="text-center text-[#5b6472] font-inter text-[12px] mt-3 italic">
-              {caption}
-            </figcaption>
-          )}
-        </figure>
-      );
-    }
-
-    default:
-      return null;
+async function RichTextContent({ content }: { content: Record<string, unknown> }) {
+  let html = '';
+  try {
+    html = await convertLexicalToHTML({ data: content as unknown as Parameters<typeof convertLexicalToHTML>[0]['data'] });
+  } catch {
+    // Fallback: if conversion fails render nothing rather than crashing the page
+    html = '';
   }
-}
-
-function RichTextContent({ content }: { content: Record<string, unknown> }) {
-  const root = (content?.root as Record<string, unknown>) ?? content;
-  return <>{renderLexicalNode(root, 'root')}</>;
+  return (
+    <div
+      className="davethan-prose"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
