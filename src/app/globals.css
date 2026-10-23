@@ -17,3 +17,174 @@ body {
   color: var(--color-text);
   font-family: var(--font-inter), sans-serif;
 }
+
+/* ─── Blog Post Rich Text Prose Styles ─────────────────────────────────────
+ * Applied to the wrapper div around convertLexicalToHTML output.
+ * Styles all standard HTML elements with Davethan's brand design system.
+ * ──────────────────────────────────────────────────────────────────────── */
+.davethan-prose {
+  color: #5b6472;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.davethan-prose p {
+  margin-bottom: 1.25rem;
+  color: #5b6472;
+}
+
+.davethan-prose h1,
+.davethan-prose h2,
+.davethan-prose h3,
+.davethan-prose h4,
+.davethan-prose h5,
+.davethan-prose h6 {
+  font-family: var(--font-roboto), sans-serif;
+  font-weight: 700;
+  color: #0a0d53;
+  line-height: 1.2;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.davethan-prose h1 { font-size: clamp(1.6rem, 3vw, 2.25rem); }
+.davethan-prose h2 { font-size: clamp(1.375rem, 2.5vw, 1.875rem); }
+.davethan-prose h3 { font-size: clamp(1.125rem, 2vw, 1.375rem); }
+.davethan-prose h4 { font-size: 1.125rem; }
+.davethan-prose h5 { font-size: 1rem; }
+.davethan-prose h6 { font-size: 0.875rem; }
+
+.davethan-prose strong,
+.davethan-prose b {
+  font-weight: 700;
+  color: #0a0d53;
+}
+
+.davethan-prose em,
+.davethan-prose i {
+  font-style: italic;
+}
+
+.davethan-prose u {
+  text-decoration: underline;
+}
+
+.davethan-prose a {
+  color: #06bae1;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.davethan-prose a:hover {
+  color: #0a0d53;
+}
+
+.davethan-prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.davethan-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.davethan-prose li {
+  margin-bottom: 0.4rem;
+  line-height: 1.8;
+}
+
+.davethan-prose blockquote {
+  border-left: 4px solid #06bae1;
+  padding-left: 1.5rem;
+  margin: 1.75rem 0;
+  font-style: italic;
+  color: #5b6472;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.davethan-prose hr {
+  border: none;
+  border-top: 1px solid #e4e9f2;
+  margin: 2.5rem 0;
+}
+
+.davethan-prose img {
+  width: 100%;
+  border-radius: 16px;
+  margin: 2rem 0;
+  box-shadow: 0 4px 16px rgba(6, 186, 225, 0.08);
+  display: block;
+}
+
+.davethan-prose figure {
+  margin: 2rem 0;
+}
+
+.davethan-prose figcaption {
+  text-align: center;
+  font-size: 12px;
+  color: #5b6472;
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+.davethan-prose code {
+  background: #f4f8fc;
+  border: 1px solid #e4e9f2;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.875em;
+  color: #0a0d53;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.davethan-prose pre {
+  background: #070933;
+  color: #bff9ea;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.davethan-prose pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.davethan-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+  font-size: 14px;
+}
+
+.davethan-prose th {
+  background: #0a0d53;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 10px 14px;
+  text-align: left;
+}
+
+.davethan-prose td {
+  border: 1px solid #e4e9f2;
+  padding: 10px 14px;
+  color: #5b6472;
+}
+
+.davethan-prose tr:nth-child(even) td {
+  background: #f4f8fc;
+}
+
