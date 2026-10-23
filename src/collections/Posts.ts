@@ -61,10 +61,8 @@ export const Posts: CollectionConfig = {
         ],
       },
       admin: {
-        description: 'Auto-generated from the Post Title. Must be unique.',
-        components: {
-          Field: '@/components/payload/SlugField#SlugField',
-        },
+        description: 'Type or paste the Post Title here — it will be auto-formatted into a URL slug on save. Example: "5 Signs Your IT Infrastructure Needs an Upgrade" → "5-signs-your-it-infrastructure-needs-an-upgrade". Must be unique.',
+        placeholder: 'auto-formatted-on-save',
       },
     },
 
