@@ -170,6 +170,32 @@ function renderLexicalNode(node: Record<string, unknown>, key: string | number):
         </blockquote>
       );
 
+    case 'upload': {
+      // Inline image inserted via the Upload feature in the Lexical editor
+      const value = node.value as Record<string, unknown> | undefined;
+      if (!value) return null;
+      const src = (value.url ?? value.cloudinaryUrl) as string | undefined;
+      const alt = (value.alt ?? '') as string;
+      const caption = (node.fields as Record<string, unknown> | undefined)?.caption as string | undefined;
+      if (!src) return null;
+      return (
+        <figure key={key} className="my-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={alt}
+            className="w-full rounded-[16px] object-cover shadow-sm"
+            loading="lazy"
+          />
+          {caption && (
+            <figcaption className="text-center text-[#5b6472] font-inter text-[12px] mt-3 italic">
+              {caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    }
+
     default:
       return null;
   }
@@ -250,8 +276,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               fill
               className="object-cover"
               priority
-              quality={85}
-              sizes="(max-width: 1200px) 100vw, 1200px"
+              quality={100}
+              sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 1200px"
             />
           </div>
         </div>
