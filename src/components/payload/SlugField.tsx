@@ -1,35 +1,41 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useField, useAllFormFields } from '@payloadcms/ui';
+import { useField, useFormFields } from '@payloadcms/ui';
+
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+}
 
 /**
- * SlugField — Custom Payload v3 UI field.
- * Watches the `title` field and auto-generates a URL-safe slug as the editor
- * types. The slug can still be manually overridden at any time.
+ * SlugField — Custom Payload v3 field component.
+ *
+ * Uses useFormFields to watch the `title` field and auto-generates
+ * a URL-safe slug in real time as the editor types the post title.
+ * The slug can still be manually overridden at any time.
+ *
+ * Payload passes `path` (and many other props) to custom Field components.
+ * We accept `path` and ignore the rest via the index signature.
  */
-export const SlugField: React.FC<{ path: string; label?: string; required?: boolean }> = ({
-  path,
-  label = 'URL Slug',
-  required = false,
-}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const SlugField: React.FC<{ path: string; [key: string]: any }> = ({ path }) => {
   const { value: slug, setValue: setSlug } = useField<string>({ path });
 
-  // useAllFormFields returns [fields, dispatch] — read all current field values
-  const [fields] = useAllFormFields();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const titleValue: string = (fields as any)?.title?.value ?? '';
+  // useFormFields re-renders this component whenever ANY form field changes.
+  // The selector picks only the title value to minimise unnecessary renders.
+  const titleValue = useFormFields(
+    ([fields]) => (fields['title']?.value as string) ?? '',
+  );
 
-  function generateSlug(title: string): string {
-    return title
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w-]+/g, '')
-      .replace(/--+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
-  }
-
+  // Auto-generate the slug whenever the title changes.
+  // The editor can still override the slug manually after auto-fill.
   useEffect(() => {
     if (titleValue) {
       const generated = generateSlug(titleValue);
@@ -37,7 +43,8 @@ export const SlugField: React.FC<{ path: string; label?: string; required?: bool
         setSlug(generated);
       }
     }
-  // Only run when the title changes
+  // Intentionally omit slug and setSlug from deps so manual edits
+  // to the slug field are not immediately overwritten on re-render.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [titleValue]);
 
@@ -53,10 +60,8 @@ export const SlugField: React.FC<{ path: string; label?: string; required?: bool
           color: 'var(--theme-text, #0a0d53)',
         }}
       >
-        {label}
-        {required && (
-          <span style={{ color: 'var(--theme-error-500, #e10606)', marginLeft: '4px' }}>*</span>
-        )}
+        URL Slug{' '}
+        <span style={{ color: 'var(--theme-error-500, #e10606)' }}>*</span>
       </label>
 
       <input
@@ -76,13 +81,14 @@ export const SlugField: React.FC<{ path: string; label?: string; required?: bool
           color: 'var(--theme-text, #0a0d53)',
           boxSizing: 'border-box',
           outline: 'none',
+          transition: 'border-color 0.15s ease',
         }}
-        onFocus={(e) => { e.target.style.borderColor = '#06bae1'; }}
-        onBlur={(e) => { e.target.style.borderColor = 'var(--theme-elevation-150, #e4e9f2)'; }}
+        onFocus={(e) => { e.currentTarget.style.borderColor = '#06bae1'; }}
+        onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--theme-elevation-150, #e4e9f2)'; }}
       />
 
-      <p style={{ fontSize: '11px', color: '#5b6472', marginTop: '5px', margin: '5px 0 0 0' }}>
-        Auto-filled from the Post Title. You may edit it manually.
+      <p style={{ fontSize: '11px', color: '#5b6472', margin: '5px 0 0 0' }}>
+        Auto-filled from the Post Title as you type. You may edit it manually.
       </p>
     </div>
   );

@@ -61,8 +61,11 @@ export const Posts: CollectionConfig = {
         ],
       },
       admin: {
-        description: 'Type or paste the Post Title here — it will be auto-formatted into a URL slug on save. Example: "5 Signs Your IT Infrastructure Needs an Upgrade" → "5-signs-your-it-infrastructure-needs-an-upgrade". Must be unique.',
-        placeholder: 'auto-formatted-on-save',
+        description: 'Auto-filled from the Post Title as you type. Must be unique.',
+        placeholder: 'auto-generated-from-title',
+        components: {
+          Field: '@/components/payload/SlugField#SlugField',
+        },
       },
     },
 
