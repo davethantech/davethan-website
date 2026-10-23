@@ -1,6 +1,6 @@
 import { buildConfig } from 'payload';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { lexicalEditor, FixedToolbarFeature, InlineToolbarFeature } from '@payloadcms/richtext-lexical';
+import { lexicalEditor, FixedToolbarFeature, InlineToolbarFeature, UploadFeature } from '@payloadcms/richtext-lexical';
 import { resendAdapter } from '@payloadcms/email-resend';
 import { cloudinaryStorage } from 'payload-storage-cloudinary';
 import path from 'path';
@@ -50,6 +50,19 @@ export default buildConfig({
       ...defaultFeatures,
       FixedToolbarFeature(),
       InlineToolbarFeature(),
+      UploadFeature({
+        collections: {
+          media: {
+            fields: [
+              {
+                name: 'caption',
+                type: 'text',
+                label: 'Caption (optional)',
+              },
+            ],
+          },
+        },
+      }),
     ],
   }),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',

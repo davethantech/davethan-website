@@ -46,24 +46,25 @@ export const Posts: CollectionConfig = {
       index: true,
       hooks: {
         beforeValidate: [
-          ({ value, originalDoc, data }) => {
-            // Format slug to be URL-friendly (e.g. when a post is duplicated, " - Copy" becomes "-copy")
+          ({ value }) => {
             if (typeof value === 'string') {
               return value
                 .toLowerCase()
-                .replace(/\s+/g, '-')       // Replace spaces with -
-                .replace(/[^\w-]+/g, '')    // Remove all non-word chars
-                .replace(/--+/g, '-')       // Replace multiple - with single -
-                .replace(/^-+/, '')         // Trim - from start of text
-                .replace(/-+$/, '');        // Trim - from end of text
+                .replace(/\s+/g, '-')
+                .replace(/[^\w-]+/g, '')
+                .replace(/--+/g, '-')
+                .replace(/^-+/, '')
+                .replace(/-+$/, '');
             }
             return value;
           },
         ],
       },
       admin: {
-        description: 'URL-safe identifier. Example: "5-signs-your-it-infrastructure-needs-an-upgrade". Must be unique.',
-        placeholder: 'auto-filled-from-title',
+        description: 'Auto-generated from the Post Title. Must be unique.',
+        components: {
+          Field: '@/components/payload/SlugField#SlugField',
+        },
       },
     },
 
