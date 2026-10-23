@@ -35,6 +35,9 @@ export const Posts: CollectionConfig = {
       required: true,
       admin: {
         placeholder: 'e.g. 5 Signs Your IT Infrastructure Needs an Upgrade',
+        components: {
+          afterInput: ['@/components/payload/SlugSync#SlugSync'],
+        },
       },
     },
     {
@@ -63,9 +66,6 @@ export const Posts: CollectionConfig = {
       admin: {
         description: 'Auto-filled from the Post Title as you type. Must be unique.',
         placeholder: 'auto-generated-from-title',
-        components: {
-          Field: '@/components/payload/SlugField#SlugField',
-        },
       },
     },
 
