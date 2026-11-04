@@ -33,7 +33,6 @@ export const SlugButton: React.FC = () => {
   const applySlug = useCallback(
     (rawTitle: string) => {
       const slug = generateSlug(rawTitle);
-      if (!slug) return;
 
       // 1. Update Payload form state via hook
       setSlug(slug);
@@ -53,13 +52,10 @@ export const SlugButton: React.FC = () => {
 
   // Real-time synchronization as user types title
   useEffect(() => {
-    if (!hasManuallyEdited && titleValue && typeof titleValue === 'string') {
-      const generated = generateSlug(titleValue);
-      if (generated && generated !== slugValue) {
-        applySlug(titleValue);
-      }
+    if (!hasManuallyEdited && typeof titleValue === 'string') {
+      applySlug(titleValue);
     }
-  }, [titleValue, hasManuallyEdited, slugValue, applySlug]);
+  }, [titleValue, hasManuallyEdited, applySlug]);
 
   // Native DOM listener fallback on the title input
   useEffect(() => {
@@ -80,10 +76,13 @@ export const SlugButton: React.FC = () => {
     }
   }, [hasManuallyEdited, applySlug]);
 
-  // Track if the user explicitly types directly inside the slug input
+  // Track if the user explicitly types directly inside the slug input with physical keyboard
   useEffect(() => {
-    const handleSlugInput = () => {
-      setHasManuallyEdited(true);
+    const handleSlugInput = (e: Event) => {
+      // Only set manual edit if user physically typed into the slug input (isTrusted === true)
+      if (e.isTrusted) {
+        setHasManuallyEdited(true);
+      }
     };
 
     const slugInput = document.querySelector<HTMLInputElement>(
@@ -161,4 +160,3 @@ export const SlugButton: React.FC = () => {
     </div>
   );
 };
-
