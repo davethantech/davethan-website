@@ -25,6 +25,7 @@ import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { Icon as Icon_e34c28bdc97e3fecf976b23b26d64cc9 } from '@/components/payload/Logo'
 import { Logo as Logo_e34c28bdc97e3fecf976b23b26d64cc9 } from '@/components/payload/Logo'
 import { CustomDashboard as CustomDashboard_6638bd162dfbbd22db49e881107ef5da } from '@/components/payload/CustomDashboard'
+import { SlugButton as SlugButton_component } from '@/components/payload/SlugButton'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -56,5 +57,6 @@ export const importMap = {
   "@/components/payload/Logo#Icon": Icon_e34c28bdc97e3fecf976b23b26d64cc9,
   "@/components/payload/Logo#Logo": Logo_e34c28bdc97e3fecf976b23b26d64cc9,
   "@/components/payload/CustomDashboard#CustomDashboard": CustomDashboard_6638bd162dfbbd22db49e881107ef5da,
+  "@/components/payload/SlugButton#SlugButton": SlugButton_component,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
