@@ -107,18 +107,68 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 // ─── Rich Text Renderer ──────────────────────────────────────────────────────
-//
-// Uses Payload's built-in convertLexicalToHTML which handles ALL node types:
-// headings, paragraphs, bold, italic, links, images (upload nodes), lists,
-// blockquotes, tables, horizontal rules, code blocks — everything.
-// Branded via a scoped CSS class applied to the wrapper div.
 
-async function RichTextContent({ content }: { content: Record<string, unknown> }) {
+async function populateLexicalUploads(node: any, payload: any): Promise<void> {
+  if (!node || typeof node !== 'object') return;
+
+  if (node.type === 'upload' && node.value) {
+    const mediaId = typeof node.value === 'string' ? node.value : node.value?.id;
+    if (mediaId && (typeof node.value === 'string' || !node.value.url)) {
+      try {
+        const mediaDoc = await payload.findByID({
+          collection: node.relationTo || 'media',
+          id: mediaId,
+        });
+        if (mediaDoc) {
+          node.value = mediaDoc;
+        }
+      } catch (err) {
+        console.error('Failed to populate lexical upload in post:', err);
+      }
+    }
+  }
+
+  if (Array.isArray(node.children)) {
+    for (const child of node.children) {
+      await populateLexicalUploads(child, payload);
+    }
+  }
+}
+
+async function RichTextContent({
+  content,
+  payload,
+}: {
+  content: Record<string, unknown>;
+  payload: any;
+}) {
   let html = '';
   try {
-    html = await convertLexicalToHTML({ data: content as unknown as Parameters<typeof convertLexicalToHTML>[0]['data'] });
-  } catch {
-    // Fallback: if conversion fails render nothing rather than crashing the page
+    const cloned = JSON.parse(JSON.stringify(content));
+    await populateLexicalUploads(cloned?.root ?? cloned, payload);
+
+    html = await convertLexicalToHTML({
+      data: cloned as unknown as Parameters<typeof convertLexicalToHTML>[0]['data'],
+      converters: ({ defaultConverters }) => ({
+        ...defaultConverters,
+        upload: ({ node }: { node: any }) => {
+          const val = node?.value;
+          if (!val || typeof val !== 'object') return '';
+          const url = val.url || val.cloudinaryUrl || '';
+          if (!url) return '';
+          const alt = node.fields?.alt || val.alt || val.filename || '';
+          const caption = node.fields?.caption || '';
+          return `
+            <figure>
+              <img src="${url}" alt="${alt}" loading="lazy" />
+              ${caption ? `<figcaption>${caption}</figcaption>` : ''}
+            </figure>
+          `;
+        },
+      }),
+    });
+  } catch (err) {
+    console.error('Lexical conversion error:', err);
     html = '';
   }
   return (
@@ -298,7 +348,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                 {/* Article body — rendered from Payload's lexical rich text */}
                 <article className="flex-1 min-w-0">
-                  <RichTextContent content={post.content as Record<string, unknown>} />
+                  <RichTextContent content={post.content as Record<string, unknown>} payload={payload} />
 
                   {/* Back link */}
                   <div className="pt-8 mt-4 border-t border-[#e4e9f2]">

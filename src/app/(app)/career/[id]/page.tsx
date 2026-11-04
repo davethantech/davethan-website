@@ -84,6 +84,19 @@ function renderLexicalNode(node: Record<string, unknown>, key: string | number):
     case 'linebreak':
       return <br key={key} />;
 
+    case 'upload': {
+      const val = node.value as Record<string, unknown> | undefined;
+      const url = (val?.url as string) || (val?.cloudinaryUrl as string) || '';
+      if (!url) return null;
+      const alt = ((node.fields as Record<string, unknown> | undefined)?.alt as string) || (val?.alt as string) || '';
+      return (
+        <figure key={key} className="my-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={url} alt={alt} className="w-full rounded-xl object-cover" loading="lazy" />
+        </figure>
+      );
+    }
+
     case 'quote':
       return (
         <blockquote key={key} className="border-l-4 border-[#06bae1] pl-6 my-6 text-[#5b6472] italic font-inter text-[15px] leading-relaxed">
