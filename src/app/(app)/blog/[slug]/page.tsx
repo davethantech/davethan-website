@@ -42,6 +42,8 @@ export async function generateStaticParams() {
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
       collection: 'posts',
+      
+      where: { status: { not_equals: 'draft' } },
       limit: 200,
       select: { slug: true },
     });
@@ -60,7 +62,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
       collection: 'posts',
-      where: { slug: { equals: decodedSlug } },
+      
+      where: {
+        and: [
+          { slug: { equals: decodedSlug } },
+          { status: { not_equals: 'draft' } },
+        ],
+      },
       limit: 1,
       depth: 2,
     });
@@ -76,6 +84,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title: `${post.title} | Davethan Blog`,
       description: post.excerpt ?? '',
+      alternates: {
+        canonical: `https://davethan.tech/blog/${slug}`,
+      },
       openGraph: {
         title: post.title,
         description: post.excerpt ?? '',
@@ -129,7 +140,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   // Fetch the specific post by slug
   const { docs } = await payload.find({
     collection: 'posts',
-    where: { slug: { equals: decodedSlug } },
+    where: {
+        and: [
+          { slug: { equals: decodedSlug } },
+          { status: { not_equals: 'draft' } },
+        ],
+      },
     limit: 1,
     depth: 2,
   });
@@ -147,6 +163,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       and: [
         { 'category.id': { equals: categoryId } },
         { slug: { not_equals: decodedSlug } },
+        { status: { not_equals: 'draft' } },
       ],
     },
     limit: 3,
@@ -158,8 +175,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const categoryLabel = getCategoryTitle(post.category);
   const dateLabel = formatDate(post.publishedDate);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: [heroUrl.startsWith('http') ? heroUrl : `https://davethan.tech${heroUrl}`],
+    datePublished: post.publishedDate,
+    dateModified: post.updatedAt || post.publishedDate,
+    author: {
+      '@type': 'Person',
+      name: post.author || 'Davethan Security Team',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Davethan Technologies Limited',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://davethan.tech/davethan_logo.webp',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://davethan.tech/blog/${slug}`,
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white font-inter">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <main>
 

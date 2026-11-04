@@ -64,6 +64,7 @@ export type Post = {
   id: string;
   title: string;
   slug: string;
+  status?: 'published' | 'draft' | null;
   category: string | Category;
   heroImage: string | Media;
   excerpt?: string | null;

@@ -19,12 +19,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const product = productsData.find((p) => p.slug === slug);
   
   if (!product) {
-    return { title: 'Product Not Found | Davethan Technologies' };
+    return { title: 'Product Not Found | Davethan Technologies', robots: { index: false } };
   }
   
   return {
     title: `${product.name} | Davethan Technologies`,
     description: product.tagline,
+    alternates: {
+      canonical: `https://davethan.tech/products/${slug}`,
+    },
+    openGraph: {
+      title: `${product.name} | Davethan Technologies`,
+      description: product.tagline,
+      url: `https://davethan.tech/products/${slug}`,
+      images: [{ url: product.image }],
+    },
   };
 }
 

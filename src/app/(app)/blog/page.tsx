@@ -18,9 +18,12 @@ export const revalidate = 60;
 export default async function BlogPage() {
   const payload = await getPayloadClient();
 
-  // Fetch all posts, newest first
+  // Fetch all published posts, newest first (excludes drafts)
   const { docs: allPosts } = await payload.find({
     collection: 'posts',
+    where: {
+      status: { not_equals: 'draft' },
+    },
     sort: '-publishedDate',
     limit: 50,
     depth: 2, // populate category and heroImage relationships

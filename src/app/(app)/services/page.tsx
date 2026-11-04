@@ -5,6 +5,20 @@ import { Footer } from "@/components/layout/Footer";
 import { MonitorPlay, Lightbulb, Cloud } from "lucide-react";
 import { CtaBlock } from "@/components/shared/CtaBlock";
 
+export const metadata = {
+  title: 'IT Services & Solutions | Davethan Technologies Limited',
+  description: 'Explore our comprehensive IT solutions: Managed IT Support, Cybersecurity, Cloud Infrastructure, and Strategic IT Consultancy across the UK and Nigeria.',
+  alternates: {
+    canonical: 'https://davethan.tech/services',
+  },
+  openGraph: {
+    title: 'IT Services & Solutions | Davethan Technologies Limited',
+    description: 'Explore our comprehensive IT solutions: Managed IT Support, Cybersecurity, Cloud Infrastructure, and Strategic IT Consultancy.',
+    url: 'https://davethan.tech/services',
+    type: 'website',
+  },
+};
+
 export default function ServicesPage() {
   return (
     <div className="bg-white min-h-screen font-inter flex flex-col">

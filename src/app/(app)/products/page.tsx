@@ -5,6 +5,20 @@ import { Footer } from "@/components/layout/Footer";
 import { CtaBlock } from "@/components/shared/CtaBlock";
 import { productsData } from "@/lib/productsData";
 
+export const metadata = {
+  title: 'Our Products | Davethan Technologies Limited',
+  description: 'Explore proprietary software solutions engineered by Davethan: Dishstack, MediCore, and SpringBoardERP for modern enterprises and startups.',
+  alternates: {
+    canonical: 'https://davethan.tech/products',
+  },
+  openGraph: {
+    title: 'Our Products | Davethan Technologies Limited',
+    description: 'Explore proprietary software solutions engineered by Davethan: Dishstack, MediCore, and SpringBoardERP.',
+    url: 'https://davethan.tech/products',
+    type: 'website',
+  },
+};
+
 export default function ProductsPage() {
   return (
     <div className="bg-white min-h-screen font-inter flex flex-col">

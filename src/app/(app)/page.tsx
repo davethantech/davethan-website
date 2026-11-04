@@ -5,8 +5,46 @@ import { Footer } from '@/components/layout/Footer';
 import { CtaBlock } from '@/components/shared/CtaBlock';
 
 export default function Home() {
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Davethan Technologies Limited',
+    url: 'https://davethan.tech',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://davethan.tech/blog?search={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Davethan Technologies Limited',
+    url: 'https://davethan.tech',
+    logo: 'https://davethan.tech/davethan_logo.webp',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+44 20 8089 9235',
+      contactType: 'customer support',
+      areaServed: ['GB', 'NG'],
+      availableLanguage: ['en'],
+    },
+    sameAs: [
+      'https://www.linkedin.com/company/davethantech',
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       <Navbar />
 
       <main>

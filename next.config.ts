@@ -21,6 +21,21 @@ const nextConfig: NextConfig = {
     ],
     qualities: [25, 50, 75, 85, 100],
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.davethan.tech',
+          },
+        ],
+        destination: 'https://davethan.tech/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withPayload(nextConfig);

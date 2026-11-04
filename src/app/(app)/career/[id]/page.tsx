@@ -101,14 +101,41 @@ function RichTextContent({ content }: { content: Record<string, unknown> }) {
   return <>{renderLexicalNode(root, 'root')}</>;
 }
 
+export async function generateStaticParams() {
+  try {
+    const payload = await getPayloadClient();
+    const { docs } = await payload.find({
+      collection: 'jobs',
+      where: { active: { equals: true } },
+      limit: 100,
+      select: { id: true },
+    });
+    return docs.map((job) => ({ id: String(job.id) }));
+  } catch {
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   try {
     const payload = await getPayloadClient();
     const job = await payload.findByID({ collection: 'jobs', id }) as Job;
-    if (!job) return { title: 'Job Not Found | Davethan Career' };
+    if (!job || !job.active) {
+      return { title: 'Job Not Found | Davethan Career', robots: { index: false } };
+    }
     return {
       title: `${job.title} | Davethan Career`,
+      description: `${job.title} in ${job.location} (${job.department}). Apply today at Davethan Technologies Limited.`,
+      alternates: {
+        canonical: `https://davethan.tech/career/${id}`,
+      },
+      openGraph: {
+        title: `${job.title} | Davethan Career`,
+        description: `${job.title} in ${job.location} (${job.department}).`,
+        url: `https://davethan.tech/career/${id}`,
+        type: 'website',
+      },
     };
   } catch {
     return { title: 'Davethan Career' };
@@ -134,8 +161,34 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
     year: 'numeric'
   });
 
+  const jobPostingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    title: job.title,
+    description: job.title,
+    datePosted: job.createdAt,
+    employmentType: job.type ? job.type.toUpperCase().replace('-', '_') : 'FULL_TIME',
+    hiringOrganization: {
+      '@type': 'Organization',
+      name: 'Davethan Technologies Limited',
+      sameAs: 'https://davethan.tech',
+      logo: 'https://davethan.tech/davethan_logo.webp',
+    },
+    jobLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: job.location,
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white font-inter">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema) }}
+      />
       <Navbar />
       <main>
         {/* ─── HEADER ─── */}

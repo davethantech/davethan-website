@@ -10,7 +10,7 @@ export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'featured', 'publishedDate', 'updatedAt'],
+    defaultColumns: ['title', 'status', 'category', 'featured', 'publishedDate', 'updatedAt'],
     description: 'Create and manage blog articles. Mark one post as "Featured" to pin it at the top of the blog.',
     group: 'Content',
     preview: (doc) => {
@@ -35,9 +35,6 @@ export const Posts: CollectionConfig = {
       required: true,
       admin: {
         placeholder: 'e.g. 5 Signs Your IT Infrastructure Needs an Upgrade',
-        components: {
-          afterInput: ['@/components/payload/SlugSync#SlugSync'],
-        },
       },
     },
     {
@@ -64,8 +61,25 @@ export const Posts: CollectionConfig = {
         ],
       },
       admin: {
-        description: 'Auto-filled from the Post Title as you type. Must be unique.',
+        description: 'Auto-filled from Post Title as you type, or generate using the button below. Must be unique.',
         placeholder: 'auto-generated-from-title',
+        components: {
+          afterInput: ['@/components/payload/SlugButton#SlugButton'],
+        },
+      },
+    },
+    {
+      name: 'status',
+      type: 'select',
+      label: 'Status',
+      required: true,
+      defaultValue: 'published',
+      options: [
+        { label: 'Published', value: 'published' },
+        { label: 'Draft', value: 'draft' },
+      ],
+      admin: {
+        description: 'Drafts are hidden from the public blog and sitemap. Set to Published to make visible.',
       },
     },
 
