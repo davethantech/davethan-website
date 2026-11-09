@@ -46,3 +46,8 @@ AGENTS.md
 CLAUDE.md
 
 .vercel
+
+
+# Security - never commit credential scripts
+pw.js
+*.secret.js
