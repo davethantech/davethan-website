@@ -12,6 +12,10 @@ export const isAdminOrEditor: Access = ({ req: { user } }) => {
   return Boolean(user?.role === 'super-admin' || user?.role === 'editor');
 };
 
+export const canAccessAdminPanel = ({ req: { user } }: { req: { user?: any } }): boolean => {
+  return Boolean(user?.role === 'super-admin' || user?.role === 'editor');
+};
+
 export const isSelfOrAdmin: Access = ({ req: { user } }) => {
   if (!user) return false;
   if (user.role === 'super-admin') return true;

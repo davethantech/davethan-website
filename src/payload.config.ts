@@ -19,7 +19,21 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SITE_URL || 'https://davethan-website.vercel.app',
+  serverURL: process.env.NEXT_PUBLIC_SITE_URL || 'https://davethan.tech',
+  cors: [
+    'https://davethan.tech',
+    'https://www.davethan.tech',
+    'https://davethan-website.vercel.app',
+    'http://localhost:3000',
+    ...(process.env.NEXT_PUBLIC_SITE_URL ? [process.env.NEXT_PUBLIC_SITE_URL] : []),
+  ],
+  csrf: [
+    'https://davethan.tech',
+    'https://www.davethan.tech',
+    'https://davethan-website.vercel.app',
+    'http://localhost:3000',
+    ...(process.env.NEXT_PUBLIC_SITE_URL ? [process.env.NEXT_PUBLIC_SITE_URL] : []),
+  ],
   admin: {
     user: Users.slug,
     suppressHydrationWarning: true,

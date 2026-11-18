@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload';
-import { isAdmin, isSelfOrAdmin, isAdminFieldAccess } from '../access';
+import { isAdmin, isSelfOrAdmin, isAdminFieldAccess, canAccessAdminPanel } from '../access';
 
 /**
  * Users Collection
@@ -13,6 +13,7 @@ export const Users: CollectionConfig = {
     group: 'Admin',
   },
   access: {
+    admin: canAccessAdminPanel,
     create: isAdmin,
     read: isSelfOrAdmin,
     update: isSelfOrAdmin,
